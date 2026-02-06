@@ -46,6 +46,11 @@ a:hover {
     text-decoration: underline;
 }
 
+a i.fa-external-link-alt {
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
 ul {
     list-style: none;
 }
@@ -71,7 +76,7 @@ section {
    3. Header
    ========================================= */
 header {
-    background-color: rgba(255, 255, 255, 0.50); /* Light Mode: 半透明の白 */
+    background-color: rgba(255, 255, 255, 0.50);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 1px 15px rgba(0,0,0,0.04);
@@ -158,39 +163,14 @@ header {
 }
 
 /* =========================================
-   4. Hero Section (PC: Flex / Mobile: Column)
+   4. Hero Section
    ========================================= */
 #hero {
     background-color: var(--white);
     padding: 80px 0;
+    text-align: center;
     border-bottom: 1px solid var(--border-color);
     margin-bottom: 60px;
-}
-
-/* Wrapper for Flex Layout */
-.hero-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: left;
-    gap: 40px;
-}
-
-.hero-info {
-    flex: 1;
-}
-
-.hero-image {
-    flex-shrink: 0;
-}
-
-.hero-image img {
-    width: 180px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 4px solid var(--white);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .hero-name {
@@ -198,7 +178,6 @@ header {
     font-family: var(--font-serif);
     margin-bottom: 15px;
     color: var(--primary-color);
-    line-height: 1.2;
 }
 
 .en-name {
@@ -213,16 +192,11 @@ header {
 .hero-affiliation {
     font-size: 1rem;
     color: #555;
-    margin-bottom: 15px;
-}
-
-.social-links {
-    margin-top: 30px;
+    margin-bottom: 25px;
 }
 
 .social-links a {
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
     padding: 8px 20px;
     border: 1px solid var(--border-color);
     border-radius: 30px;
@@ -236,31 +210,6 @@ header {
     color: var(--white);
     border-color: var(--primary-color);
     text-decoration: none;
-}
-
-/* Mobile Hero Optimization */
-@media (max-width: 768px) {
-    .hero-wrapper {
-        flex-direction: column-reverse;
-        text-align: center;
-        gap: 25px;
-    }
-    .hero-image img {
-        width: 140px;
-        height: 140px;
-    }
-    .hero-name {
-        font-size: 2rem;
-    }
-    .social-links {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-    .social-links a {
-        margin-right: 0 !important;
-    }
 }
 
 /* =========================================
@@ -348,6 +297,7 @@ header {
 
 /* Recognition */
 .recognition-list {
+    list-style: none;
     padding: 0;
     margin: 0;
 }
@@ -459,7 +409,29 @@ footer {
 }
 
 /* =========================================
-   7. GitHub Calendar
+   7. Responsive Design
+   ========================================= */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 0;
+    }
+    .nav-list {
+        margin-top: 15px;
+        gap: 20px;
+        font-size: 0.9rem;
+    }
+    .hero-name {
+        font-size: 2rem;
+    }
+    .skills-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   8. GitHub Calendar
    ========================================= */
 .calendar {
     width: 100%;
@@ -491,12 +463,12 @@ footer {
 
 
 /* =========================================
-   8. DARK MODE CONFIGURATION
+   9. DARK MODE CONFIGURATION
    ========================================= */
 
 /* (A) Variable Overrides */
 html[data-theme="dark"] {
-    --primary-color: #ecf0f1;    /* Light Silver-ish */
+    --primary-color: #ecf0f1;    /* Light Silver */
     --text-color: #d1d5db;       /* Soft Gray */
     --light-bg: #121212;         /* Deep Dark Gray */
     --white: #1e1e1e;            /* Card Background */
@@ -504,7 +476,7 @@ html[data-theme="dark"] {
     --accent-color: #5dade2;     /* Bright Blue */
 }
 
-/* (B) Header & Navigation Fixes */
+/* (B) Header Fixes */
 html[data-theme="dark"] header {
     background-color: rgba(18, 18, 18, 0.85) !important;
     border-bottom: 1px solid #333;
@@ -518,7 +490,7 @@ html[data-theme="dark"] .nav-list a:hover {
     color: var(--accent-color) !important;
 }
 
-/* (C) Text Visibility Fixes (Force Brightness on Gray Text) */
+/* (C) Text Visibility Fixes (Brighten Gray Text) */
 html[data-theme="dark"] .en-name,
 html[data-theme="dark"] .hero-affiliation,
 html[data-theme="dark"] .hero-affiliation-sub a,
@@ -529,27 +501,29 @@ html[data-theme="dark"] .award-date,
 html[data-theme="dark"] .award-note,
 html[data-theme="dark"] footer,
 html[data-theme="dark"] footer p,
+html[data-theme="dark"] footer span,
 html[data-theme="dark"] .social-links a,
-html[data-theme="dark"] .section-title span, /* Subtitles */
+html[data-theme="dark"] .section-title span, 
 html[data-theme="dark"] .card span[style*="color"], 
 html[data-theme="dark"] .timeline-content span[style*="color"] {
     color: #cccccc !important;
 }
 
-/* Force Abstract & Experience details (often hardcoded colors) to be bright */
+/* (D) Force Brightness for Inline-Styled Text */
 html[data-theme="dark"] .card p,
 html[data-theme="dark"] .timeline-content p {
     color: #e0e0e0 !important;
     opacity: 1 !important;
 }
 
-/* Specific fix for Hero "Location" text */
+/* (E) Specific Fixes */
+/* Hero Location Text */
 html[data-theme="dark"] #hero p[style*="opacity"] {
     color: #ffffff !important;
     opacity: 0.9 !important;
 }
 
-/* (D) Headings Fixes */
+/* Headings */
 html[data-theme="dark"] .hero-name,
 html[data-theme="dark"] .recognition-list strong,
 html[data-theme="dark"] .skill-category h3,
@@ -557,15 +531,14 @@ html[data-theme="dark"] h3 {
     color: #ffffff !important;
 }
 
-/* (E) Component Specific Fixes */
-/* Hover states reset to accent color */
+/* Hover States (Reset to accent) */
 html[data-theme="dark"] .hero-affiliation-sub a:hover,
 html[data-theme="dark"] .social-links a:hover {
     color: var(--accent-color) !important;
     border-color: var(--accent-color) !important;
 }
 
-/* Tags (Darken background) */
+/* Tags (Darken bg) */
 html[data-theme="dark"] .tags span {
     background-color: #2c2c2c;
     border-color: #444;
@@ -575,7 +548,7 @@ html[data-theme="dark"] .tags span:hover {
     background-color: #3e3e3e;
 }
 
-/* Badges (Revert to original dark colors for readability on light badge bg) */
+/* Badges (Keep original dark colors) */
 html[data-theme="dark"] .card span[style*="#0d47a1"] { color: #0d47a1 !important; }
 html[data-theme="dark"] .card span[style*="#616161"] { color: #616161 !important; }
 
@@ -588,7 +561,7 @@ html[data-theme="dark"] img:hover {
     opacity: 1;
 }
 
-/* Toggle Button Animation */
+/* Toggle Button */
 #theme-toggle {
     transition: transform 0.3s ease, color 0.3s ease;
 }
