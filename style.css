@@ -50,6 +50,15 @@ html {
     scroll-behavior: smooth;
 }
 
+.card, .timeline-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* 少し上に浮く */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* 影を濃くする */
+}
+
 /* =========================================
    Layout Utilities
    ========================================= */
