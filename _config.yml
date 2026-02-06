@@ -3,7 +3,7 @@ email: utsunomiya@mdl.cs.tsukuba.ac.jp
 description: >-
   宇都宮 幸大 (Kodai Utsunomiya) のポートフォリオサイト．
   筑波大学大学院にて，機械学習・深層学習を研究中．
-baseurl: "" # 詳しくは後述
+baseurl: ""
 url: "https://kodai-utsunomiya-mdl.github.io"
 twitter_username: utsunomiya__k
 github_username: kodai-utsunomiya-mdl
