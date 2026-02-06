@@ -336,6 +336,7 @@ header {
     border-radius: 4px;
     font-size: 0.9rem;
     color: #444;
+    transition: background-color 0.2s;
 }
 
 /* =========================================
