@@ -550,3 +550,53 @@ html[data-theme="dark"] .calendar .ContributionCalendar-day[data-level="0"] {
     fill: #2d333b !important;
     background-color: #2d333b !important;
 }
+
+/* =========================================
+   Dark Mode Text Adjustments (見にくいグレー文字の補正)
+   ========================================= */
+
+/* 日付、詳細テキスト、英語名などを明るいグレー (#ccc) に強制変更 */
+html[data-theme="dark"] .en-name,
+html[data-theme="dark"] .hero-affiliation,
+html[data-theme="dark"] .hero-affiliation-sub a,
+html[data-theme="dark"] .timeline-date,
+html[data-theme="dark"] .timeline-content .detail,
+html[data-theme="dark"] .keywords,
+html[data-theme="dark"] .award-note,
+html[data-theme="dark"] footer,
+html[data-theme="dark"] footer p,
+html[data-theme="dark"] .social-links a {
+    color: #cccccc !important;
+}
+
+/* 場所表記 (Tsukuba < Miyazaki...) の補正 */
+html[data-theme="dark"] #hero p[style*="opacity"] {
+    color: #ffffff !important;
+    opacity: 0.9 !important;
+}
+
+/* リンクホバー時はアクセントカラーに戻す */
+html[data-theme="dark"] .hero-affiliation-sub a:hover,
+html[data-theme="dark"] .social-links a:hover {
+    color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+}
+
+/* タグ（Skillsなど）の背景色を暗くして文字を明るく */
+html[data-theme="dark"] .tags span {
+    background-color: #2c2c2c;
+    border-color: #444;
+    color: #e0e0e0;
+}
+html[data-theme="dark"] .tags span:hover {
+    background-color: #3e3e3e;
+}
+
+/* 研究画像の明るさを少し落とす（眩しさ軽減） */
+html[data-theme="dark"] .card img {
+    opacity: 0.85;
+    transition: opacity 0.3s;
+}
+html[data-theme="dark"] .card img:hover {
+    opacity: 1;
+}
