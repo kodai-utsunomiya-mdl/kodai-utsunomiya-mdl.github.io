@@ -46,7 +46,13 @@
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#recognition">Recognition</a></li> 
-                </ul>
+
+                    <li>
+                        <button id="theme-toggle" aria-label="Toggle Dark Mode" style="background:none; border:none; cursor:pointer; color: var(--text-color); font-size: 1rem; padding: 5px;">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    </ul>
             </nav>
         </div>
     </header>
@@ -381,5 +387,43 @@
         });
     });
 </script>
+
+<script>
+    // 1. テーマ切り替えのロジック
+    const toggleButton = document.getElementById('theme-toggle');
+    const icon = toggleButton.querySelector('i');
+    const htmlElement = document.documentElement;
+
+    // 現在のテーマを判定してアイコンを切り替える関数
+    const updateIcon = (theme) => {
+        if (theme === 'dark') {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun'); // ダークモード時は太陽アイコンを表示
+        } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon'); // ライトモード時は月アイコンを表示
+        }
+    };
+
+    // 初期設定：ローカルストレージ または OSの設定を確認
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        htmlElement.setAttribute('data-theme', 'dark');
+        updateIcon('dark');
+    }
+
+    // ボタンクリック時の処理
+    toggleButton.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme); // 設定を保存
+        updateIcon(newTheme);
+    });
+</script>
+
 </body>
 </html>
