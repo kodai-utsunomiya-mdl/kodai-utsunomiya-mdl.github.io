@@ -96,7 +96,7 @@ header {
 
 .logo a {
     font-family: var(--font-serif);
-    font-size: 1.3rem;
+    font-size: 1.0rem;
     font-weight: 700;
     color: var(--primary-color);
     text-decoration: none;
@@ -146,7 +146,7 @@ header {
         padding: 0px 0 0px 0;
     }
     .logo a {
-        font-size: 1.0rem;
+        font-size: 0.5rem;
     }
     .nav-list {
         margin-top: 2px;
