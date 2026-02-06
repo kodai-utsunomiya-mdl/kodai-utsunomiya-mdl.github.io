@@ -159,8 +159,8 @@
                       <span style="color: #999;">(Work in Progress)</span>
                   </p>
                 <div style="margin-top: 20px; display: flex; justify-content: center; align-items: center; gap: 20px;">
-                    <img src="mt_1.png" style="max-width: 58%; height: auto;">
-                    <img src="mt_2.jpeg" style="max-width: 40%; height: auto;">
+                    <img src="mt_1.png" style="max-width: 58%; height: auto;" class="zoomable">
+                    <img src="mt_2.jpeg" style="max-width: 40%; height: auto;" class="zoomable">
                 </div>
             </div>
 
@@ -185,8 +185,8 @@
                 </p>
 
                 <div style="margin-top: 20px; display: flex; justify-content: center; align-items: center; gap: 20px;"> 
-                    <img src="bt_1.jpeg" style="max-width: 68%; height: auto;">
-                    <img src="bt_2.jpeg" style="max-width: 28%; height: auto;">
+                    <img src="bt_1.jpeg" style="max-width: 68%; height: auto;" class="zoomable">
+                    <img src="bt_2.jpeg" style="max-width: 28%; height: auto;" class="zoomable">
                 </div>
         </section>
 
@@ -425,5 +425,11 @@
     });
 </script>
 
+<div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+    <div id="lightbox-caption"></div>
+</div>
+    
 </body>
 </html>
