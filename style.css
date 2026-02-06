@@ -581,3 +581,81 @@ html[data-theme="dark"] .calendar .ContributionCalendar-day[data-level="0"] {
     fill: #2d333b !important;
     background-color: #2d333b !important;
 }
+
+
+/* =========================================
+   10. Lightbox (Image Zoom)
+   ========================================= */
+
+/* 画像にホバーした時のアクション */
+.zoomable {
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+}
+.zoomable:hover {
+    transform: scale(1.02); /* ほんの少し浮かせる演出 */
+}
+
+/* モーダルの背景 */
+.lightbox {
+    display: none; /* デフォルトは非表示 */
+    position: fixed;
+    z-index: 2000; /* ヘッダー(1000)より上に表示 */
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* 背景は黒の透過 */
+    backdrop-filter: blur(5px); /* 背景を少しぼかす */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* 拡大画像のスタイル */
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    animation-name: zoom;
+    animation-duration: 0.3s;
+    object-fit: contain;
+}
+
+/* 拡大アニメーション */
+@keyframes zoom {
+    from {transform:scale(0.8); opacity: 0;} 
+    to {transform:scale(1); opacity: 1;}
+}
+
+/* 閉じるボタン */
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: var(--accent-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* モバイル対応 */
+@media only screen and (max-width: 700px){
+    .lightbox-content {
+        width: 100%;
+    }
+}
