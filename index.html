@@ -259,6 +259,13 @@
                     </div>
                 </div>
             </div>
+		<div style="margin-top: 50px;">
+            <h3 style="font-size: 1.1rem; color: #555; margin-bottom: 15px;">GitHub Contributions</h3>
+            
+            <div class="calendar">
+                Loading the data just for you.
+            </div>
+        </div>
         </section>
 
 		<section id="recognition" class="section">
@@ -331,5 +338,14 @@
 </footer>
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
+
+<script>
+    // GitHubユーザー名 "kodai-utsunomiya-mdl" を指定してカレンダーを描画
+    GitHubCalendar(".calendar", "kodai-utsunomiya-mdl", { 
+        responsive: true,
+        tooltips: true
+    });
 </body>
 </html>
