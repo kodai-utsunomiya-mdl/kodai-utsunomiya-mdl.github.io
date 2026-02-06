@@ -518,7 +518,6 @@ html[data-theme="dark"] .nav-list a:hover {
 /* (C) Text Visibility Fixes (Brighten Gray Text) */
 html[data-theme="dark"] .en-name,
 html[data-theme="dark"] .hero-affiliation,
-html[data-theme="dark"] .hero-affiliation-sub a,
 html[data-theme="dark"] .timeline-date,
 html[data-theme="dark"] .timeline-content .detail,
 html[data-theme="dark"] .keywords,
