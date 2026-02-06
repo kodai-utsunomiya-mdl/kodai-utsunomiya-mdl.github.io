@@ -73,21 +73,29 @@ section {
 }
 
 /* =========================================
-   Header
+   Header (Sophisticated & Compact)
    ========================================= */
 header {
-    background-color: var(--white);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    /* 透過度 */
+    background-color: rgba(255, 255, 255, 0.50);
+    
+    /* ぼかし */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(16px);
+    
+    box-shadow: 0 1px 15px rgba(0,0,0,0.04);
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: all 0.3s ease;
 }
 
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: 70px; /* PCではこの高さ */
+    width: 100%;
 }
 
 .logo a {
@@ -96,22 +104,69 @@ header {
     font-weight: 700;
     color: var(--primary-color);
     text-decoration: none;
+    letter-spacing: 0.02em; /* 少し字間を空ける */
 }
 
+/* ナビゲーション */
 .nav-list {
     display: flex;
-    gap: 30px;
+    gap: 25px;
 }
 
 .nav-list a {
     color: var(--text-color);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    position: relative;
+    padding: 5px 0;
+}
+
+/* ホバー時に下線がスッと出るアニメーション */
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
 }
 
 .nav-list a:hover {
     color: var(--accent-color);
     text-decoration: none;
+}
+
+.nav-list a:hover::after {
+    width: 100%;
+}
+
+/* =========================================
+   Mobile Optimization
+   ========================================= */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 0 12px 0; /* 上下の余白 */
+    }
+
+    .logo a {
+        font-size: 1.3rem; /* 名前を少し小さく */
+    }
+
+    .nav-list {
+        margin-top: 8px; /* 名前とメニューの間隔を詰める */
+        gap: 15px;       /* メニュー同士の間隔を詰める */
+        flex-wrap: wrap; /* 画面幅が極端に狭い場合の保険 */
+        justify-content: center;
+    }
+
+    .nav-list a {
+        font-size: 0.8rem; /* メニュー文字を小さく */
+        color: #555;       /* 若干グレーにして主張を抑える */
+    }
 }
 
 /* =========================================
