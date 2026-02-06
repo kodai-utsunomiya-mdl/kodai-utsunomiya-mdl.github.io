@@ -437,10 +437,10 @@ footer {
     .header-container {
         flex-direction: column;
         height: auto;
-        padding: 5px 0;
+        padding: 0px 0;
     }
     .nav-list {
-        margin-top: 5px;
+        margin-top: 2px;
         gap: 20px;
         font-size: 0.9rem;
     }
