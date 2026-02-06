@@ -431,58 +431,25 @@ footer {
 }
 
 /* =========================================
-   7. Responsive Design (Mobile Compact Version)
-   ========================================= */
+   7. Responsive Design
+   ========================================= */
 @media (max-width: 768px) {
-    /* ヘッダー全体の高さを最小化 */
-    header {
-        line-height: 1; /* 行間を詰め、全体の高さを抑制 */
-    }
-
-    .header-container {
-        flex-direction: column !important; /* 強制的に2段（縦並び）にする */
-        height: auto !important;
-        padding: 4px 0 2px 0 !important; /* 上下の余白を数ピクセル単位で凝縮 */
-        justify-content: center;
-    }
-
-    /* ロゴの調整 */
-    .logo a {
-        font-size: 1.1rem; /* 少し小さくして圧迫感を軽減 */
-        margin: 0;
-        padding: 0;
-        line-height: 1;
-    }
-
-    /* メニュー（2段目）の調整 */
-    .nav-list {
-        margin-top: 2px !important; /* ロゴとの隙間をほぼゼロに */
-        gap: 8px; /* リンク同士の横の隙間も少し詰める */
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .nav-list a {
-        font-size: 0.75rem;
-        padding: 2px 0;
-        color: #666;
-    }
-
-    /* --- Heroセクション等の設定（変更なし） --- */
-    #hero {
-        padding: 60px 0;
-        text-align: left;
-    }
-    .hero-name {
-        font-size: 2rem;
-    }
-    .social-links {
-        justify-content: flex-start;
-        margin-top: 20px;
-    }
-    .skills-wrapper {
-        grid-template-columns: 1fr;
-    }
+    .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 0;
+    }
+    .nav-list {
+        margin-top: 15px;
+        gap: 20px;
+        font-size: 0.9rem;
+    }
+    .hero-name {
+        font-size: 2rem;
+    }
+    .skills-wrapper {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* =========================================
