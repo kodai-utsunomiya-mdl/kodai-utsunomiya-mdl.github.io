@@ -4,3 +4,6 @@ This repository contains the source code for my personal portfolio website, host
 
 ## Live Site
 **[https://kodai-utsunomiya-mdl.github.io/](https://kodai-utsunomiya-mdl.github.io/)**
+
+## License
+&copy; 2026 Kodai Utsunomiya. All Rights Reserved.
