@@ -338,25 +338,24 @@
 </footer>
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
 
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/tippy.js@6"></script>
+<link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css">
 
 <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
-	
+
 <script>
     // GitHub Calendarを実行
     GitHubCalendar(".calendar", "kodai-utsunomiya-mdl", { 
         responsive: true,
         tooltips: true,
-		global_stats: false
+        global_stats: false
     }).then(function() {
         // --- 読み込み完了後の処理 ---
         
-        // 不要なリンク「Skip to contributions...」を消す
+        // 不要なリンク「Skip to contributions...」を完全に消す
         const links = document.querySelectorAll('.calendar a');
         links.forEach(link => {
             if (link.textContent.includes('Skip to contributions')) {
