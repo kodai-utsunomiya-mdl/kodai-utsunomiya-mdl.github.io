@@ -505,11 +505,14 @@ footer {
     color: var(--accent-color);
 }
 
+
+
 /* =========================================
    Dark Mode Variables
    ========================================= */
-/* HTMLタグに data-theme="dark" が付いた時の変数を上書き */
-[data-theme="dark"] {
+
+/* 修正点: [data-theme="dark"] ではなく html[data-theme="dark"] にして優先度を上げる */
+html[data-theme="dark"] {
     /* 色の反転ロジック */
     --primary-color: #ecf0f1;    /* ヘッダーなどは明るい白グレーに */
     --text-color: #d1d5db;       /* 本文は目に優しいグレー */
@@ -521,37 +524,29 @@ footer {
     --accent-color: #5dade2; 
 }
 
+/* 以下は変更なし（そのままでOKですが念のため記載します） */
+
 /* ダークモード時の微調整 */
-[data-theme="dark"] .logo a {
-    color: var(--accent-color); /* ロゴを目立たせる */
+html[data-theme="dark"] .logo a {
+    color: var(--accent-color);
 }
 
-[data-theme="dark"] .hero-name {
+html[data-theme="dark"] .hero-name {
     color: #ffffff;
 }
 
-[data-theme="dark"] .recognition-list strong {
-    color: #fff; /* 受賞タイトルなどを白く */
+html[data-theme="dark"] .recognition-list strong {
+    color: #fff;
 }
 
 /* GitHub Calendarのダークモード対応 (強制上書き) */
-[data-theme="dark"] .calendar {
+html[data-theme="dark"] .calendar {
     border-color: #333 !important;
 }
-[data-theme="dark"] .calendar text.ContributionCalendar-label {
+html[data-theme="dark"] .calendar text.ContributionCalendar-label {
     fill: #ccc !important;
 }
-/* 草が生えていない日を暗くする */
-[data-theme="dark"] .calendar .ContributionCalendar-day[data-level="0"] {
+html[data-theme="dark"] .calendar .ContributionCalendar-day[data-level="0"] {
     fill: #2d333b !important;
     background-color: #2d333b !important;
-}
-
-/* トグルボタンのアニメーション */
-#theme-toggle {
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-#theme-toggle:hover {
-    transform: scale(1.1);
-    color: var(--accent-color);
 }
