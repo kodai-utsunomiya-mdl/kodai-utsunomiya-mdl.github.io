@@ -431,7 +431,7 @@ footer {
    7. Responsive Design
    ========================================= */
 @media (max-width: 768px) {
-    /* .header-container {
+    .header-container {
         flex-direction: column;
         height: auto;
         padding: 15px 0;
@@ -440,7 +440,7 @@ footer {
         margin-top: 15px;
         gap: 20px;
         font-size: 0.9rem;
-    } */
+    }
     .hero-name {
         font-size: 2rem;
     }
