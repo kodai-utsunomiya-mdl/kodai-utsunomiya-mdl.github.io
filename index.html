@@ -347,6 +347,26 @@
         responsive: true,
         tooltips: true,
 		global_stats: false
+    }).then(function() {
+        // 読み込みが完了した後に実行される処理
+        
+        // カレンダー内のすべてのリンクタグを取得
+        const links = document.querySelectorAll('.calendar a');
+        
+        // リンクを一つずつチェックし，以下の文字が含まれていたら消す
+        links.forEach(link => {
+            if (link.textContent.includes('Skip to contributions')) {
+                link.style.display = 'none'; // 非表示にする
+                link.style.visibility = 'hidden'; // 念のため視覚的にも隠す
+            }
+        });
+        
+        // 余計なクラス (sr-only) がついている要素も念のため消す
+        const srElements = document.querySelectorAll('.calendar .sr-only');
+        srElements.forEach(el => {
+            el.style.display = 'none';
+        });
     });
-</script></body>
+</script>
+</body>
 </html>
