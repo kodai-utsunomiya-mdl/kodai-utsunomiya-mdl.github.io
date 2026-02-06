@@ -341,27 +341,31 @@
 <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
 
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+
+<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
+	
 <script>
-    // GitHubユーザー名 "kodai-utsunomiya-mdl" を指定してカレンダーを描画
+    // GitHub Calendarを実行
     GitHubCalendar(".calendar", "kodai-utsunomiya-mdl", { 
         responsive: true,
         tooltips: true,
 		global_stats: false
     }).then(function() {
-        // 読み込みが完了した後に実行される処理
+        // --- 読み込み完了後の処理 ---
         
-        // カレンダー内のすべてのリンクタグを取得
+        // 不要なリンク「Skip to contributions...」を消す
         const links = document.querySelectorAll('.calendar a');
-        
-        // リンクを一つずつチェックし，以下の文字が含まれていたら消す
         links.forEach(link => {
             if (link.textContent.includes('Skip to contributions')) {
-                link.style.display = 'none'; // 非表示にする
-                link.style.visibility = 'hidden'; // 念のため視覚的にも隠す
+                link.style.display = 'none';
+                link.style.visibility = 'hidden';
             }
         });
         
-        // 余計なクラス (sr-only) がついている要素も念のため消す
+        // 念のため sr-only クラスも消す
         const srElements = document.querySelectorAll('.calendar .sr-only');
         srElements.forEach(el => {
             el.style.display = 'none';
