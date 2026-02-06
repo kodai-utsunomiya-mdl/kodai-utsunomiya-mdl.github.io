@@ -425,6 +425,51 @@
     });
 </script>
 
+
+<script>
+    // Lightbox機能のスクリプト
+    document.addEventListener('DOMContentLoaded', () => {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.lightbox-close');
+        
+        // すべての .zoomable 画像に対してクリックイベントを設定
+        document.querySelectorAll('.zoomable').forEach(img => {
+            img.addEventListener('click', function() {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.src;
+                // スクロール禁止（背景が動かないようにする）
+                document.body.style.overflow = "hidden";
+            });
+        });
+
+        // 閉じる処理を行う関数
+        const closeLightbox = () => {
+            lightbox.style.display = "none";
+            document.body.style.overflow = "auto"; // スクロール再開
+        };
+
+        // ×ボタンで閉じる
+        closeBtn.addEventListener('click', closeLightbox);
+
+        // 背景クリックでも閉じる
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // ESCキーで閉じる
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && lightbox.style.display === "flex") {
+                closeLightbox();
+            }
+        });
+    });
+</script>
+    
+    
+
 <div id="lightbox" class="lightbox">
     <span class="lightbox-close">&times;</span>
     <img class="lightbox-content" id="lightbox-img">
