@@ -600,3 +600,31 @@ html[data-theme="dark"] .card img {
 html[data-theme="dark"] .card img:hover {
     opacity: 1;
 }
+
+
+
+/* =========================================
+   Header Dark Mode Fixes (ヘッダーの修正)
+   ========================================= */
+
+/* ヘッダーの背景を「半透明の白」から「半透明の黒」に変更 */
+html[data-theme="dark"] header {
+    background-color: rgba(18, 18, 18, 0.85) !important; /* 暗いグレーで透過 */
+    border-bottom: 1px solid #333; /* 下線を引いて境界をはっきりさせる */
+    box-shadow: 0 1px 15px rgba(0,0,0,0.5); /* 影を少し濃く */
+}
+
+/* ロゴ (Kodai Utsunomiya) の色を明るいグレー (#ccc) に変更 */
+html[data-theme="dark"] .logo a {
+    color: #cccccc !important;
+}
+
+/* ついでに、ナビゲーションの文字色も確実に明るくする */
+html[data-theme="dark"] .nav-list a {
+    color: #cccccc;
+}
+
+/* ナビゲーションホバー時はアクセントカラー（青）にする */
+html[data-theme="dark"] .nav-list a:hover {
+    color: var(--accent-color);
+}
