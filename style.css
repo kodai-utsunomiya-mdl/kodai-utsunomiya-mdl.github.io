@@ -96,7 +96,7 @@ header {
 
 .logo a {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--primary-color);
     text-decoration: none;
@@ -143,10 +143,10 @@ header {
     .header-container {
         flex-direction: column;
         height: auto;
-        padding: 5px 0 6px 0;
+        padding: 2px 0 2px 0;
     }
     .logo a {
-        font-size: 1.2rem;
+        font-size: 1.0rem;
     }
     .nav-list {
         margin-top: 2px;
@@ -437,7 +437,7 @@ footer {
     .header-container {
         flex-direction: column;
         height: auto;
-        padding: 0px 0;
+        padding: 5px 0;
     }
     .nav-list {
         margin-top: 5px;
