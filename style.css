@@ -218,22 +218,19 @@ header {
     text-decoration: none;
 }
 
-/* モバイル対応 */
+/* モバイル対応（左揃えを維持しつつ余白を微調整） */
 @media (max-width: 768px) {
     #hero {
-        text-align: center; /* スマホでは中央揃えに戻す */
+        padding: 60px 0;
+        text-align: left; /* スマホでも左揃えを維持 */
     }
-    
+
+    .hero-name {
+        font-size: 2rem; /* スマホ用に少し小さく */
+    }
+
     .social-links {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    
-    .social-links a {
-        margin-right: 0; /* スマホではgapで間隔をとるのでマージンリセット */
+        justify-content: flex-start; /* ボタン群も左側に寄せる */
     }
 }
 
