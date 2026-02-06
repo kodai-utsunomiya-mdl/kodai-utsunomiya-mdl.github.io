@@ -372,3 +372,58 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* =========================================
+   Additions for Sophistication
+   ========================================= */
+/* スムーズスクロールとオフセット */
+html {
+    scroll-behavior: smooth;
+}
+section {
+    scroll-margin-top: 80px; /* ヘッダーの高さ分 */
+}
+
+/* Researchカードのホバーエフェクト */
+.card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid rgba(0,0,0,0.08);
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    border-color: transparent;
+}
+
+/* 画像に少し角丸と枠線をつけて資料っぽくする */
+.card img {
+    border-radius: 4px;
+    border: 1px solid #eee;
+    transition: transform 0.3s;
+}
+.card img:hover {
+    transform: scale(1.02); /* カーソルを乗せると少し拡大 */
+    cursor: zoom-in;
+}
+
+/* タグのデザインをモダンに (Pill Shape) */
+.tags span {
+    border-radius: 50px; /* 完全な丸み */
+    padding: 6px 16px;
+    background-color: #f0f4f8; /* 薄い青グレー背景 */
+    border: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #2c3e50;
+    transition: background-color 0.2s;
+}
+.tags span:hover {
+    background-color: #e1e8ed;
+}
+
+/* 外部リンクアイコンの調整 */
+a i.fa-external-link-alt {
+    font-size: 0.8em;
+    opacity: 0.7;
+}
