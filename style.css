@@ -504,3 +504,8 @@ footer {
 .calendar-footer a {
     color: var(--accent-color);
 }
+
+/* スクリーンリーダー用のテキストを隠す */
+.calendar .sr-only {
+    display: none !important;
+}
