@@ -628,3 +628,34 @@ html[data-theme="dark"] .nav-list a {
 html[data-theme="dark"] .nav-list a:hover {
     color: var(--accent-color);
 }
+
+
+
+/* =========================================
+   Fix Remaining Gray Text (Abstract, Experience, etc.)
+   ========================================= */
+
+/* カード内の <p> タグ（Abstractなど）や
+   タイムライン内の <p> タグ（研究内容の詳細など）について、
+   インラインスタイル(style="...")で指定されたグレー色を強制的に上書きします。
+*/
+html[data-theme="dark"] .card p,
+html[data-theme="dark"] .timeline-content p {
+    color: #e0e0e0 !important; /* ほぼ白に近いグレー */
+    opacity: 1 !important;      /* 透明度があれば解除 */
+}
+
+/* "Work in Progress" のような <span> タグで薄くなっている文字も
+   明るく見えるように修正
+*/
+html[data-theme="dark"] .card span[style*="color"], 
+html[data-theme="dark"] .timeline-content span[style*="color"] {
+    color: #cccccc !important;
+}
+
+/* フッターの文字も見やすく
+*/
+html[data-theme="dark"] footer p,
+html[data-theme="dark"] footer span {
+    color: #aaaaaa !important;
+}
