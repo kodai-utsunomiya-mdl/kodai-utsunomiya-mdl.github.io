@@ -679,3 +679,27 @@ html[data-theme="dark"] .award-date {
 html[data-theme="dark"] h3 {
     color: #e0e0e0 !important;
 }
+
+
+/* =========================================
+   Fix Badges & Subtitles (バッジと注釈の修正)
+   ========================================= */
+
+/* 1. バッジの文字色を「元の濃い色」に戻す
+   (背景が薄い水色やグレーのままなので、文字は濃くないと読めないため)
+*/
+html[data-theme="dark"] .card span[style*="#0d47a1"] {
+    color: #0d47a1 !important; /* Current Research の濃い青 */
+}
+
+html[data-theme="dark"] .card span[style*="#616161"] {
+    color: #616161 !important; /* Bachelor Thesis の濃いグレー */
+}
+
+
+/* 2. "including topics for future study" を見えるようにする
+   (元が #888 で暗いため、明るいグレーに変更) 
+*/
+html[data-theme="dark"] .section-title span {
+    color: #cccccc !important;
+}
