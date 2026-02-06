@@ -24,7 +24,7 @@
 }
 
 html {
-    scroll-behavior: smooth; /* スムーズスクロール */
+    scroll-behavior: smooth;
 }
 
 body {
@@ -186,10 +186,9 @@ header {
 .timeline-item {
     position: relative;
     margin-bottom: 40px;
-    transition: transform 0.3s ease; /* ホバー用 */
+    transition: transform 0.3s ease;
 }
 
-/* タイムラインの丸ポチ */
 .timeline-item::before {
     content: '';
     position: absolute;
@@ -225,33 +224,21 @@ header {
     background: var(--white);
     padding: 25px;
     border-radius: 8px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(0,0,0,0.08);
     box-shadow: 0 4px 6px rgba(0,0,0,0.04);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-bottom: 25px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* 浮き上がり */
 .card:hover {
-    transform: translateY(-4px); /* 浮き上がり */
-    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-    border-color: transparent;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .card h3 {
     font-size: 1.2rem;
     margin-bottom: 10px;
-}
-
-/* カード内の画像スタイル */
-.card img {
-    border-radius: 4px;
-    border: 1px solid #eee;
-    transition: transform 0.3s;
-}
-
-.card img:hover {
-    transform: scale(1.02); /* カーソルを乗せると少し拡大 */
-    cursor: zoom-in;
 }
 
 .keywords {
@@ -342,20 +329,13 @@ header {
     gap: 10px;
 }
 
-/* タグのデザイン (Pill Shape / モダン) */
 .tags span {
-    border-radius: 50px;
-    padding: 6px 16px;
-    background-color: #f0f4f8;
-    border: none;
-    font-weight: 500;
-    font-size: 0.85rem;
-    color: #2c3e50;
-    transition: background-color 0.2s;
-}
-
-.tags span:hover {
-    background-color: #e1e8ed;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #444;
 }
 
 /* =========================================
