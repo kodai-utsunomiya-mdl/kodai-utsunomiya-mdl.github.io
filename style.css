@@ -73,7 +73,7 @@ section {
 }
 
 /* =========================================
-   Header (Sophisticated & Compact)
+   Header
    ========================================= */
 header {
     /* 透過度 */
@@ -94,7 +94,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px; /* PCではこの高さ */
+    height: 60px; /* PCではこの高さ */
     width: 100%;
 }
 
@@ -105,6 +105,8 @@ header {
     color: var(--primary-color);
     text-decoration: none;
     letter-spacing: 0.02em; /* 少し字間を空ける */
+	/* 行の高さを文字サイズと揃え，上下の見えない余白を消す */
+    line-height: 1.0;
 }
 
 /* ナビゲーション */
@@ -130,7 +132,7 @@ header {
     bottom: 0;
     left: 0;
     background-color: var(--accent-color);
-    transition: width 0.3s ease;
+    transition: width 0.17s ease;
 }
 
 .nav-list a:hover {
@@ -149,23 +151,29 @@ header {
     .header-container {
         flex-direction: column;
         height: auto;
-        padding: 10px 0 12px 0; /* 上下の余白 */
+		/* 上下余白をカット (5px + 6px) */
+        padding: 5px 0 6px 0;
     }
 
     .logo a {
-        font-size: 1.3rem; /* 名前を少し小さく */
+        font-size: 1.2rem; /* 名前を小さく */
     }
 
-    .nav-list {
-        margin-top: 8px; /* 名前とメニューの間隔を詰める */
-        gap: 15px;       /* メニュー同士の間隔を詰める */
-        flex-wrap: wrap; /* 画面幅が極端に狭い場合の保険 */
+	.nav-list {
+        /* 名前との距離をほぼゼロに */
+        margin-top: 2px;
+        /* メニュー間の余白も詰める */
+        gap: 12px;
+        flex-wrap: wrap;
         justify-content: center;
+        /* メニュー自体の上下マージン等を打ち消し */
+        line-height: 1.2;
     }
 
-    .nav-list a {
-        font-size: 0.8rem; /* メニュー文字を小さく */
-        color: #555;       /* 若干グレーにして主張を抑える */
+	.nav-list a {
+        font-size: 0.75rem; /* 文字サイズを控えめに */
+        color: #666;
+        padding: 2px 0; /* タップ領域の調整 */
     }
 }
 
