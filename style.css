@@ -437,15 +437,15 @@ footer {
     .header-container {
         flex-direction: column;
         height: auto;
-        padding: 5px 0;
+        padding: 1px 0;
     }
     .nav-list {
-        margin-top: 5px;
-        gap: 20px;
+        margin-top: 1px;
+        gap: 10px;
         font-size: 0.9rem;
     }
     .hero-name {
-        font-size: 2rem;
+        font-size: 1rem;
     }
     .skills-wrapper {
         grid-template-columns: 1fr;
