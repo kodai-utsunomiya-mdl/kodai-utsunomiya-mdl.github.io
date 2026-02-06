@@ -293,29 +293,18 @@
 		
     </main>
 
-	<footer>
-	    <div class="container">
-	        <p>&copy; 2026 Kodai Utsunomiya. &nbsp; All Rights Reserved.</p>
-	        
-	        <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">
-	            Total Visits: <span id="visits">Loading...</span>
-	        </p>
-	        </div>
-	</footer>
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Kodai Utsunomiya. &nbsp; All Rights Reserved.</p>
+        
+        <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">
+            <span id="busuanzi_container_site_pv" style="display: none;">
+                Total Visits: <span id="busuanzi_value_site_pv"></span>
+            </span>
+        </p>
+        </div>
+</footer>
 
-	<script>
-        const namespace = 'kodai-utsunomiya-portfolio'; 
-        const key = 'visits';
-
-        fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-            .then(res => res.json())
-            .then(res => {
-                document.getElementById('visits').innerText = res.value;
-            })
-            .catch(() => {
-                document.getElementById('visits').innerText = "(Error)";
-            });
-    </script>
-
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>
