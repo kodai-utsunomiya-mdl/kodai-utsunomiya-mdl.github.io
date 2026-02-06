@@ -163,12 +163,12 @@ header {
 }
 
 /* =========================================
-   4. Hero Section
+   4. Hero Section (Left Aligned Version)
    ========================================= */
 #hero {
     background-color: var(--white);
     padding: 80px 0;
-    text-align: center;
+    text-align: left; /* ★ここを center から left に変更しました */
     border-bottom: 1px solid var(--border-color);
     margin-bottom: 60px;
 }
@@ -195,6 +195,12 @@ header {
     margin-bottom: 25px;
 }
 
+/* リンクや所属の下線調整（左揃えでもきれいに見えるように） */
+.hero-affiliation-sub a,
+.hero-affiliation a {
+    display: inline-block;
+}
+
 .social-links a {
     display: inline-block;
     padding: 8px 20px;
@@ -203,6 +209,7 @@ header {
     color: var(--text-color);
     font-size: 0.9rem;
     transition: all 0.3s ease;
+    margin-right: 5px; /* ★左揃え時にボタン同士がくっつきすぎないよう調整 */
 }
 
 .social-links a:hover {
@@ -210,6 +217,28 @@ header {
     color: var(--white);
     border-color: var(--primary-color);
     text-decoration: none;
+}
+
+/* =========================================
+   ★モバイル対応（スマホでは中央揃えに戻す）
+   これがないとスマホで左に寄って見にくくなるため追加しています
+   ========================================= */
+@media (max-width: 768px) {
+    #hero {
+        text-align: center; /* スマホでは中央揃えに戻す */
+    }
+    
+    .social-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .social-links a {
+        margin-right: 0; /* スマホではgapで間隔をとるのでマージンリセット */
+    }
 }
 
 /* =========================================
