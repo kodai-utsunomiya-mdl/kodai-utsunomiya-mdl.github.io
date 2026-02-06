@@ -659,3 +659,23 @@ html[data-theme="dark"] footer p,
 html[data-theme="dark"] footer span {
     color: #aaaaaa !important;
 }
+
+
+/* =========================================
+   Final Dark Mode Adjustments (見出し・日付の修正)
+   ========================================= */
+
+/* スキル・資格セクションの見出し (Certifications, Technical Skills) */
+html[data-theme="dark"] .skill-category h3 {
+    color: #e0e0e0 !important; /* 明るい白グレーに */
+}
+
+/* 受賞歴の日付 (2022.09 など) */
+html[data-theme="dark"] .award-date {
+    color: #cccccc !important; /* 明るいグレーに */
+}
+
+/* ついでに、もし見逃していたらGitHub Contributionsの見出しも */
+html[data-theme="dark"] h3 {
+    color: #e0e0e0 !important;
+}
