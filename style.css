@@ -443,3 +443,60 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* =========================================
+   GitHub Calendar Customization
+   ========================================= */
+.calendar {
+    width: 100%;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: var(--white);
+    min-height: 180px; /* 読み込み中のガタツキ防止 */
+    font-family: var(--font-sans) !important;
+}
+
+/* グラフ全体の文字サイズ調整 */
+.calendar .width-full {
+    fill: #666;
+    font-size: 10px;
+}
+
+/* --- テーマカラーに合わせて草の色を青にする --- */
+
+/* レベル0 (活動なし) */
+.calendar .ContributionCalendar-day[data-level="0"] {
+    fill: #ebedf0; 
+    background-color: #ebedf0;
+}
+/* レベル1 (薄い青) */
+.calendar .ContributionCalendar-day[data-level="1"] {
+    fill: #d6eaf8; 
+    background-color: #d6eaf8;
+}
+/* レベル2 */
+.calendar .ContributionCalendar-day[data-level="2"] {
+    fill: #aed6f1; 
+    background-color: #aed6f1;
+}
+/* レベル3 */
+.calendar .ContributionCalendar-day[data-level="3"] {
+    fill: #5dade2; 
+    background-color: #5dade2;
+}
+/* レベル4 (濃い青 - サイトのアクセントカラーに近い色) */
+.calendar .ContributionCalendar-day[data-level="4"] {
+    fill: #2e86c1; 
+    background-color: #2e86c1;
+}
+
+/* リンクや文字の調整 */
+.calendar text.ContributionCalendar-label {
+    fill: #666;
+    font-size: 10px;
+}
+.calendar-footer a {
+    color: var(--accent-color);
+}
