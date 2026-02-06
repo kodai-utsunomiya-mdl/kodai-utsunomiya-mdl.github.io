@@ -339,6 +339,10 @@ header {
     transition: background-color 0.2s;
 }
 
+.tags span:hover {
+    background-color: #e1e8ed;
+}
+
 /* =========================================
    Footer
    ========================================= */
