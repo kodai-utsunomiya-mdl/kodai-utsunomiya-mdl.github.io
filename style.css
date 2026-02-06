@@ -141,24 +141,21 @@ header {
 /* Mobile Header */
 @media (max-width: 768px) {
     .header-container {
-        flex-direction: column;
-        height: auto;
-        padding: 5px 0 6px 0;
+        flex-direction: row; /* 横並びを維持 */
+        height: 60px;        /* PCと同じ高さに固定 */
+        padding: 0 15px;
+        justify-content: space-between;
     }
     .logo a {
-        font-size: 1.2rem;
+        font-size: 1.1rem;   /* 少し小さくして1行に収める */
     }
     .nav-list {
-        margin-top: 2px;
-        gap: 12px;
-        flex-wrap: wrap;
-        justify-content: center;
-        line-height: 1.2;
+        margin-top: 0;       /* 余計なマージンを削除 */
+        gap: 10px;           /* リンク間の隙間を詰め，改行を防ぐ */
     }
     .nav-list a {
         font-size: 0.75rem;
-        color: #666;
-        padding: 2px 0;
+        padding: 5px 0;
     }
 }
 
@@ -434,7 +431,7 @@ footer {
    7. Responsive Design
    ========================================= */
 @media (max-width: 768px) {
-    .header-container {
+    /* .header-container {
         flex-direction: column;
         height: auto;
         padding: 15px 0;
@@ -443,7 +440,7 @@ footer {
         margin-top: 15px;
         gap: 20px;
         font-size: 0.9rem;
-    }
+    } */
     .hero-name {
         font-size: 2rem;
     }
