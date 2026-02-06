@@ -1,41 +1,172 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>あなたのＨＰタイトル</title>
-<meta name="keywords" content="ページのキーワードA,B,C">
-<meta name="description" content="ページの説明">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kodai Utsunomiya | University of Tsukuba</title>
+    <meta name="description" content="宇都宮 幸大 (Kodai Utsunomiya) のポートフォリオサイト．筑波大学大学院にて，機械学習・深層学習を研究中．">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="outer">
-<header><div id="header-container"><div id="head-inner"><h1>あなたのＨＰタイトル</h1>
-<p class="description">あなたのＨＰの説明文</p></div></div>
-</header>
-<div id="content-wrapper">
-<main>
-<div id="inner">
-<h2>記事ページ見出し・大</h2>
-<p>文章あれこれ</p>
-<h3>記事ページ見出し・中</h3>
-<p>文章あれこれ</p>
-<h4>記事ページ見出し・小</h4>
-<p>文章あれこれ</p>
-</div>
-</main>
-<aside>
-<div id="middle-inner">
-<div class="side-title">menu</div>
-<div class="side">
-<ul>
-<li>記事ページへのリンク</li>
-<li>記事ページへのリンク</li>
-</ul>
-</div>
-</div>
-</aside>
-</div>
-<footer>© 2010 あなたのホームページ</footer>
-</div></body>
+
+    <header>
+        <div class="container header-container">
+            <h1 class="logo"><a href="#">K.Utsunomiya</a></h1>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h1 class="hero-name">宇都宮 幸大 <span class="en-name">Kodai Utsunomiya</span></h1>
+            
+            <div class="hero-affiliation-group">
+                <p class="hero-affiliation">
+                    筑波大学大学院 理工情報生命学術院<br>
+                    システム情報工学研究群 情報理工学位プログラム 博士前期課程 (M1)
+                </p>
+                <p class="hero-affiliation-sub">
+                    <a href="https://mdl.cs.tsukuba.ac.jp/ja/" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-university"></i> 機械学習・データマイニング研究室 (MDL)
+                    </a>
+                </p>
+            </div>
+
+            <div class="hero-affiliation-group" style="margin-top: 15px;">
+                <p class="hero-affiliation">
+                    <a href="https://www.riken.jp/research/labs/aip/ai_soc/ai_sec_privacy/index.html" target="_blank" rel="noopener noreferrer">
+                        理化学研究所 革新知能統合研究センター (RIKEN AIP)
+                    </a>
+                </p>
+                <p class="hero-affiliation-sub">
+                    人工知能セキュリティ・プライバシーチーム 研修生
+                </p>
+            </div>
+
+            <div class="social-links" style="margin-top: 30px;">
+                <a href="https://github.com/kodai-utsunomiya-mdl/" target="_blank" rel="noopener noreferrer" style="margin-right: 10px;">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://x.com/utsunomiya__k" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-x-twitter"></i> X
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        
+        <section id="about" class="section">
+            <h2 class="section-title">Interests</h2>
+            <p>
+                主な興味分野は <strong>機械学習 (Machine Learning)</strong>，<strong>深層学習 (Deep Learning)</strong>，<strong>人工知能 (Artificial Intelligence)</strong>，および <strong>統計的学習理論 (Statistical Learning Theory)</strong>．
+            </p>
+        </section>
+
+        <section id="research" class="section">
+            <h2 class="section-title">Research</h2>
+            
+            <div class="card">
+                <h3>[Current Research] Master's Theme</h3>
+                <p style="font-weight: 500;">スプリアス相関下における深層ニューラルネットワークの特徴学習の理論解析</p>
+            </div>
+
+            <div class="card">
+                <h3>[Bachelor Thesis] 中間層のニューロン数が層によって異なるオーダーを持つ深層ニューラルネットワークの学習ダイナミクスの解析</h3>
+                <p class="keywords">
+                    <a href="https://github.com/kodai-utsunomiya-mdl/senior-thesis" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> GitHub Repository / Paper (PDF)
+                    </a>
+                </p>
+                <p>
+                    <strong>概要:</strong> 層ごとに幅のオーダーが異なる (ボトルネック構造などを持つ) 深層ニューラルネットワークにおいて，学習が安定する条件を導出．
+                    信号伝播のオーダー評価を行い，パラメータの更新量がネットワーク内の最小の層幅に制約されるという規則を特定．これに基づき，初期化と学習率等を動的に調整する手法 Dynamic Parametrization を提案．
+                </p>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2025 - Present</div>
+                    <div class="timeline-content">
+                        <h3>Research Assistant (K Program)</h3>
+                        <p>経済安全保障重要技術育成プログラム (K-Program)</p>
+                        <p class="detail">
+                            <a href="https://www.jst.go.jp/k-program/" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Program Website</a>
+                            <br>
+                            LLMのセキュリティ評価・レッドチーミング技術の開発に従事．
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Current</div>
+                    <div class="timeline-content">
+                        <h3>Trainee (研修生)</h3>
+                        <p>理化学研究所 革新知能統合研究センター (RIKEN AIP)</p>
+                        <p class="detail">人工知能セキュリティ・プライバシーチーム</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Current</div>
+                    <div class="timeline-content">
+                        <h3>Master's Student (M1)</h3>
+                        <p>筑波大学大学院 機械学習・データマイニング研究室 (MDL)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2 class="section-title">Skills & Certifications</h2>
+            
+            <div class="skills-wrapper">
+                <div class="skill-category">
+                    <h3>Certifications</h3>
+                    <ul class="list-check">
+                        <li><strong>2023.06:</strong> 応用情報技術者試験 (Applied Information Technology Engineer Examination)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Technical Skills</h3>
+                    <div class="tags">
+                        <span>Python</span>
+                        <span>PyTorch</span>
+                        <span>Deep Learning Theory</span>
+                        <span>Statistical Learning</span>
+                        <span>LaTeX</span>
+                        <span>Git/GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Kodai Utsunomiya. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
 </html>
