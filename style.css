@@ -504,12 +504,3 @@ footer {
 .calendar-footer a {
     color: var(--accent-color);
 }
-
-/* スクリーンリーダー用のテキストを隠す */
-.calendar .sr-only, 
-.calendar a[href*="year-list"] {
-    display: none !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    position: absolute !important;
-}
