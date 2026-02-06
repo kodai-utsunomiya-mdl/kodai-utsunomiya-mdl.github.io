@@ -454,42 +454,46 @@ footer {
     border-radius: 8px;
     padding: 20px;
     background-color: var(--white);
-    min-height: 180px; /* 読み込み中のガタツキ防止 */
+    min-height: 180px;
     font-family: var(--font-sans) !important;
 }
 
-/* グラフ全体の文字サイズ調整 */
 .calendar .width-full {
     fill: #666;
     font-size: 10px;
 }
 
 /* --- テーマカラーに合わせて草の色を青にする --- */
+/* !important をつけて強制的に色を適用 */
 
-/* レベル0 (活動なし) */
+/* レベル0 (活動なし: グレー) */
 .calendar .ContributionCalendar-day[data-level="0"] {
-    fill: #ebedf0; 
-    background-color: #ebedf0;
+    fill: #ebedf0 !important; 
+    background-color: #ebedf0 !important;
 }
+
 /* レベル1 (薄い青) */
 .calendar .ContributionCalendar-day[data-level="1"] {
-    fill: #d6eaf8; 
-    background-color: #d6eaf8;
+    fill: #d6eaf8 !important; 
+    background-color: #d6eaf8 !important;
 }
+
 /* レベル2 */
 .calendar .ContributionCalendar-day[data-level="2"] {
-    fill: #aed6f1; 
-    background-color: #aed6f1;
+    fill: #aed6f1 !important; 
+    background-color: #aed6f1 !important;
 }
+
 /* レベル3 */
 .calendar .ContributionCalendar-day[data-level="3"] {
-    fill: #5dade2; 
-    background-color: #5dade2;
+    fill: #5dade2 !important; 
+    background-color: #5dade2 !important;
 }
-/* レベル4 (濃い青 - サイトのアクセントカラーに近い色) */
+
+/* レベル4 (濃い青) */
 .calendar .ContributionCalendar-day[data-level="4"] {
-    fill: #2e86c1; 
-    background-color: #2e86c1;
+    fill: #2e86c1 !important; 
+    background-color: #2e86c1 !important;
 }
 
 /* リンクや文字の調整 */
