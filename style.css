@@ -168,7 +168,7 @@ header {
 #hero {
     background-color: var(--white);
     padding: 80px 0;
-    text-align: left; /* ★ここを center から left に変更しました */
+    text-align: left;
     border-bottom: 1px solid var(--border-color);
     margin-bottom: 60px;
 }
@@ -195,7 +195,6 @@ header {
     margin-bottom: 25px;
 }
 
-/* リンクや所属の下線調整（左揃えでもきれいに見えるように） */
 .hero-affiliation-sub a,
 .hero-affiliation a {
     display: inline-block;
@@ -209,7 +208,7 @@ header {
     color: var(--text-color);
     font-size: 0.9rem;
     transition: all 0.3s ease;
-    margin-right: 5px; /* ★左揃え時にボタン同士がくっつきすぎないよう調整 */
+    margin-right: 5px;
 }
 
 .social-links a:hover {
@@ -219,10 +218,7 @@ header {
     text-decoration: none;
 }
 
-/* =========================================
-   ★モバイル対応（スマホでは中央揃えに戻す）
-   これがないとスマホで左に寄って見にくくなるため追加しています
-   ========================================= */
+/* モバイル対応 */
 @media (max-width: 768px) {
     #hero {
         text-align: center; /* スマホでは中央揃えに戻す */
