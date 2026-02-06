@@ -46,6 +46,13 @@ ul {
     list-style: none;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+section {
+    scroll-margin-top: 80px; 
+}
+
 /* =========================================
    Layout Utilities
    ========================================= */
