@@ -294,14 +294,28 @@
     </main>
 
 	<footer>
-        <div class="container">
-            <p>&copy; 2026 Kodai Utsunomiya. &nbsp; All Rights Reserved.</p>
-            
-            <div style="margin-top: 10px;">
-                <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fkodai-utsunomiya-mdl.github.io&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visits&edge_flat=false" alt="Visitor Count"/>
-            </div>
-            </div>
-    </footer>
+	    <div class="container">
+	        <p>&copy; 2026 Kodai Utsunomiya. &nbsp; All Rights Reserved.</p>
+	        
+	        <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">
+	            Total Visits: <span id="visits">Loading...</span>
+	        </p>
+	        </div>
+	</footer>
+
+	<script>
+        const namespace = 'kodai-utsunomiya-portfolio'; 
+        const key = 'visits';
+
+        fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+            .then(res => res.json())
+            .then(res => {
+                document.getElementById('visits').innerText = res.value;
+            })
+            .catch(() => {
+                document.getElementById('visits').innerText = "(Error)";
+            });
+    </script>
 
 </body>
 </html>
