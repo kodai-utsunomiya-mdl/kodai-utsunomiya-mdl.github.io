@@ -227,6 +227,58 @@ header {
     font-style: italic;
 }
 
+/* =========================================
+   Recognition Section
+   ========================================= */
+.recognition-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recognition-list li {
+    margin-bottom: 15px;
+    display: flex; /* 日付と内容を横並びにする */
+    align-items: baseline; /* テキストのベースラインを揃える */
+}
+
+/* 最後の項目だけ下の余白を消す */
+.recognition-list li:last-child {
+    margin-bottom: 0;
+}
+
+.award-date {
+    min-width: 90px;     /* 日付の幅を固定 */
+    font-weight: 700;
+    color: #555;
+    font-family: var(--font-sans); /* "Lato" を適用 */
+    flex-shrink: 0;      /* 画面が狭くなっても日付が改行されないようにする */
+}
+
+.award-content {
+}
+
+.award-note {
+    font-size: 0.9rem;
+    color: #666;
+    margin-left: 5px;
+}
+
+/* スマホ対応：画面がとても狭い時は縦並びにする */
+@media (max-width: 480px) {
+    .recognition-list li {
+        flex-direction: column;
+    }
+    .award-date {
+        margin-bottom: 4px;
+    }
+    .award-note {
+        display: block;
+        margin-left: 0;
+        margin-top: 2px;
+    }
+}
+
 /* Lists & Tags */
 .list-check li {
     position: relative;
