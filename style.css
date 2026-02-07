@@ -143,7 +143,7 @@ header {
     .header-container {
         flex-direction: column;
         height: auto;
-        padding: 50px 0 0px 0;
+        padding: 10px 0 0px 0;
     }
     .logo a {
         font-size: 1.0rem;
@@ -431,29 +431,7 @@ footer {
 }
 
 /* =========================================
-   7. Responsive Design
-   ========================================= */
-@media (max-width: 768px) {
-    .header-container {
-        flex-direction: column;
-        height: auto;
-        padding: 0px 0;
-    }
-    .nav-list {
-        margin-top: 2px;
-        gap: 20px;
-        font-size: 0.9rem;
-    }
-    .hero-name {
-        font-size: 2rem;
-    }
-    .skills-wrapper {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* =========================================
-   8. GitHub Calendar
+   7. GitHub Calendar
    ========================================= */
 .calendar {
     width: 100%;
@@ -485,7 +463,7 @@ footer {
 
 
 /* =========================================
-   9. DARK MODE CONFIGURATION
+   8. DARK MODE CONFIGURATION
    ========================================= */
 
 /* (A) Variable Overrides */
@@ -605,7 +583,7 @@ html[data-theme="dark"] .calendar .ContributionCalendar-day[data-level="0"] {
 
 
 /* =========================================
-   10. Lightbox (Image Zoom)
+   9. Lightbox (Image Zoom)
    ========================================= */
 
 /* 画像にホバーした時のアクション */
