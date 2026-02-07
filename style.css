@@ -163,7 +163,7 @@ header {
 }
 
 /* =========================================
-   4. Hero Section (Left Aligned Version)
+   4. Hero Section
    ========================================= */
 #hero {
     background-color: var(--white);
@@ -218,19 +218,19 @@ header {
     text-decoration: none;
 }
 
-/* モバイル対応（左揃えを維持しつつ余白を微調整） */
+/* モバイル対応 */
 @media (max-width: 768px) {
     #hero {
         padding: 60px 0;
-        text-align: left; /* スマホでも左揃えを維持 */
+        text-align: left;
     }
 
     .hero-name {
-        font-size: 2rem; /* スマホ用に少し小さく */
+        font-size: 2rem;
     }
 
     .social-links {
-        justify-content: flex-start; /* ボタン群も左側に寄せる */
+        justify-content: flex-start;
     }
 }
 
