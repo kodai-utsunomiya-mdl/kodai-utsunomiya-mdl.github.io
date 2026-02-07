@@ -550,6 +550,39 @@
     <img class="lightbox-content" id="lightbox-img">
     <div id="lightbox-caption"></div>
 </div>
-     
+
+<script>
+    // アンカーリンクのスムーズなスクロール制御
+    document.addEventListener('DOMContentLoaded', () => {
+        // hrefが"#"で始まるリンクをすべて取得
+        const anchors = document.querySelectorAll('a[href^="#"]');
+
+        anchors.forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                // デフォルトの単純なジャンプを無効化
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    // ヘッダーの高さ分を調整
+                    const headerOffset = 90; 
+
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    // スムーズにスクロール
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
