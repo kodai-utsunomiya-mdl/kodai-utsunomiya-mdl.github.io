@@ -143,7 +143,7 @@ header {
     .header-container {
         flex-direction: column;
         height: auto;
-        padding: 0px 0 0px 0;
+        padding: 5px 0 5px 0;
     }
     .logo a {
         font-size: 1.0rem;
@@ -437,7 +437,7 @@ footer {
     .header-container {
         flex-direction: column;
         height: auto;
-        padding: 7px 0;
+        padding: 0px 0;
     }
     .nav-list {
         margin-top: 2px;
