@@ -27,7 +27,6 @@
     <script>
         window.MathJax = {
             tex: {
-                // $...$ でインライン数式を書けるように設定
                 inlineMath: [['$', '$'], ['\\(', '\\)']]
             }
         };
@@ -370,14 +369,14 @@
 <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
 
 <script>
-    // GitHub Calendarを実行
+    // GitHub Calendar
     GitHubCalendar(".calendar", "kodai-utsunomiya-mdl", { 
         responsive: true,
         global_stats: false
     }).then(function() {
         // --- 読み込み完了後の処理 ---
         
-        // 不要なリンク「Skip to contributions...」を完全に消す
+        // リンク「Skip to contributions...」を消す
         const links = document.querySelectorAll('.calendar a');
         links.forEach(link => {
             if (link.textContent.includes('Skip to contributions')) {
@@ -395,7 +394,7 @@
 </script>
 
 <script>
-    // 1. テーマ切り替えのロジック
+    // 1. テーマ切り替え
     const toggleButton = document.getElementById('theme-toggle');
     const icon = toggleButton.querySelector('i');
     const htmlElement = document.documentElement;
