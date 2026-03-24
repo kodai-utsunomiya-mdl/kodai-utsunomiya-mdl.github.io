@@ -1,39 +1,76 @@
-# Kodai Utsunomiya Website
+# Kodai Utsunomiya Website (Developer README)
 
-This repository hosts the public website for Kodai Utsunomiya.
+This document focuses on the technical architecture, operational flow, and configuration.
 
-## Developer Notes
-
-### Stack
+## Stack
 - Astro
+- TypeScript (Astro endpoints)
+- Markdown (Notes content)
+- MathJax (math rendering)
+- GitHub App (Notes Admin)
 
-### Local Development
+## Repository Structure
+- Entry points
+  - `src/pages/index.astro`: main page
+  - `src/pages/notes/index.astro`: notes list + search
+  - `src/pages/notes/[slug].astro`: notes detail
+  - `src/pages/admin/index.astro`: custom Notes Admin UI
+- Layout
+  - `src/layouts/BaseLayout.astro`
+  - `src/components/Header.astro`
+  - `src/components/Footer.astro`
+- Content
+  - `src/content/blog/*.md`: notes entries
+  - `src/content.config.ts`: content collection schema
+- CMS backend (GitHub App)
+  - `src/pages/api/cms/login.ts`
+  - `src/pages/api/cms/callback.ts`
+  - `src/pages/api/cms/logout.ts`
+  - `src/pages/api/cms/me.ts`
+  - `src/pages/api/cms/posts/index.ts` (GET/POST)
+  - `src/pages/api/cms/posts/[slug].ts` (GET/PUT/DELETE)
+  - `src/lib/githubApp.ts`
+  - `src/lib/session.ts`
+  - `src/lib/frontmatter.ts`
+- Static assets
+  - `public/`: images, CSS, fonts, favicon
+- `public/style.css`: global styling
+
+## System Architecture
+```mermaid
+flowchart TD
+  User[User Browser] -->|HTTP| Vercel[Vercel Hosting]
+  Vercel -->|Static pages| Astro[Astro Build Output]
+  Astro --> NotesList[Notes List / Search]
+  Astro --> NotesDetail[Notes Detail Pages]
+  Astro --> AdminUI[Notes Admin UI]
+
+  AdminUI -->|Login| CMSLogin[/api/cms/login/]
+  CMSLogin --> GitHubOAuth[GitHub OAuth]
+  GitHubOAuth --> CMSCallback[/api/cms/callback/]
+  CMSCallback --> Session[Session Cookie]
+  AdminUI -->|CRUD| CMSPosts[/api/cms/posts/]
+
+  CMSPosts --> GitHubAPI[GitHub API]
+  GitHubAPI --> Repo[GitHub Repository]
+```
+
+## Local Development
 ```sh
 npm install
 npm run dev
 ```
 
-### Build
+## Build and Preview
 ```sh
 npm run build
 npm run preview
 ```
 
-### Content
-- Main page: `src/pages/index.astro`
-- Notes entries: `src/content/blog/*.md`
-- Layout: `src/layouts/BaseLayout.astro`
-- Assets: `public/`
+## Notes Content (Markdown)
+Notes entries live in `src/content/blog/`. The filename becomes the slug.
 
-### Notes Authoring
-Notes entries live in `src/content/blog/` as Markdown files. The filename becomes the URL slug.
-
-Steps:
-1) Create a new file in `src/content/blog/` (e.g. `my-post.md`).
-2) Add frontmatter and body.
-3) Save and run the dev server to confirm rendering.
-
-Frontmatter example:
+Frontmatter schema (see `src/content.config.ts`):
 ```md
 ---
 title: "Sample Title"
@@ -43,34 +80,117 @@ draft: false
 ---
 ```
 
-Notes:
-- `draft: true` will hide the post from the list and from static generation.
-- Use a blank line to separate paragraphs. Paragraph spacing comes from `.blog-content p` in `public/style.css`.
-- Headings use standard Markdown (`##`, `###`) and are styled in `public/style.css`.
-- Inline math uses `$...$` and is rendered by MathJax.
-- Images can be added with Markdown, files should live in `public/`:
-  `![Figure]( /mt_1.png )`
-- Inline color can be applied with HTML:
-  `<span class="text-color" style="--inline-text-color:#b45309;">Highlight</span>`
+Authoring rules:
+- `draft: true` hides the entry from the list and from static generation.
+- `pubDate` must be a date (YYYY-MM-DD). Do not quote.
+- Inline math: `$...$` (MathJax).
+- Images: store files in `public/` and reference by root path.
+  - Example: `![Figure](/mt_1.png)`
+- Inline color: use HTML span.
+  - Example: `<span class="text-color" style="--inline-text-color:#b45309;">Highlight</span>`
 
-### Notes Admin (Custom)
-The site uses a custom admin at `/admin/` backed by a GitHub App.
+## Notes List and Search
+Notes list lives in `src/pages/notes/index.astro`.
 
-Setup:
-1) Create a GitHub App.
-2) Set "Callback URL" to `https://kodai-utsunomiya.vercel.app/api/cms/callback`.
-3) Install the App on the repository.
-4) Add these Vercel environment variables:
-   - `GITHUB_REPO` (e.g. `kodai-utsunomiya-mdl/kodai-utsunomiya-mdl.github.io`)
-   - `GITHUB_APP_ID`
-   - `GITHUB_APP_PRIVATE_KEY`
-   - `GITHUB_APP_INSTALLATION_ID`
-   - `GITHUB_APP_CLIENT_ID`
-   - `GITHUB_APP_CLIENT_SECRET`
-   - `CMS_SESSION_SECRET`
-   - `CMS_ALLOWED_USERS` (comma-separated GitHub logins)
-5) Deploy, then open `/admin/` and log in.
+Search behavior:
+- Full-text search across `title`, `description`, and `body`.
+- Search button or Enter cycles through matches.
+- Active match is highlighted and scrolled into view.
+- `Clear` resets results and the count.
+- Search bar is sticky for visibility.
 
-Required App permissions:
+Styling:
+- Notes list cards reuse `.card` styles from `public/style.css`.
+- Search UI styles are under `.notes-search*` in `public/style.css`.
+
+## Notes Detail Page
+Notes detail route: `src/pages/notes/[slug].astro`.
+Styling rules live under `.blog-content` in `public/style.css`.
+
+Key styles:
+- `h1/h2/h3` typography and separators
+- lists (`ul/ol`)
+- paragraph spacing
+- inline strong text
+
+## Notes Admin (Custom)
+The Admin UI is a custom page at `/admin/` that uses a GitHub App.
+
+Auth flow:
+1) `/admin/` calls `GET /api/cms/login`
+2) The endpoint redirects to GitHub OAuth for the GitHub App
+3) GitHub redirects to `/api/cms/callback`
+4) Callback exchanges code for a user token, validates user, stores a session cookie
+5) `/admin/` uses the session cookie to call CMS endpoints
+
+CMS endpoints:
+- `GET /api/cms/me`: returns current user
+- `GET /api/cms/posts`: list notes (from repo)
+- `POST /api/cms/posts`: create note
+- `GET /api/cms/posts/[slug]`: get note
+- `PUT /api/cms/posts/[slug]`: update note
+- `DELETE /api/cms/posts/[slug]`: delete note
+
+Session:
+- Stored in signed cookie
+- Session secret: `CMS_SESSION_SECRET`
+- Allowed users: `CMS_ALLOWED_USERS` (comma-separated)
+
+### GitHub App Setup
+Create a GitHub App and install it on the repository.
+
+Required settings:
+- Callback URL: `https://kodai-utsunomiya.vercel.app/api/cms/callback`
+
+Required permissions:
 - Repository contents: Read and write
 - Metadata: Read-only
+
+### Vercel Environment Variables
+Set these in Vercel Project Settings:
+- `GITHUB_REPO` (e.g. `kodai-utsunomiya-mdl/kodai-utsunomiya-mdl.github.io`)
+- `GITHUB_APP_ID`
+- `GITHUB_APP_PRIVATE_KEY`
+- `GITHUB_APP_INSTALLATION_ID`
+- `GITHUB_APP_CLIENT_ID`
+- `GITHUB_APP_CLIENT_SECRET`
+- `CMS_SESSION_SECRET`
+- `CMS_ALLOWED_USERS`
+
+Private key:
+- Use the full contents including `-----BEGIN RSA PRIVATE KEY-----` lines.
+
+## Deployment
+The site is deployed on Vercel.
+
+Notes:
+- `npm run build` runs `astro build`
+- Node version is defined in `package.json` engines
+- Static output is generated into `dist/`
+
+## Troubleshooting
+Build errors:
+- `pubDate` must be a date: ensure `pubDate: 2026-03-24` (no quotes)
+- Content schema errors: check `src/content.config.ts`
+
+Admin auth issues:
+- Verify `GITHUB_APP_*` env vars match the GitHub App
+- Ensure the GitHub App is installed on the repo
+- Confirm `CMS_ALLOWED_USERS` contains your GitHub username
+- Ensure the callback URL matches exactly
+
+Preview vs live mismatch:
+- Ensure styles are defined both for `.blog-content` and `.admin-preview__body`
+- MathJax is only loaded on the site pages; Admin preview uses its own render path
+
+## Style Sources
+Primary style file: `public/style.css`
+
+Main areas:
+- Base variables and resets
+- Layout (`.container`, `.section`)
+- Cards, timeline, tags
+- Notes list and search
+- Blog content typography
+- Admin UI
+- Dark mode overrides
