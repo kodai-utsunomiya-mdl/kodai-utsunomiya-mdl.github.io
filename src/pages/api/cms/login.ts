@@ -1,6 +1,26 @@
 import { randomBytes } from "crypto";
 
-export async function GET({ request, cookies }: { request: Request; cookies: any }) {
+const serializeCookie = (
+  name: string,
+  value: string,
+  options: {
+    httpOnly?: boolean;
+    secure?: boolean;
+    sameSite?: "lax" | "strict" | "none";
+    path?: string;
+    maxAge?: number;
+  }
+) => {
+  const parts = [`${name}=${value}`];
+  if (options.maxAge !== undefined) parts.push(`Max-Age=${options.maxAge}`);
+  if (options.httpOnly) parts.push("HttpOnly");
+  if (options.secure) parts.push("Secure");
+  if (options.sameSite) parts.push(`SameSite=${options.sameSite}`);
+  if (options.path) parts.push(`Path=${options.path}`);
+  return parts.join("; ");
+};
+
+export async function GET({ request }: { request: Request }) {
   const url = new URL(request.url);
   const clientId = import.meta.env.GITHUB_APP_CLIENT_ID;
 
@@ -9,7 +29,7 @@ export async function GET({ request, cookies }: { request: Request; cookies: any
   }
 
   const state = randomBytes(16).toString("hex");
-  cookies.set("cms_oauth_state", state, {
+  const stateCookie = serializeCookie("cms_oauth_state", state, {
     httpOnly: true,
     secure: true,
     sameSite: "lax",
@@ -23,5 +43,7 @@ export async function GET({ request, cookies }: { request: Request; cookies: any
   authorizeUrl.searchParams.set("scope", "read:user");
   authorizeUrl.searchParams.set("state", state);
 
-  return Response.redirect(authorizeUrl.toString(), 302);
+  const headers = new Headers({ Location: authorizeUrl.toString() });
+  headers.append("Set-Cookie", stateCookie);
+  return new Response(null, { status: 302, headers });
 }
