@@ -32,10 +32,14 @@ const { Content } = await render(post);
 
   <main class="container">
     <section class="section">
-      <div class="card">
-        <h1 class="hero-name">{post.data.title}</h1>
-        <p class="timeline-date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
-        <Content />
+      <div class="card blog-card">
+        <div class="blog-meta">
+          <h1 class="blog-title">{post.data.title}</h1>
+          <p class="timeline-date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
+        </div>
+        <div class="blog-content">
+          <Content />
+        </div>
       </div>
     </section>
   </main>

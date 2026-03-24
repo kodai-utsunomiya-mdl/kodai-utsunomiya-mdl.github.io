@@ -629,6 +629,87 @@ header {
     margin-left: 3px;
 }
 
+/* Blog */
+.blog-card {
+    padding: 30px;
+}
+
+.blog-meta {
+    margin-bottom: 20px;
+}
+
+.blog-title {
+    margin: 0 0 12px 0;
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--primary-color);
+    line-height: 1.3;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.blog-content {
+    color: var(--text-color);
+}
+
+.blog-content p {
+    margin: 0 0 0.7em 0;
+}
+
+.blog-content h2 {
+    margin: 1.6em 0 0.6em;
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    font-family: var(--font-serif);
+}
+
+.blog-content h3 {
+    margin: 1.4em 0 0.5em;
+    font-size: 1.15rem;
+    color: var(--primary-color);
+}
+
+.blog-content ul,
+.blog-content ol {
+    padding-left: 1.4em;
+    margin: 0 0 1em 0;
+    list-style-position: outside;
+}
+
+.blog-content li {
+    margin-bottom: 0.4em;
+}
+
+.blog-content ul {
+    list-style: disc;
+}
+
+.blog-content ol {
+    list-style: decimal;
+}
+
+.blog-content a {
+    color: var(--accent-color);
+}
+
+.blog-content a:hover {
+    color: var(--primary-color);
+}
+
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.text-color {
+    color: var(--inline-text-color, var(--accent-color));
+}
+
+.blog-content strong {
+    font-weight: 700;
+}
+
 /* =========================================
    6. Footer
    ========================================= */

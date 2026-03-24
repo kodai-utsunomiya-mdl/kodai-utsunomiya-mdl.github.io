@@ -24,3 +24,31 @@ npm run preview
 - Blog posts: `src/content/blog/*.md`
 - Layout: `src/layouts/BaseLayout.astro`
 - Assets: `public/`
+
+### Blog Authoring
+Blog posts live in `src/content/blog/` as Markdown files. The filename becomes the URL slug.
+
+Steps:
+1) Create a new file in `src/content/blog/` (e.g. `my-post.md`).
+2) Add frontmatter and body.
+3) Save and run the dev server to confirm rendering.
+
+Frontmatter example:
+```md
+---
+title: "記事タイトル"
+description: "概要文．"
+pubDate: 2026-03-24
+draft: false
+---
+```
+
+Notes:
+- `draft: true` will hide the post from the list and from static generation.
+- Use a blank line to separate paragraphs. Paragraph spacing comes from `.blog-content p` in `public/style.css`.
+- Headings use standard Markdown (`##`, `###`) and are styled in `public/style.css`.
+- Inline math uses `$...$` and is rendered by MathJax.
+- Images can be added with Markdown, files should live in `public/`:
+  `![説明](/mt_1.png)`
+- Inline color can be applied with HTML:
+  `<span class="text-color" style="--inline-text-color:#b45309;">強調</span>`
