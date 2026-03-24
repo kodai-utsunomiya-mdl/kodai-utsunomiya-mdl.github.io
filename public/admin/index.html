@@ -90,6 +90,40 @@
         }
       });
     </script>
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
     <script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
+    <script>
+      CMS.init({
+        config: {
+          backend: {
+            name: 'github',
+            repo: 'kodai-utsunomiya-mdl/kodai-utsunomiya-mdl.github.io',
+            branch: 'main',
+            auth_endpoint: 'https://kodai-utsunomiya.vercel.app/api/auth'
+          },
+          site_url: 'https://kodai-utsunomiya.vercel.app',
+          media_folder: 'public/uploads',
+          public_folder: '/uploads',
+          collections: [
+            {
+              name: 'blog',
+              label: 'Notes',
+              folder: 'src/content/blog',
+              create: true,
+              slug: '{{slug}}',
+              fields: [
+                { name: 'title', label: 'Title', widget: 'string' },
+                { name: 'description', label: 'Description', widget: 'string', required: false },
+                { name: 'pubDate', label: 'Publish Date', widget: 'datetime' },
+                { name: 'draft', label: 'Draft', widget: 'boolean', default: false },
+                { name: 'body', label: 'Body', widget: 'markdown' }
+              ]
+            }
+          ]
+        }
+      });
+    </script>
   </body>
 </html>
