@@ -227,6 +227,7 @@ const postsData = posts.map((post) => ({
       currentIndex = 0;
       updateCount(normalized);
       if (currentMatches.length > 0) {
+        currentMatches[0].classList.add('notes-search__active');
         currentMatches[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       setClearVisible(true);
@@ -234,8 +235,10 @@ const postsData = posts.map((post) => ({
 
     const advanceMatch = () => {
       if (currentMatches.length === 0) return;
+      currentMatches[currentIndex]?.classList.remove('notes-search__active');
       currentIndex = (currentIndex + 1) % currentMatches.length;
       updateCount(lastQuery);
+      currentMatches[currentIndex]?.classList.add('notes-search__active');
       currentMatches[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
@@ -262,7 +265,7 @@ const postsData = posts.map((post) => ({
 
     input?.addEventListener('input', () => {
       const value = input.value.trim();
-      setClearVisible(value.length > 0);
+      setClearVisible(value.length > 0 || lastQuery.length > 0);
     });
 
     input?.addEventListener('keydown', (event) => {

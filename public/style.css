@@ -709,6 +709,11 @@ header {
     border-radius: 2px;
 }
 
+.notes-search__active {
+    border-color: rgba(52, 152, 219, 0.5);
+    box-shadow: 0 12px 20px rgba(52, 152, 219, 0.12);
+}
+
 .icon-inline {
     font-size: 0.8em;
     margin-left: 3px;
