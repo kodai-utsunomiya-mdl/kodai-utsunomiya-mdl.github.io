@@ -35,6 +35,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           <label class="admin-label">
             Publish Date
             <input id="post-date" class="admin-input" type="date" required />
+            <span class="admin-hint">Format: YYYY-MM-DD</span>
           </label>
           <label class="admin-label admin-checkbox">
             <input id="post-draft" type="checkbox" />
@@ -179,11 +180,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     form?.addEventListener('submit', async (event) => {
       event.preventDefault();
       formStatus.textContent = 'Saving...';
+      const normalizedDate = dateInput.value.replaceAll('/', '-');
+      if (!normalizedDate) {
+        formStatus.textContent = 'Publish Date is required (YYYY-MM-DD).';
+        return;
+      }
       const payload = {
         title: titleInput.value.trim(),
         slug: slugInput.value.trim(),
         description: descriptionInput.value.trim(),
-        pubDate: dateInput.value,
+        pubDate: normalizedDate,
         draft: draftInput.checked,
         body: bodyInput.value,
       };
