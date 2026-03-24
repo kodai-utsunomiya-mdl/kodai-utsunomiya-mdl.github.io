@@ -28,7 +28,7 @@ const postsData = posts.map((post) => ({
   <main class="container blog-page">
     <section class="section">
       <h2 class="section-title">Notes</h2>
-      <div class="notes-search">
+      <form class="notes-search" id="notes-search-form">
         <input
           id="notes-search-input"
           class="admin-input notes-search__input"
@@ -36,10 +36,11 @@ const postsData = posts.map((post) => ({
           placeholder="Search notes"
           aria-label="Search notes"
         />
+        <button class="notes-search__button" type="submit">Search</button>
         <p class="notes-search__count" id="notes-search-count">
           {posts.length} notes
         </p>
-      </div>
+      </form>
       <div id="notes-list">
         {posts.map((post) => (
           <div class="card">
@@ -64,6 +65,7 @@ const postsData = posts.map((post) => ({
   <Footer />
 
   <script is:inline>
+    const form = document.getElementById('notes-search-form');
     const input = document.getElementById('notes-search-input');
     const list = document.getElementById('notes-list');
     const count = document.getElementById('notes-search-count');
@@ -78,10 +80,36 @@ const postsData = posts.map((post) => ({
     }
 
     const normalize = (value) => value.toLowerCase();
-    const render = (items) => {
+    const escapeHtml = (value) =>
+      value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    const highlightText = (text, query) => {
+      if (!query) return escapeHtml(text);
+      const escaped = escapeHtml(text);
+      const pattern = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'ig');
+      return escaped.replace(pattern, '<mark class="notes-match">$1</mark>');
+    };
+    const getBodySnippet = (body, query) => {
+      if (!query || !body) return '';
+      const lower = body.toLowerCase();
+      const idx = lower.indexOf(query);
+      if (idx === -1) return '';
+      const start = Math.max(0, idx - 60);
+      const end = Math.min(body.length, idx + query.length + 60);
+      const snippet = body.slice(start, end).replace(/\s+/g, ' ').trim();
+      const prefix = start > 0 ? '…' : '';
+      const suffix = end < body.length ? '…' : '';
+      return `${prefix}${snippet}${suffix}`;
+    };
+    const formatCount = (value) => `${value} note${value === 1 ? '' : 's'}`;
+    const render = (items, query = '') => {
       if (!list) return;
       list.innerHTML = '';
-      if (count) count.textContent = `${items.length} notes`;
+      if (count) count.textContent = formatCount(items.length);
       if (items.length === 0) {
         const empty = document.createElement('p');
         empty.className = 'abstract-text';
@@ -96,14 +124,22 @@ const postsData = posts.map((post) => ({
         title.className = 'card-title';
         const link = document.createElement('a');
         link.href = `/notes/${post.slug}/`;
-        link.textContent = post.title;
+        link.innerHTML = highlightText(post.title, query);
         title.appendChild(link);
         card.appendChild(title);
         if (post.description) {
           const desc = document.createElement('p');
           desc.className = 'abstract-text';
-          desc.textContent = post.description;
+          desc.innerHTML = highlightText(post.description, query);
           card.appendChild(desc);
+        } else {
+          const snippet = getBodySnippet(post.body || '', query);
+          if (snippet) {
+            const desc = document.createElement('p');
+            desc.className = 'abstract-text';
+            desc.innerHTML = highlightText(snippet, query);
+            card.appendChild(desc);
+          }
         }
         const date = document.createElement('p');
         date.className = 'timeline-date';
@@ -111,6 +147,11 @@ const postsData = posts.map((post) => ({
         card.appendChild(date);
         list.appendChild(card);
       });
+
+      const firstMatch = list.querySelector('.notes-match');
+      if (firstMatch) {
+        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     };
 
     const filterPosts = (term) => {
@@ -124,9 +165,11 @@ const postsData = posts.map((post) => ({
       });
     };
 
-    input?.addEventListener('input', (event) => {
-      const value = event.target.value || '';
-      render(filterPosts(value));
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const value = input?.value || '';
+      const normalized = normalize(value);
+      render(filterPosts(value), normalized);
     });
 
     render(posts);
