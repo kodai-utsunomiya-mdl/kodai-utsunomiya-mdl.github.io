@@ -11,6 +11,7 @@ Decap CMSを用いた運用が想定通りに安定せず，最終的にGitHub A
 - Markdownで運用 (記事はGitHubに保存)
 - 管理画面から記事作成/更新/削除
 - 管理者画面で記事のプレビューが可能
+- 管理画面から画像をアップロード可能
 
 # 全体構成
 フロントはAstro，データはGitHub，管理画面はAstroのページとして静的に用意し，認証とCRUDだけをAPIで実装．
@@ -126,6 +127,7 @@ AstroのContent Collectionが厳密な型チェックを行うため，formatを
 
 - 左: 編集フォーム (Title/Slug/Description/Date/Draft/Body)
 - 右: Preview
+- 画像アップロード機能 (/uploads に保存)
 - PreviewはMarkdownをHTMLに変換して表示
 - MathJaxを読み込んで数式レンダリング
 - Previewと本番の差は `public/style.css` の `.admin-preview__body` で調整
@@ -152,6 +154,7 @@ AstroのContent Collectionが厳密な型チェックを行うため，formatを
 # 運用フロー
 1) `/admin/` でログイン
 2) Markdownを編集し保存
+2.5) 必要なら画像をアップロードしURLを挿入
 3) GitHubにコミットされる
 4) Vercelが自動ビルド
 5) `/notes/` と個別ページに反映
