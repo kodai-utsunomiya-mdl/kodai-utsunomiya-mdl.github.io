@@ -751,6 +751,7 @@ header {
 .admin-form {
     display: grid;
     gap: 12px;
+    margin-top: 8px;
 }
 
 .admin-label {
@@ -788,7 +789,17 @@ header {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
-    align-items: start;
+    align-items: stretch;
+}
+
+.admin-preview-wrap {
+    display: grid;
+    gap: 6px;
+}
+
+.admin-label-title {
+    font-size: 0.9rem;
+    color: #555;
 }
 
 .admin-preview {
@@ -798,12 +809,6 @@ header {
     background: var(--white);
     height: 520px;
     overflow: auto;
-}
-
-.admin-preview__title {
-    font-size: 0.8rem;
-    color: #666;
-    margin-bottom: 8px;
 }
 
 .admin-preview__body {
@@ -873,6 +878,7 @@ header {
 .admin-list {
     display: grid;
     gap: 10px;
+    margin-top: 12px;
 }
 
 .admin-list-item {
