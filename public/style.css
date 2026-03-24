@@ -339,6 +339,10 @@ header {
     font-weight: 700;
 }
 
+.card .abstract-text + .timeline-date {
+    margin-top: 10px;
+}
+
 .timeline-content h3 {
     font-size: 1.2rem;
     margin-bottom: 5px;
