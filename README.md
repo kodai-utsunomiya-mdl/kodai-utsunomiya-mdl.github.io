@@ -1,4 +1,4 @@
-# Personal Site (Developer README)
+# Personal Site
 
 Scope: architecture, operations, configuration.
 
