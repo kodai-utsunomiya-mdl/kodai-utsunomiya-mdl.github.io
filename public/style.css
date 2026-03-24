@@ -821,6 +821,33 @@ header {
     font-weight: 700;
 }
 
+.blog-content code,
+.admin-preview__body code {
+    font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.9em;
+    background: #f1f3f5;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0 0.3em;
+    color: #2f3640;
+}
+
+.blog-content pre,
+.admin-preview__body pre {
+    background: #f1f3f5;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px 14px;
+    overflow: auto;
+}
+
+.blog-content pre code,
+.admin-preview__body pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
 /* Admin */
 .admin-page .card {
     margin-bottom: 20px;
