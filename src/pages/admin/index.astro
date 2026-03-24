@@ -48,7 +48,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             </label>
             <div class="admin-preview-wrap">
               <p class="admin-label-title">Preview</p>
-              <div id="post-preview" class="admin-preview admin-preview__body"></div>
+              <div id="post-preview" class="admin-preview admin-preview__body blog-content"></div>
             </div>
           </div>
           <div class="admin-actions">
@@ -147,6 +147,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         preview.innerHTML = window.marked.parse(content);
       } else {
         preview.textContent = content;
+      }
+      if (window.MathJax?.typesetPromise) {
+        window.MathJax.typesetPromise([preview]).catch(() => {});
       }
     };
 
