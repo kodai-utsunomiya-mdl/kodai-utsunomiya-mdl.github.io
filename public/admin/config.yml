@@ -2,10 +2,9 @@ backend:
   name: github
   repo: kodai-utsunomiya-mdl/kodai-utsunomiya-mdl.github.io
   branch: main
-  base_url: https://kodai-utsunomiya.vercel.app
-  auth_endpoint: /api/auth
+  auth_endpoint: https://kodai-utsunomiya.vercel.app/api/auth
 
-local_backend: true
+site_url: https://kodai-utsunomiya.vercel.app
 
 media_folder: public/uploads
 public_folder: /uploads
