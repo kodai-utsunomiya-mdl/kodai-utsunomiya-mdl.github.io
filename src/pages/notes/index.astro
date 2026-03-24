@@ -53,9 +53,11 @@ const postsData = posts.map((post) => ({
           </div>
         ))}
       </div>
-      <script type="application/json" id="notes-data">
-        {JSON.stringify(postsData)}
-      </script>
+      <script
+        type="application/json"
+        id="notes-data"
+        set:html={JSON.stringify(postsData)}
+      ></script>
     </section>
   </main>
 
@@ -66,7 +68,14 @@ const postsData = posts.map((post) => ({
     const list = document.getElementById('notes-list');
     const count = document.getElementById('notes-search-count');
     const dataEl = document.getElementById('notes-data');
-    const posts = dataEl ? JSON.parse(dataEl.textContent || '[]') : [];
+    let posts = [];
+    if (dataEl) {
+      try {
+        posts = JSON.parse(dataEl.textContent || '[]');
+      } catch (error) {
+        console.error('Failed to parse notes data.', error);
+      }
+    }
 
     const normalize = (value) => value.toLowerCase();
     const render = (items) => {
@@ -119,5 +128,7 @@ const postsData = posts.map((post) => ({
       const value = event.target.value || '';
       render(filterPosts(value));
     });
+
+    render(posts);
   </script>
 </BaseLayout>
