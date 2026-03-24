@@ -2,6 +2,7 @@ export async function GET({ request }: { request: Request }) {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
+  const debug = url.searchParams.get("debug");
   const clientId = import.meta.env.GITHUB_CLIENT_ID;
   const clientSecret = import.meta.env.GITHUB_CLIENT_SECRET;
 
@@ -55,7 +56,6 @@ export async function GET({ request }: { request: Request }) {
   }
 
   const token = tokenData.access_token;
-  const debug = url.searchParams.get("debug");
   const body = `<!doctype html>
 <html>
   <body>
