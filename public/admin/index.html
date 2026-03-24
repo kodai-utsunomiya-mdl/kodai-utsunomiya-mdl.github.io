@@ -10,10 +10,19 @@
     <script>
       const deliverToken = () => {
         const token = window.localStorage.getItem('decap_auth_token');
-        if (token) {
-          window.postMessage(token, window.location.origin);
-          window.localStorage.removeItem('decap_auth_token');
-        }
+        if (!token) return;
+
+        const origin = window.location.origin;
+        let attempts = 0;
+        const maxAttempts = 20;
+        const interval = setInterval(() => {
+          window.postMessage(token, origin);
+          attempts += 1;
+          if (attempts >= maxAttempts) {
+            clearInterval(interval);
+            window.localStorage.removeItem('decap_auth_token');
+          }
+        }, 250);
       };
 
       window.addEventListener('load', deliverToken);
