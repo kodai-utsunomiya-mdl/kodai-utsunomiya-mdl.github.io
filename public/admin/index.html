@@ -8,11 +8,18 @@
   </head>
   <body>
     <script>
-      window.addEventListener('load', () => {
+      const deliverToken = () => {
         const token = window.localStorage.getItem('decap_auth_token');
         if (token) {
           window.postMessage(token, window.location.origin);
           window.localStorage.removeItem('decap_auth_token');
+        }
+      };
+
+      window.addEventListener('load', deliverToken);
+      window.addEventListener('storage', (event) => {
+        if (event.key === 'decap_auth_token') {
+          deliverToken();
         }
       });
     </script>
