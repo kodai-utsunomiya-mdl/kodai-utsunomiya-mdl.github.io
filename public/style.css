@@ -991,6 +991,10 @@ header {
     flex-wrap: wrap;
 }
 
+.admin-actions .admin-label {
+    min-width: 240px;
+}
+
 .admin-button {
     border: 1px solid var(--border-color);
     background: var(--white);

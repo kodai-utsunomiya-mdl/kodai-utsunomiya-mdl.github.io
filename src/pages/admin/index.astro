@@ -52,6 +52,15 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             </div>
           </div>
           <div class="admin-actions">
+            <label class="admin-label">
+              Upload Image
+              <input id="upload-file" class="admin-input" type="file" accept="image/*" />
+              <span class="admin-hint">Uploads to /public/uploads and returns a URL.</span>
+            </label>
+            <button class="admin-button" type="button" id="upload-btn">Upload</button>
+            <span class="abstract-text" id="upload-status"></span>
+          </div>
+          <div class="admin-actions">
             <button class="admin-button" type="submit" id="save-btn">Save</button>
             <button class="admin-button admin-button--ghost" type="button" id="new-btn">New</button>
             <button class="admin-button admin-button--danger is-hidden" type="button" id="delete-btn">Delete</button>
@@ -87,6 +96,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     const preview = document.getElementById('post-preview');
     const newBtn = document.getElementById('new-btn');
     const deleteBtn = document.getElementById('delete-btn');
+    const uploadInput = document.getElementById('upload-file');
+    const uploadBtn = document.getElementById('upload-btn');
+    const uploadStatus = document.getElementById('upload-status');
 
     let editingSlug = null;
 
@@ -238,6 +250,39 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       formStatus.textContent = 'Deleted.';
       resetForm();
       await loadPosts();
+    });
+
+    uploadBtn?.addEventListener('click', async () => {
+      if (!uploadInput?.files || uploadInput.files.length === 0) {
+        uploadStatus.textContent = 'Select an image first.';
+        return;
+      }
+      const file = uploadInput.files[0];
+      uploadStatus.textContent = 'Uploading...';
+      uploadBtn.setAttribute('disabled', 'disabled');
+      try {
+        const data = new FormData();
+        data.append('file', file);
+        const response = await fetch('/api/cms/uploads', {
+          method: 'POST',
+          body: data,
+        });
+        if (!response.ok) {
+          const error = await response.json().catch(() => ({}));
+          uploadStatus.textContent = error.error || 'Upload failed.';
+          return;
+        }
+        const payload = await response.json();
+        const url = payload.url;
+        uploadStatus.textContent = `Uploaded: ${url}`;
+        if (navigator.clipboard?.writeText) {
+          navigator.clipboard.writeText(url).catch(() => {});
+        }
+      } catch (error) {
+        uploadStatus.textContent = 'Upload failed.';
+      } finally {
+        uploadBtn.removeAttribute('disabled');
+      }
     });
 
     checkSession();
