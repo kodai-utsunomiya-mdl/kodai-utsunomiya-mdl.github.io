@@ -1,6 +1,6 @@
 ---
 title: "サンプル記事 2"
-description: "Notes運用のためのサンプル投稿．"
+description: "Notes サンプル投稿 2．"
 pubDate: 2026-03-25
 draft: false
 ---
