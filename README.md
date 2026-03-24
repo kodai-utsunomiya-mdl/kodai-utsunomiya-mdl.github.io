@@ -1,4 +1,4 @@
-# Kodai Utsunomiya Website (Developer README)
+# Personal Site (Developer README)
 
 This document focuses on the technical architecture, operational flow, and configuration.
 
