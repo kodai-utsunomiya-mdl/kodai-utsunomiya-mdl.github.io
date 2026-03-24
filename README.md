@@ -1,6 +1,6 @@
 # Personal Site (Developer README)
 
-This document focuses on the technical architecture, operational flow, and configuration.
+Scope: architecture, operations, configuration.
 
 ## Stack
 - Astro
@@ -55,18 +55,17 @@ flowchart TD
   GitHubAPI --> Repo[GitHub Repository]
 ```
 
-## Recovery Checklist (Cold Start)
-Use this list if you return after a long time and need to restore the project.
+## Recovery Checklist
 
 1) Access and accounts
-   - Ensure GitHub account access for the repo.
-   - Ensure Vercel account access for the project.
+   - Verify GitHub account access for the repo.
+   - Verify Vercel account access for the project.
 2) Local setup
    - Clone the repository.
    - `npm install`
    - `npm run dev`
 3) Content sanity
-   - Notes are in `src/content/notes/`.
+   - Notes location: `src/content/notes/`.
    - Frontmatter uses `pubDate: YYYY-MM-DD` (no quotes).
 4) Deploy sanity
    - Vercel project is connected to the repo `main`.
@@ -87,8 +86,8 @@ Set in Vercel Project Settings.
 | `GITHUB_APP_INSTALLATION_ID` | GitHub App installation | Installation ID for this repo |
 | `GITHUB_APP_CLIENT_ID` | GitHub App settings | Client ID |
 | `GITHUB_APP_CLIENT_SECRET` | GitHub App settings | Client secret |
-| `CMS_SESSION_SECRET` | You generate | 32+ chars random string |
-| `CMS_ALLOWED_USERS` | You define | Comma-separated GitHub logins |
+| `CMS_SESSION_SECRET` | Developer-provided | 32+ chars random string |
+| `CMS_ALLOWED_USERS` | Developer-defined | Comma-separated GitHub logins |
 
 ## GitHub App Setup (Detailed)
 1) Create a GitHub App.
@@ -122,7 +121,7 @@ npm run preview
 ```
 
 ## Notes Content (Markdown)
-Notes entries live in `src/content/notes/`. The filename becomes the slug.
+Notes location: `src/content/notes/`. The filename becomes the slug.
 
 Frontmatter schema (see `src/content.config.ts`):
 ```md
@@ -144,7 +143,7 @@ Authoring rules:
   - Example: `<span class="text-color" style="--inline-text-color:#b45309;">Highlight</span>`
 
 ## Notes List and Search
-Notes list lives in `src/pages/notes/index.astro`.
+Notes list location: `src/pages/notes/index.astro`.
 
 Search behavior:
 - Full-text search across `title`, `description`, and `body`.
@@ -168,7 +167,7 @@ Key styles:
 - inline strong text
 
 ## Notes Admin (Custom)
-The Admin UI is a custom page at `/admin/` that uses a GitHub App.
+Admin UI is a custom page at `/admin/` that uses a GitHub App.
 
 Auth flow:
 1) `/admin/` calls `GET /api/cms/login`
@@ -215,7 +214,7 @@ Private key:
 - Use the full contents including `-----BEGIN RSA PRIVATE KEY-----` lines.
 
 ## Deployment
-The site is deployed on Vercel.
+Deployment target is Vercel.
 
 Notes:
 - `npm run build` runs `astro build`
@@ -223,9 +222,8 @@ Notes:
 - Static output is generated into `dist/`
 
 ## Troubleshooting
-Common pitfalls:
+Known pitfalls:
 - `pubDate` must be a date (YYYY-MM-DD) without quotes.
-- Notes folder is `src/content/notes/` (not `blog`).
 - GitHub App callback URL must match exactly.
 - `CMS_ALLOWED_USERS` must include your GitHub login.
 
@@ -235,12 +233,12 @@ Build errors:
 
 Admin auth issues:
 - Verify `GITHUB_APP_*` env vars match the GitHub App
-- Ensure the GitHub App is installed on the repo
+- Verify the GitHub App is installed on the repo
 - Confirm `CMS_ALLOWED_USERS` contains your GitHub username
-- Ensure the callback URL matches exactly
+- Verify the callback URL matches exactly
 
 Preview vs live mismatch:
-- Ensure styles are defined both for `.blog-content` and `.admin-preview__body`
+- Verify styles are defined both for `.blog-content` and `.admin-preview__body`
 - MathJax is only loaded on the site pages; Admin preview uses its own render path
 
 ## Style Sources
