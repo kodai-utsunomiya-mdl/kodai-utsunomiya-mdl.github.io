@@ -121,6 +121,7 @@ const postsData = posts.map((post) => ({
         list.appendChild(empty);
         return;
       }
+      const cards = [];
       items.forEach((post) => {
         const card = document.createElement('div');
         card.className = 'card';
@@ -163,12 +164,9 @@ const postsData = posts.map((post) => ({
         date.textContent = post.pubDate;
         card.appendChild(date);
         list.appendChild(card);
+        cards.push(card);
       });
-
-      const firstMatch = list.querySelector('.notes-match');
-      if (firstMatch) {
-        firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+      return cards;
     };
 
     const filterPosts = (term) => {
@@ -182,11 +180,59 @@ const postsData = posts.map((post) => ({
       });
     };
 
+    let lastQuery = '';
+    let currentIndex = 0;
+    let currentMatches = [];
+
+    const updateCount = (query) => {
+      if (!count) return;
+      if (!query) {
+        count.textContent = '';
+        return;
+      }
+      const total = currentMatches.length;
+      if (total === 0) {
+        count.textContent = '0 notes';
+        return;
+      }
+      count.textContent = `${currentIndex + 1} / ${formatCount(total)}`;
+    };
+
+    const runSearch = (query) => {
+      const normalized = normalize(query);
+      const items = filterPosts(query);
+      currentMatches = render(items, normalized) || [];
+      currentIndex = 0;
+      updateCount(normalized);
+      if (currentMatches.length > 0) {
+        currentMatches[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    };
+
+    const advanceMatch = () => {
+      if (currentMatches.length === 0) return;
+      currentIndex = (currentIndex + 1) % currentMatches.length;
+      updateCount(lastQuery);
+      currentMatches[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
     form?.addEventListener('submit', (event) => {
       event.preventDefault();
       const value = input?.value || '';
       const normalized = normalize(value);
-      render(filterPosts(value), normalized);
+      if (!normalized) {
+        lastQuery = '';
+        currentIndex = 0;
+        currentMatches = render(posts) || [];
+        updateCount('');
+        return;
+      }
+      if (normalized === lastQuery && currentMatches.length > 0) {
+        advanceMatch();
+        return;
+      }
+      lastQuery = normalized;
+      runSearch(value);
     });
 
     if (count) count.textContent = '';
