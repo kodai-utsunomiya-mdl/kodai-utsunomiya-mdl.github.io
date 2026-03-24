@@ -128,13 +128,26 @@ const postsData = posts.map((post) => ({
         title.className = 'card-title';
         const link = document.createElement('a');
         link.href = `/notes/${post.slug}/`;
-        link.innerHTML = highlightText(post.title, query);
+        const titleMatch = query
+          ? normalize(post.title).includes(query)
+          : false;
+        const descMatch = query
+          ? normalize(post.description || '').includes(query)
+          : false;
+        const bodyMatch = query
+          ? normalize(post.body || '').includes(query)
+          : false;
+        link.innerHTML = titleMatch
+          ? highlightText(post.title, query)
+          : escapeHtml(post.title);
         title.appendChild(link);
         card.appendChild(title);
-        if (post.description) {
+        if (post.description && (!query || descMatch)) {
           const desc = document.createElement('p');
           desc.className = 'abstract-text';
-          desc.innerHTML = highlightText(post.description, query);
+          desc.innerHTML = descMatch
+            ? highlightText(post.description, query)
+            : escapeHtml(post.description);
           card.appendChild(desc);
         } else {
           const snippet = getBodySnippet(post.body || '', query);
