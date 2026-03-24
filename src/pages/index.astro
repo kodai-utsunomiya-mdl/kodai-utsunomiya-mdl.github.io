@@ -318,12 +318,12 @@ const getSlug = (post) => {
       </div>
     </section>
 
-    <section id="tools" class="section">
+    <section id="notes" class="section">
       <h2 class="section-title">Notes</h2>
       <p class="tools-intro">
         Notes.
       </p>
-      <a class="tool-link tool-link--notes" href="/blog/">
+      <a class="tool-link tool-link--notes" href="/notes/">
         Open Notes &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
       </a>
 
@@ -333,7 +333,7 @@ const getSlug = (post) => {
           {latestPosts.map((post) => (
             <div class="notes-item">
               <h3 class="card-title">
-                <a href={`/blog/${getSlug(post)}/`}>{post.data.title}</a>
+                <a href={`/notes/${getSlug(post)}/`}>{post.data.title}</a>
               </h3>
               {post.data.description && (
                 <p class="abstract-text">{post.data.description}</p>

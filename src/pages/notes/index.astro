@@ -23,7 +23,7 @@ const getSlug = (post) => {
       {posts.map((post) => (
         <div class="card">
           <h3 class="card-title">
-            <a href={`/blog/${getSlug(post)}/`}>{post.data.title}</a>
+            <a href={`/notes/${getSlug(post)}/`}>{post.data.title}</a>
           </h3>
           {post.data.description && (
             <p class="abstract-text">{post.data.description}</p>
