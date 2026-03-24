@@ -54,6 +54,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           <div class="admin-actions">
             <button class="admin-button" type="submit" id="save-btn">Save</button>
             <button class="admin-button admin-button--ghost" type="button" id="new-btn">New</button>
+            <button class="admin-button admin-button--danger is-hidden" type="button" id="delete-btn">Delete</button>
             <span class="abstract-text" id="form-status"></span>
           </div>
         </form>
@@ -85,6 +86,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     const bodyInput = document.getElementById('post-body');
     const preview = document.getElementById('post-preview');
     const newBtn = document.getElementById('new-btn');
+    const deleteBtn = document.getElementById('delete-btn');
 
     let editingSlug = null;
 
@@ -98,6 +100,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       form.reset();
       slugInput.removeAttribute('disabled');
       formStatus.textContent = '';
+      if (deleteBtn) deleteBtn.classList.add('is-hidden');
       if (preview) preview.innerHTML = '';
     };
 
@@ -135,6 +138,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           bodyInput.value = payload.body || '';
           renderPreview();
           formStatus.textContent = '';
+          if (deleteBtn) deleteBtn.classList.remove('is-hidden');
         });
         postsList.appendChild(item);
       });
@@ -219,6 +223,22 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     });
 
     newBtn?.addEventListener('click', resetForm);
+
+    deleteBtn?.addEventListener('click', async () => {
+      if (!editingSlug) return;
+      const confirmed = window.confirm('Delete this note? This cannot be undone.');
+      if (!confirmed) return;
+      formStatus.textContent = 'Deleting...';
+      const response = await fetch(`/api/cms/posts/${editingSlug}`, { method: 'DELETE' });
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        formStatus.textContent = error.error || 'Failed to delete.';
+        return;
+      }
+      formStatus.textContent = 'Deleted.';
+      resetForm();
+      await loadPosts();
+    });
 
     checkSession();
   </script>

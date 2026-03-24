@@ -109,3 +109,31 @@ export async function PUT({
 
   return jsonResponse({ ok: true });
 }
+
+export async function DELETE({ params, cookies }: { params: any; cookies: any }) {
+  const session = requireSession(cookies);
+  if (session instanceof Response) return session;
+
+  const slug = params.slug;
+  if (!slug || !isValidSlug(slug)) {
+    return jsonResponse({ error: "Invalid slug." }, 400);
+  }
+
+  const path = `${BLOG_DIR}/${slug}.md`;
+  const { sha } = await fetchFileContent(path);
+  const { owner, name } = getRepoInfoEnv();
+  const response = await githubRequest(`/repos/${owner}/${name}/contents/${path}`, {
+    method: "DELETE",
+    body: JSON.stringify({
+      message: `Delete note: ${slug}`,
+      sha,
+    }),
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    return jsonResponse({ error: text }, response.status);
+  }
+
+  return jsonResponse({ ok: true });
+}

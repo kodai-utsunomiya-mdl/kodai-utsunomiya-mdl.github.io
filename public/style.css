@@ -664,7 +664,7 @@ header {
 }
 
 .blog-meta {
-    margin-bottom: 20px;
+    margin-bottom: 28px;
 }
 
 .blog-title {
@@ -903,6 +903,15 @@ header {
 
 .admin-button--ghost {
     background: transparent;
+}
+
+.admin-button--danger {
+    border-color: #d9534f;
+    color: #b52b27;
+}
+
+.admin-button--danger:hover {
+    background: #fdecea;
 }
 
 .admin-list {
