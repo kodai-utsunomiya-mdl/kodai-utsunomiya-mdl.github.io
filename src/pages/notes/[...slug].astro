@@ -5,7 +5,7 @@ import Footer from "../../components/Footer.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
+  const posts = (await getCollection("notes")).filter((post) => !post.data.draft);
   const getSlug = (post) => {
     if (post.slug) return post.slug;
     const filename = post.id.split("/").pop() ?? post.id;
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
   }));
 }
 
-const posts = await getCollection("blog");
+const posts = await getCollection("notes");
 const post = posts.find((entry) => {
   const filename = entry.id.split("/").pop() ?? entry.id;
   const slug = entry.slug ?? filename.replace(/\.mdx?$/, "");

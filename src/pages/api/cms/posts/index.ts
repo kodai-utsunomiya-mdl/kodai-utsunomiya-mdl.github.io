@@ -2,7 +2,7 @@ import { getSessionCookieName, verifySessionToken } from "../../../../lib/sessio
 import { formatFrontmatter, parseFrontmatter } from "../../../../lib/frontmatter";
 import { getRepoInfoEnv, getRepoPath, githubRequest } from "../../../../lib/githubApp";
 
-const BLOG_DIR = "src/content/blog";
+const NOTES_DIR = "src/content/notes";
 
 const jsonResponse = (data: unknown, status = 200) =>
   new Response(JSON.stringify(data), {
@@ -37,7 +37,7 @@ export async function GET({ cookies }: { cookies: any }) {
   const session = requireSession(cookies);
   if (session instanceof Response) return session;
 
-  const response = await githubRequest(getRepoPath(BLOG_DIR));
+  const response = await githubRequest(getRepoPath(NOTES_DIR));
   if (!response.ok) {
     return jsonResponse({ error: "Failed to list posts." }, response.status);
   }
@@ -86,7 +86,7 @@ export async function POST({ request, cookies }: { request: Request; cookies: an
     draft,
   });
   const content = `${frontmatter}${contentBody}\n`;
-  const path = `${BLOG_DIR}/${slug}.md`;
+  const path = `${NOTES_DIR}/${slug}.md`;
   const { owner, name } = getRepoInfoEnv();
 
   const response = await githubRequest(`/repos/${owner}/${name}/contents/${path}`, {

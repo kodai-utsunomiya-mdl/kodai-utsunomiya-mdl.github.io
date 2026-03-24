@@ -2,7 +2,7 @@ import { getSessionCookieName, verifySessionToken } from "../../../../lib/sessio
 import { formatFrontmatter, parseFrontmatter } from "../../../../lib/frontmatter";
 import { getRepoInfoEnv, getRepoPath, githubRequest } from "../../../../lib/githubApp";
 
-const BLOG_DIR = "src/content/blog";
+const NOTES_DIR = "src/content/notes";
 
 const jsonResponse = (data: unknown, status = 200) =>
   new Response(JSON.stringify(data), {
@@ -41,7 +41,7 @@ export async function GET({ params, cookies }: { params: any; cookies: any }) {
     return jsonResponse({ error: "Invalid slug." }, 400);
   }
 
-  const path = `${BLOG_DIR}/${slug}.md`;
+  const path = `${NOTES_DIR}/${slug}.md`;
   const { content } = await fetchFileContent(path);
   const { data, body } = parseFrontmatter(content);
 
@@ -89,7 +89,7 @@ export async function PUT({
     draft,
   });
   const content = `${frontmatter}${contentBody}\n`;
-  const path = `${BLOG_DIR}/${slug}.md`;
+  const path = `${NOTES_DIR}/${slug}.md`;
 
   const { sha } = await fetchFileContent(path);
   const { owner, name } = getRepoInfoEnv();
@@ -119,7 +119,7 @@ export async function DELETE({ params, cookies }: { params: any; cookies: any })
     return jsonResponse({ error: "Invalid slug." }, 400);
   }
 
-  const path = `${BLOG_DIR}/${slug}.md`;
+  const path = `${NOTES_DIR}/${slug}.md`;
   const { sha } = await fetchFileContent(path);
   const { owner, name } = getRepoInfoEnv();
   const response = await githubRequest(`/repos/${owner}/${name}/contents/${path}`, {

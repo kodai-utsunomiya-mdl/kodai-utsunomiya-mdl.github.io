@@ -20,7 +20,7 @@ This document focuses on the technical architecture, operational flow, and confi
   - `src/components/Header.astro`
   - `src/components/Footer.astro`
 - Content
-  - `src/content/blog/*.md`: notes entries
+  - `src/content/notes/*.md`: notes entries
   - `src/content.config.ts`: content collection schema
 - CMS backend (GitHub App)
   - `src/pages/api/cms/login.ts`
@@ -68,7 +68,7 @@ npm run preview
 ```
 
 ## Notes Content (Markdown)
-Notes entries live in `src/content/blog/`. The filename becomes the slug.
+Notes entries live in `src/content/notes/`. The filename becomes the slug.
 
 Frontmatter schema (see `src/content.config.ts`):
 ```md
