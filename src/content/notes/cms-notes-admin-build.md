@@ -1,16 +1,16 @@
 ---
 title: "GitHub AppとAstroでCMSを組む方法"
-description: "GitHub App + Vercel + Astro APIでCMSを自作した手順と設計判断．"
+description: "GitHub App + Vercel + Astro APIでCMSを自作する手順や設計判断について．"
 pubDate: 2026-03-25
 draft: false
 ---
-Decap CMSを用いた運用が想定通りに安定せず，最終的にGitHub App + Astro API + Vercelで自作のCMSを構築した．本稿はその設計判断，構成，実装の詳細を記録したもの．
+Decap CMSを用いた運用が想定通りに安定せず，最終的にGitHub App + Astro API + Vercelで自作のCMSを構築した．本稿はその設計判断，構成，実装の詳細を記録したもの．リポジトリは <https://github.com/kodai-utsunomiya-mdl/kodai-utsunomiya-mdl.github.io> に置いてある．
 
 # 目的と要件
 - 無料枠で運用可能
 - Markdownで運用 (記事はGitHubに保存)
 - 管理画面から記事作成/更新/削除
-- 管理者画面で記事のプレビューが可能
+- 管理画面で記事のプレビューが可能
 - 管理画面から画像をアップロード可能
 
 # 全体構成
@@ -31,7 +31,7 @@ Decap CMSを用いた運用が想定通りに安定せず，最終的にGitHub A
 6) Vercelがビルドして公開
 
 # 主要なディレクトリ構成
-構成の見通しを良くするため，機能単位で分離．特にAPIとセッション関連は `src/lib` に寄せる．
+機能単位で分離．特にAPIとセッション関連は `src/lib` に寄せる．
 
 - `src/pages/admin/index.astro` 管理画面UI
 - `src/pages/api/cms/login.ts` OAuth開始
@@ -44,7 +44,7 @@ Decap CMSを用いた運用が想定通りに安定せず，最終的にGitHub A
 - `src/lib/frontmatter.ts` frontmatter生成/解析
 - `src/content/notes/` 記事Markdown
 
-# GitHub Appの作成
+# GitHub Appの作成手順
 権限の付与は最小限に抑え，Repository Contentsのみ書き込みを許可した．
 
 1) GitHub → Settings → Developer settings → GitHub Apps → New
