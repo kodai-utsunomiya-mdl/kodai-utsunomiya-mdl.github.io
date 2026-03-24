@@ -653,6 +653,24 @@ header {
     margin-bottom: 18px;
 }
 
+.notes-search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.notes-search__input {
+    max-width: 360px;
+    height: 38px;
+}
+
+.notes-search__count {
+    font-size: 0.85rem;
+    color: #666;
+}
+
 .icon-inline {
     font-size: 0.8em;
     margin-left: 3px;

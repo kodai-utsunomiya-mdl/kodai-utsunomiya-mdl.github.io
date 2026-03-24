@@ -13,6 +13,14 @@ const getSlug = (post) => {
   const filename = post.id.split("/").pop() ?? post.id;
   return filename.replace(/\.mdx?$/, "");
 };
+
+const postsData = posts.map((post) => ({
+  title: post.data.title,
+  description: post.data.description ?? "",
+  pubDate: post.data.pubDate.toLocaleDateString("en-CA"),
+  slug: getSlug(post),
+  body: post.body ?? "",
+}));
 ---
 <BaseLayout title="Notes | Kodai Utsunomiya" description="Notes by Kodai Utsunomiya">
   <Header baseHref="/" />
@@ -20,19 +28,96 @@ const getSlug = (post) => {
   <main class="container blog-page">
     <section class="section">
       <h2 class="section-title">Notes</h2>
-      {posts.map((post) => (
-        <div class="card">
-          <h3 class="card-title">
-            <a href={`/notes/${getSlug(post)}/`}>{post.data.title}</a>
-          </h3>
-          {post.data.description && (
-            <p class="abstract-text">{post.data.description}</p>
-          )}
-          <p class="timeline-date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
-        </div>
-      ))}
+      <div class="notes-search">
+        <input
+          id="notes-search-input"
+          class="admin-input notes-search__input"
+          type="search"
+          placeholder="Search notes"
+          aria-label="Search notes"
+        />
+        <p class="notes-search__count" id="notes-search-count">
+          {posts.length} notes
+        </p>
+      </div>
+      <div id="notes-list">
+        {posts.map((post) => (
+          <div class="card">
+            <h3 class="card-title">
+              <a href={`/notes/${getSlug(post)}/`}>{post.data.title}</a>
+            </h3>
+            {post.data.description && (
+              <p class="abstract-text">{post.data.description}</p>
+            )}
+            <p class="timeline-date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
+          </div>
+        ))}
+      </div>
+      <script type="application/json" id="notes-data">
+        {JSON.stringify(postsData)}
+      </script>
     </section>
   </main>
 
   <Footer />
+
+  <script is:inline>
+    const input = document.getElementById('notes-search-input');
+    const list = document.getElementById('notes-list');
+    const count = document.getElementById('notes-search-count');
+    const dataEl = document.getElementById('notes-data');
+    const posts = dataEl ? JSON.parse(dataEl.textContent || '[]') : [];
+
+    const normalize = (value) => value.toLowerCase();
+    const render = (items) => {
+      if (!list) return;
+      list.innerHTML = '';
+      if (count) count.textContent = `${items.length} notes`;
+      if (items.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'abstract-text';
+        empty.textContent = 'No matching notes.';
+        list.appendChild(empty);
+        return;
+      }
+      items.forEach((post) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        const title = document.createElement('h3');
+        title.className = 'card-title';
+        const link = document.createElement('a');
+        link.href = `/notes/${post.slug}/`;
+        link.textContent = post.title;
+        title.appendChild(link);
+        card.appendChild(title);
+        if (post.description) {
+          const desc = document.createElement('p');
+          desc.className = 'abstract-text';
+          desc.textContent = post.description;
+          card.appendChild(desc);
+        }
+        const date = document.createElement('p');
+        date.className = 'timeline-date';
+        date.textContent = post.pubDate;
+        card.appendChild(date);
+        list.appendChild(card);
+      });
+    };
+
+    const filterPosts = (term) => {
+      const query = normalize(term);
+      if (!query) return posts;
+      return posts.filter((post) => {
+        const haystack = normalize(
+          `${post.title} ${post.description} ${post.body}`
+        );
+        return haystack.includes(query);
+      });
+    };
+
+    input?.addEventListener('input', (event) => {
+      const value = event.target.value || '';
+      render(filterPosts(value));
+    });
+  </script>
 </BaseLayout>
