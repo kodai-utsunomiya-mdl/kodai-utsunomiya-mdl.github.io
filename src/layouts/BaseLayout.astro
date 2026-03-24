@@ -1,0 +1,151 @@
+﻿---
+const {
+  title = "Kodai Utsunomiya | 宇都宮 幸大",
+  description = "The personal website of Kodai Utsunomiya",
+  canonical = "https://kodai-utsunomiya.vercel.app",
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SDQXPTP4QF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SDQXPTP4QF');
+    </script>
+
+    <link rel="canonical" href={canonical}>
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Kodai Utsunomiya",
+      "alternateName": "宇都宮 幸大",
+      "givenName": "Kodai",
+      "familyName": "Utsunomiya",
+      "url": "https://kodai-utsunomiya.vercel.app",
+      "image": "https://kodai-utsunomiya.vercel.app/favicon.jpg",
+      "description": "Master's Student at University of Tsukuba (MDL) and Student Trainee at RIKEN AIP.",
+      "jobTitle": "Master's Student",
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Tsukuba, Ibaraki, Japan"
+      },
+      "sameAs": [
+        "https://github.com/kodai-utsunomiya-mdl",
+        "https://www.linkedin.com/in/kodai-utsunomiya",
+        "https://x.com/utsunomiya__k",
+        "https://www.youtube.com/@kodai_utsunomiya",
+        "https://www.instagram.com/k__utsunomiya",
+        "https://www.kaggle.com/ffkutsunomiya",
+        "https://github.com/kodai-utsunomiya"
+      ],
+      "affiliation": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "University of Tsukuba",
+          "url": "https://www.tsukuba.ac.jp/"
+        },
+        {
+          "@type": "ResearchOrganization",
+          "name": "RIKEN AIP",
+          "url": "https://www.riken.jp/research/labs/aip/"
+        },
+        {
+            "@type": "Organization",
+            "name": "MDL (Machine Learning and Data Mining Laboratory)",
+            "url": "https://mdl.cs.tsukuba.ac.jp/"
+        }
+      ],
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "University of Miyazaki",
+          "url": "https://www.miyazaki-u.ac.jp/"
+        }
+      ],
+      "knowsAbout": [
+        "Machine Learning",
+        "Deep Learning",
+        "Statistical Learning Theory",
+        "Feature Learning",
+        "Mathematics"
+      ]
+    }
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.jpg">
+    <meta name="description" content={description}>
+
+    <meta property="og:title" content="Kodai Utsunomiya | University of Tsukuba">
+    <meta property="og:description" content={description}>
+    <meta property="og:type" content="website">
+
+    <meta property="og:url" content={canonical}>
+    <meta property="og:image" content="https://kodai-utsunomiya.vercel.app/favicon.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+     
+    <link rel="stylesheet" href="/style.css">
+
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      const toggleButton = document.getElementById('theme-toggle');
+      const icon = toggleButton?.querySelector('i');
+      const htmlElement = document.documentElement;
+
+      const updateIcon = (theme) => {
+        if (!icon) return;
+        if (theme === 'dark') {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+        } else {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+        }
+      };
+
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        htmlElement.setAttribute('data-theme', 'dark');
+        updateIcon('dark');
+      }
+
+      toggleButton?.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateIcon(newTheme);
+      });
+    </script>
+  </body>
+</html>
+
+

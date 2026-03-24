@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+---
+<BaseLayout title="Blog | Kodai Utsunomiya" description="Blog posts by Kodai Utsunomiya">
+  <Header baseHref="/" />
+
+  <main class="container">
+    <section class="section">
+      <h2 class="section-title">Blog</h2>
+      {posts.map((post) => (
+        <div class="card">
+          <h3 class="card-title">
+            <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+          </h3>
+          {post.data.description && (
+            <p class="abstract-text">{post.data.description}</p>
+          )}
+          <p class="timeline-date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
+        </div>
+      ))}
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

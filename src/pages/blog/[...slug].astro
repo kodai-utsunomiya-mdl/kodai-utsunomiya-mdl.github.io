@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+<BaseLayout title={`${post.data.title} | Kodai Utsunomiya`} description={post.data.description ?? ""}>
+  <Header baseHref="/" />
+
+  <main class="container">
+    <section class="section">
+      <div class="card">
+        <h1 class="hero-name">{post.data.title}</h1>
+        <p class="timeline-date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
+        <Content />
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
