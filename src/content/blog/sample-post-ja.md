@@ -3,9 +3,6 @@ title: "サンプル記事"
 description: "ブログ運用のためのサンプル投稿．"
 pubDate: 2026-03-24
 draft: false
-tags:
-  - サンプル
-  - 運用
 ---
 
 これはサンプルの記事．Markdownで本文を書き，必要に応じて数式や画像を追加できる．

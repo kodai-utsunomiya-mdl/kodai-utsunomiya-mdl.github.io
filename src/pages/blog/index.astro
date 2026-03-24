@@ -7,6 +7,8 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const getSlug = (post) => post.slug ?? post.id.replace(/\.mdx?$/, "");
 ---
 <BaseLayout title="Blog | Kodai Utsunomiya" description="Blog posts by Kodai Utsunomiya">
   <Header baseHref="/" />
@@ -17,17 +19,10 @@ const posts = (await getCollection("blog"))
       {posts.map((post) => (
         <div class="card">
           <h3 class="card-title">
-            <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+            <a href={`/blog/${getSlug(post)}/`}>{post.data.title}</a>
           </h3>
           {post.data.description && (
             <p class="abstract-text">{post.data.description}</p>
-          )}
-          {post.data.tags.length > 0 && (
-            <div class="tags">
-              {post.data.tags.map((tag) => (
-                <span>{tag}</span>
-              ))}
-            </div>
           )}
           <p class="timeline-date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
         </div>
