@@ -329,7 +329,7 @@ const getSlug = (post) => {
 
       {latestPosts.length > 0 ? (
         <div class="card">
-          <p class="timeline-date">Latest Notes</p>
+          <p class="timeline-date">Latest 3 Notes</p>
           {latestPosts.map((post) => (
             <div class="notes-item">
               <h3 class="card-title">
@@ -343,7 +343,7 @@ const getSlug = (post) => {
         </div>
       ) : (
         <div class="card">
-          <p class="timeline-date">Latest Notes</p>
+          <p class="timeline-date">Latest 3 Notes</p>
           <p class="abstract-text">No notes yet.</p>
         </div>
       )}
