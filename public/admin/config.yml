@@ -3,7 +3,7 @@ backend:
   repo: kodai-utsunomiya-mdl/kodai-utsunomiya-mdl.github.io
   branch: main
   base_url: https://kodai-utsunomiya.vercel.app
-  auth_endpoint: api/auth/?debug=1&
+  auth_endpoint: api/auth
 
 site_url: https://kodai-utsunomiya.vercel.app
 
