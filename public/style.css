@@ -594,7 +594,7 @@ header {
 .tools-intro {
     font-size: 0.9rem;
     color: #666;
-    margin-bottom: 20px;
+    margin-bottom: 6px;
 }
 
 .tools-grid {
@@ -649,7 +649,7 @@ header {
 .tool-link--notes {
     display: inline-flex;
     align-items: center;
-    margin-top: 2px;
+    margin-top: 0;
     margin-bottom: 12px;
 }
 
