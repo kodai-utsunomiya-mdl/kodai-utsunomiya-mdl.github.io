@@ -170,6 +170,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     };
 
     const checkSession = async () => {
+      const isLocalhost =
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        authStatus.textContent = 'Authenticated (local dev).';
+        authUserName.textContent = '@local';
+        setHidden(authActions, true);
+        setHidden(authUser, false);
+        setHidden(editorCard, false);
+        setHidden(listCard, false);
+        return;
+      }
       const response = await fetch('/api/cms/me');
       if (!response.ok) {
         authStatus.textContent = 'Not authenticated.';
