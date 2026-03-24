@@ -61,10 +61,14 @@ export async function GET({ request }: { request: Request }) {
   <body>
     <script>
       const message = 'authorization:${token}';
-      const targetOrigin = window.location.origin;
       const hasOpener = Boolean(window.opener);
       if (hasOpener) {
-        window.opener.postMessage(message, targetOrigin);
+        const send = () => {
+          window.opener.postMessage(message, '*');
+        };
+        send();
+        setTimeout(send, 200);
+        setTimeout(send, 500);
       }
       try {
         window.localStorage.setItem('decap_auth_token', message);
@@ -72,7 +76,7 @@ export async function GET({ request }: { request: Request }) {
       ${
         debug
           ? "document.body.innerText = 'auth ok';"
-          : "if (hasOpener) { window.close(); } else { window.location.assign('/admin/'); }"
+          : "if (hasOpener) { setTimeout(() => window.close(), 800); } else { window.location.assign('/admin/'); }"
       }
     </script>
   </body>
