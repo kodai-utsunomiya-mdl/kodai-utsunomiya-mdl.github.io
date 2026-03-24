@@ -6,7 +6,17 @@ export async function GET({ request }: { request: Request }) {
   const clientSecret = import.meta.env.GITHUB_CLIENT_SECRET;
 
   if (!clientId || !clientSecret) {
-    return new Response("Missing GitHub OAuth env", { status: 500 });
+    const debugInfo = {
+      hasClientId: Boolean(clientId),
+      hasClientSecret: Boolean(clientSecret),
+      host: url.host,
+      origin: url.origin,
+      hasCode: Boolean(code),
+    };
+    return new Response(JSON.stringify(debugInfo), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   if (!code) {
