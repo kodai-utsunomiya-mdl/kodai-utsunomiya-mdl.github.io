@@ -9,11 +9,11 @@ export async function getStaticPaths() {
   const getSlug = (post) => post.slug ?? post.id.replace(/\.mdx?$/, "");
   return posts.map((post) => ({
     params: { slug: getSlug(post) },
-    props: post,
+    props: { post },
   }));
 }
 
-const post = Astro.props;
+const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 <BaseLayout title={`${post.data.title} | Kodai Utsunomiya`} description={post.data.description ?? ""}>
