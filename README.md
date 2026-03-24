@@ -36,8 +36,8 @@ Steps:
 Frontmatter example:
 ```md
 ---
-title: "記事タイトル"
-description: "概要文．"
+title: "Sample Title"
+description: "Short summary"
 pubDate: 2026-03-24
 draft: false
 ---
@@ -49,19 +49,28 @@ Notes:
 - Headings use standard Markdown (`##`, `###`) and are styled in `public/style.css`.
 - Inline math uses `$...$` and is rendered by MathJax.
 - Images can be added with Markdown, files should live in `public/`:
-  `![説明](/mt_1.png)`
+  `![Figure]( /mt_1.png )`
 - Inline color can be applied with HTML:
-  `<span class="text-color" style="--inline-text-color:#b45309;">強調</span>`
+  `<span class="text-color" style="--inline-text-color:#b45309;">Highlight</span>`
 
-### GUI Editor (Decap CMS)
-The site includes a GUI editor at `/admin/` using Decap CMS. It commits directly to GitHub.
+### Notes Admin (Custom)
+The site uses a custom admin at `/admin/` backed by a GitHub App.
 
 Setup:
-1) Create a GitHub OAuth App.
-2) Set the callback URL to `https://kodai-utsunomiya.vercel.app/admin/`.
-3) Add the client id/secret as Vercel environment variables:
-   - `GITHUB_CLIENT_ID`
-   - `GITHUB_CLIENT_SECRET`
-4) Deploy, then open `/admin/` and log in with GitHub.
+1) Create a GitHub App.
+2) Set "Callback URL" to `https://kodai-utsunomiya.vercel.app/api/cms/callback`.
+3) Install the App on the repository.
+4) Add these Vercel environment variables:
+   - `GITHUB_REPO` (e.g. `kodai-utsunomiya-mdl/kodai-utsunomiya-mdl.github.io`)
+   - `GITHUB_APP_ID`
+   - `GITHUB_APP_PRIVATE_KEY`
+   - `GITHUB_APP_INSTALLATION_ID`
+   - `GITHUB_APP_CLIENT_ID`
+   - `GITHUB_APP_CLIENT_SECRET`
+   - `CMS_SESSION_SECRET`
+   - `CMS_ALLOWED_USERS` (comma-separated GitHub logins)
+5) Deploy, then open `/admin/` and log in.
 
-Config lives at `public/admin/config.yml` and the auth handler is `src/pages/api/auth/index.ts`.
+Required App permissions:
+- Repository contents: Read and write
+- Metadata: Read-only

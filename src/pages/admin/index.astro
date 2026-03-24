@@ -1,0 +1,193 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Notes Admin" description="Notes admin panel">
+  <main class="container admin-page">
+    <section class="section">
+      <h1 class="section-title">Notes Admin</h1>
+
+      <div id="auth-card" class="card">
+        <p class="abstract-text" id="auth-status">Checking session...</p>
+        <div id="auth-actions" class="admin-actions is-hidden">
+          <a class="tool-link" href="/api/cms/login">Login with GitHub</a>
+        </div>
+        <div id="auth-user" class="admin-actions is-hidden">
+          <span class="abstract-text" id="auth-user-name"></span>
+          <button class="admin-button" id="logout-btn" type="button">Logout</button>
+        </div>
+      </div>
+
+      <div id="editor-card" class="card is-hidden">
+        <h2 class="card-title">Edit Note</h2>
+        <form id="post-form" class="admin-form">
+          <label class="admin-label">
+            Title
+            <input id="post-title" class="admin-input" type="text" required />
+          </label>
+          <label class="admin-label">
+            Slug
+            <input id="post-slug" class="admin-input" type="text" required />
+          </label>
+          <label class="admin-label">
+            Description
+            <input id="post-description" class="admin-input" type="text" />
+          </label>
+          <label class="admin-label">
+            Publish Date
+            <input id="post-date" class="admin-input" type="date" required />
+          </label>
+          <label class="admin-label admin-checkbox">
+            <input id="post-draft" type="checkbox" />
+            Draft
+          </label>
+          <label class="admin-label">
+            Body
+            <textarea id="post-body" class="admin-textarea" rows="12"></textarea>
+          </label>
+          <div class="admin-actions">
+            <button class="admin-button" type="submit" id="save-btn">Save</button>
+            <button class="admin-button admin-button--ghost" type="button" id="new-btn">New</button>
+            <span class="abstract-text" id="form-status"></span>
+          </div>
+        </form>
+      </div>
+
+      <div id="list-card" class="card is-hidden">
+        <h2 class="card-title">Notes</h2>
+        <div id="posts-list" class="admin-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    const authStatus = document.getElementById('auth-status');
+    const authActions = document.getElementById('auth-actions');
+    const authUser = document.getElementById('auth-user');
+    const authUserName = document.getElementById('auth-user-name');
+    const logoutBtn = document.getElementById('logout-btn');
+    const editorCard = document.getElementById('editor-card');
+    const listCard = document.getElementById('list-card');
+    const postsList = document.getElementById('posts-list');
+    const form = document.getElementById('post-form');
+    const formStatus = document.getElementById('form-status');
+    const titleInput = document.getElementById('post-title');
+    const slugInput = document.getElementById('post-slug');
+    const descriptionInput = document.getElementById('post-description');
+    const dateInput = document.getElementById('post-date');
+    const draftInput = document.getElementById('post-draft');
+    const bodyInput = document.getElementById('post-body');
+    const newBtn = document.getElementById('new-btn');
+
+    let editingSlug = null;
+
+    const setHidden = (el, hidden) => {
+      if (!el) return;
+      el.classList.toggle('is-hidden', hidden);
+    };
+
+    const resetForm = () => {
+      editingSlug = null;
+      form.reset();
+      slugInput.removeAttribute('disabled');
+      formStatus.textContent = '';
+    };
+
+    const loadPosts = async () => {
+      postsList.innerHTML = '';
+      const response = await fetch('/api/cms/posts');
+      if (!response.ok) {
+        postsList.textContent = 'Failed to load posts.';
+        return;
+      }
+      const data = await response.json();
+      if (!data.posts || data.posts.length === 0) {
+        postsList.textContent = 'No posts yet.';
+        return;
+      }
+      data.posts.forEach((post) => {
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'admin-list-item';
+        item.textContent = `${post.title} (${post.slug})`;
+        item.addEventListener('click', async () => {
+          const detail = await fetch(`/api/cms/posts/${post.slug}`);
+          if (!detail.ok) {
+            formStatus.textContent = 'Failed to load post.';
+            return;
+          }
+          const payload = await detail.json();
+          editingSlug = post.slug;
+          titleInput.value = payload.title || '';
+          slugInput.value = payload.slug || '';
+          slugInput.setAttribute('disabled', 'disabled');
+          descriptionInput.value = payload.description || '';
+          dateInput.value = payload.pubDate ? payload.pubDate.slice(0, 10) : '';
+          draftInput.checked = Boolean(payload.draft);
+          bodyInput.value = payload.body || '';
+          formStatus.textContent = '';
+        });
+        postsList.appendChild(item);
+      });
+    };
+
+    const checkSession = async () => {
+      const response = await fetch('/api/cms/me');
+      if (!response.ok) {
+        authStatus.textContent = 'Not authenticated.';
+        setHidden(authActions, false);
+        setHidden(authUser, true);
+        setHidden(editorCard, true);
+        setHidden(listCard, true);
+        return;
+      }
+      const data = await response.json();
+      authStatus.textContent = 'Authenticated.';
+      authUserName.textContent = `@${data.login}`;
+      setHidden(authActions, true);
+      setHidden(authUser, false);
+      setHidden(editorCard, false);
+      setHidden(listCard, false);
+      await loadPosts();
+    };
+
+    logoutBtn?.addEventListener('click', async () => {
+      await fetch('/api/cms/logout', { method: 'POST' });
+      await checkSession();
+    });
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      formStatus.textContent = 'Saving...';
+      const payload = {
+        title: titleInput.value.trim(),
+        slug: slugInput.value.trim(),
+        description: descriptionInput.value.trim(),
+        pubDate: dateInput.value,
+        draft: draftInput.checked,
+        body: bodyInput.value,
+      };
+      const isEditing = Boolean(editingSlug);
+      const url = isEditing ? `/api/cms/posts/${editingSlug}` : '/api/cms/posts';
+      const method = isEditing ? 'PUT' : 'POST';
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        formStatus.textContent = error.error || 'Failed to save.';
+        return;
+      }
+      formStatus.textContent = 'Saved.';
+      await loadPosts();
+      if (!isEditing) {
+        resetForm();
+      }
+    });
+
+    newBtn?.addEventListener('click', resetForm);
+
+    checkSession();
+  </script>
+</BaseLayout>
