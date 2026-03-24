@@ -667,7 +667,6 @@ header {
     z-index: 20;
     background: var(--light-bg);
     padding: 12px 0 16px;
-    border-bottom: 1px solid var(--border-color);
 }
 
 .notes-search__input {
