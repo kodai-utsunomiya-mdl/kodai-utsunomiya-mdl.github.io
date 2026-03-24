@@ -5,7 +5,7 @@ import Footer from "../../components/Footer.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: post,
@@ -22,6 +22,13 @@ const { Content } = await post.render();
     <section class="section">
       <div class="card">
         <h1 class="hero-name">{post.data.title}</h1>
+        {post.data.tags.length > 0 && (
+          <div class="tags tags--spaced">
+            {post.data.tags.map((tag) => (
+              <span>{tag}</span>
+            ))}
+          </div>
+        )}
         <p class="timeline-date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
         <Content />
       </div>
