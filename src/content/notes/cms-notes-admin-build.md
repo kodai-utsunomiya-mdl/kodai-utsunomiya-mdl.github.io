@@ -134,7 +134,7 @@ AstroのContent Collectionが厳密な型チェックを行うため，formatを
 
 ![Notes Admin UI](/uploads/2026-03-24T18-57-57-623Z-admin_image.jpeg)
 
-# プレビューと本番の差分調整
+# プレビューの調整
 プレビュー側にも本番と同じCSSを適用．
 
 - 見出しのスタイル
