@@ -4,9 +4,10 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 
-const latestPost = (await getCollection("blog"))
+const latestPosts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
 const getSlug = (post) => {
   if (!post) return "";
@@ -323,27 +324,29 @@ const getSlug = (post) => {
         Notes.
       </p>
 
-      {latestPost ? (
+      {latestPosts.length > 0 ? (
         <div class="card">
-          <p class="timeline-date">Latest Note</p>
-          <h3 class="card-title">
-            <a href={`/blog/${getSlug(latestPost)}/`}>{latestPost.data.title}</a>
-          </h3>
-          {latestPost.data.description && (
-            <p class="abstract-text">{latestPost.data.description}</p>
-          )}
-          <a class="tool-link" href="/blog/">
-            Open Notes &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
-          </a>
+          <p class="timeline-date">Latest Notes</p>
+          {latestPosts.map((post) => (
+            <div class="notes-item">
+              <h3 class="card-title">
+                <a href={`/blog/${getSlug(post)}/`}>{post.data.title}</a>
+              </h3>
+              {post.data.description && (
+                <p class="abstract-text">{post.data.description}</p>
+              )}
+            </div>
+          ))}
         </div>
       ) : (
         <div class="card">
-          <h3 class="card-title">Read Notes</h3>
-          <a class="tool-link" href="/blog/">
-            Open Notes &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
-          </a>
+          <p class="timeline-date">Latest Notes</p>
+          <p class="abstract-text">No notes yet.</p>
         </div>
       )}
+      <a class="tool-link tool-link--notes" href="/blog/">
+        Open Notes &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
+      </a>
     </section>
     
   </main>
