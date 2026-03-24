@@ -758,6 +758,7 @@ header {
     gap: 6px;
     font-size: 0.9rem;
     color: #555;
+    max-width: 100%;
 }
 
 .admin-input,
@@ -770,6 +771,15 @@ header {
     font-family: var(--font-sans);
     background: var(--white);
     color: var(--text-color);
+    box-sizing: border-box;
+}
+
+.admin-input {
+    height: 38px;
+    line-height: 1.4;
+}
+
+.admin-textarea {
     height: 520px;
     resize: vertical;
 }
@@ -778,6 +788,7 @@ header {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
+    align-items: start;
 }
 
 .admin-preview {
