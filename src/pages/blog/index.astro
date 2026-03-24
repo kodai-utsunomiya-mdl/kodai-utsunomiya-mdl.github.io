@@ -8,7 +8,11 @@ const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const getSlug = (post) => post.slug ?? post.id.replace(/\.mdx?$/, "");
+const getSlug = (post) => {
+  if (post.slug) return post.slug;
+  const filename = post.id.split("/").pop() ?? post.id;
+  return filename.replace(/\.mdx?$/, "");
+};
 ---
 <BaseLayout title="Blog | Kodai Utsunomiya" description="Blog posts by Kodai Utsunomiya">
   <Header baseHref="/" />

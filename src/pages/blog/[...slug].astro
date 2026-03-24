@@ -6,7 +6,11 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
-  const getSlug = (post) => post.slug ?? post.id.replace(/\.mdx?$/, "");
+  const getSlug = (post) => {
+    if (post.slug) return post.slug;
+    const filename = post.id.split("/").pop() ?? post.id;
+    return filename.replace(/\.mdx?$/, "");
+  };
   return posts.map((post) => ({
     params: { slug: getSlug(post) },
     props: { post },
