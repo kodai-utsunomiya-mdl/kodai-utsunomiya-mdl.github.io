@@ -661,6 +661,15 @@ header {
     flex-wrap: wrap;
 }
 
+.notes-search--sticky {
+    position: sticky;
+    top: 72px;
+    z-index: 20;
+    background: var(--light-bg);
+    padding: 12px 0 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
 .notes-search__input {
     max-width: 360px;
     height: 38px;
