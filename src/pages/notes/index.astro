@@ -38,7 +38,7 @@ const postsData = posts.map((post) => ({
         />
         <button class="notes-search__button" type="submit">Search</button>
         <p class="notes-search__count" id="notes-search-count">
-          {posts.length} notes
+          All {posts.length} notes
         </p>
       </form>
       <div id="notes-list">
@@ -109,7 +109,11 @@ const postsData = posts.map((post) => ({
     const render = (items, query = '') => {
       if (!list) return;
       list.innerHTML = '';
-      if (count) count.textContent = formatCount(items.length);
+      if (count) {
+        count.textContent = query
+          ? `${formatCount(items.length)} / ${formatCount(posts.length)}`
+          : `All ${formatCount(posts.length)}`;
+      }
       if (items.length === 0) {
         const empty = document.createElement('p');
         empty.className = 'abstract-text';
