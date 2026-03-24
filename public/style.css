@@ -894,6 +894,12 @@ header {
     line-height: 1.4;
 }
 
+.admin-input--file {
+    height: 40px;
+    line-height: 1.2;
+    padding: 6px 8px;
+}
+
 .admin-textarea {
     height: 520px;
     resize: vertical;
