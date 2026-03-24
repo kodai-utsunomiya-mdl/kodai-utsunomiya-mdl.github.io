@@ -1,14 +1,25 @@
 export async function GET({ request }: { request: Request }) {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
+  const state = url.searchParams.get("state");
   const clientId = import.meta.env.GITHUB_CLIENT_ID;
   const clientSecret = import.meta.env.GITHUB_CLIENT_SECRET;
 
-  if (!code) {
-    return new Response("Missing code", { status: 400 });
-  }
   if (!clientId || !clientSecret) {
     return new Response("Missing GitHub OAuth env", { status: 500 });
+  }
+
+  if (!code) {
+    const redirectUri = `${url.origin}/api/auth`;
+    const authorizeUrl = new URL("https://github.com/login/oauth/authorize");
+    authorizeUrl.searchParams.set("client_id", clientId);
+    authorizeUrl.searchParams.set("redirect_uri", redirectUri);
+    authorizeUrl.searchParams.set("scope", "public_repo");
+    if (state) authorizeUrl.searchParams.set("state", state);
+    return new Response(null, {
+      status: 302,
+      headers: { Location: authorizeUrl.toString() },
+    });
   }
 
   const tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
