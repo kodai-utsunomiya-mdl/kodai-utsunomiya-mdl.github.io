@@ -76,6 +76,10 @@ section {
     margin-top: 20px;
 }
 
+.blog-page .card:first-of-type {
+    margin-top: 10px;
+}
+
 /* =========================================
    3. Header
    ========================================= */
