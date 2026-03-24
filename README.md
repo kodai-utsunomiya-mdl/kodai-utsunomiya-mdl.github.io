@@ -55,6 +55,60 @@ flowchart TD
   GitHubAPI --> Repo[GitHub Repository]
 ```
 
+## Recovery Checklist (Cold Start)
+Use this list if you return after a long time and need to restore the project.
+
+1) Access and accounts
+   - Ensure GitHub account access for the repo.
+   - Ensure Vercel account access for the project.
+2) Local setup
+   - Clone the repository.
+   - `npm install`
+   - `npm run dev`
+3) Content sanity
+   - Notes are in `src/content/notes/`.
+   - Frontmatter uses `pubDate: YYYY-MM-DD` (no quotes).
+4) Deploy sanity
+   - Vercel project is connected to the repo `main`.
+   - Required environment variables are set (see Env Mapping).
+5) Admin sanity
+   - `/admin/` loads.
+   - GitHub App is installed on the repo.
+   - Login succeeds and CRUD works.
+
+## Environment Variable Mapping
+Set in Vercel Project Settings.
+
+| Env var | Source | Notes |
+| --- | --- | --- |
+| `GITHUB_REPO` | GitHub repo | `owner/name` (e.g. `kodai-utsunomiya-mdl/kodai-utsunomiya-mdl.github.io`) |
+| `GITHUB_APP_ID` | GitHub App settings | App ID |
+| `GITHUB_APP_PRIVATE_KEY` | GitHub App keys | Full key including `BEGIN/END` lines |
+| `GITHUB_APP_INSTALLATION_ID` | GitHub App installation | Installation ID for this repo |
+| `GITHUB_APP_CLIENT_ID` | GitHub App settings | Client ID |
+| `GITHUB_APP_CLIENT_SECRET` | GitHub App settings | Client secret |
+| `CMS_SESSION_SECRET` | You generate | 32+ chars random string |
+| `CMS_ALLOWED_USERS` | You define | Comma-separated GitHub logins |
+
+## GitHub App Setup (Detailed)
+1) Create a GitHub App.
+2) Homepage URL: `https://kodai-utsunomiya.vercel.app`
+3) Callback URL: `https://kodai-utsunomiya.vercel.app/api/cms/callback`
+4) Permissions:
+   - Repository contents: Read and write
+   - Metadata: Read-only
+5) Install the App on the repository.
+6) Copy App ID, Client ID, Client secret, and generate a private key.
+7) Obtain the installation ID for this repo.
+8) Set env vars in Vercel using the mapping table above.
+
+## Operational Flow
+1) Author note locally or via `/admin/`.
+2) Content is stored in `src/content/notes/` as Markdown.
+3) Push or Admin updates GitHub contents API.
+4) Vercel builds and publishes the static site.
+5) `/notes/` list and detail pages reflect new content.
+
 ## Local Development
 ```sh
 npm install
@@ -169,6 +223,12 @@ Notes:
 - Static output is generated into `dist/`
 
 ## Troubleshooting
+Common pitfalls:
+- `pubDate` must be a date (YYYY-MM-DD) without quotes.
+- Notes folder is `src/content/notes/` (not `blog`).
+- GitHub App callback URL must match exactly.
+- `CMS_ALLOWED_USERS` must include your GitHub login.
+
 Build errors:
 - `pubDate` must be a date: ensure `pubDate: 2026-03-24` (no quotes)
 - Content schema errors: check `src/content.config.ts`
