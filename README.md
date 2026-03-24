@@ -2,6 +2,28 @@
 
 Scope: architecture, operations, configuration.
 
+## Table of Contents
+- [Stack](#stack)
+- [Repository Structure](#repository-structure)
+- [System Architecture](#system-architecture)
+- [Recovery Checklist](#recovery-checklist)
+- [Environment Variable Mapping](#environment-variable-mapping)
+- [GitHub App Setup (Detailed)](#github-app-setup-detailed)
+- [Installation ID Lookup](#installation-id-lookup)
+- [Operational Flow](#operational-flow)
+- [Local Development](#local-development)
+- [Build and Preview](#build-and-preview)
+- [Notes Content (Markdown)](#notes-content-markdown)
+- [Notes List and Search](#notes-list-and-search)
+- [Notes Detail Page](#notes-detail-page)
+- [Notes Admin (Custom)](#notes-admin-custom)
+- [GitHub App Setup](#github-app-setup)
+- [Vercel Environment Variables](#vercel-environment-variables)
+- [Deployment](#deployment)
+- [Vercel Rebuild (From Scratch)](#vercel-rebuild-from-scratch)
+- [Troubleshooting](#troubleshooting)
+- [Style Sources](#style-sources)
+
 ## Stack
 - Astro
 - TypeScript (Astro endpoints)
@@ -100,6 +122,13 @@ Set in Vercel Project Settings.
 6) Copy App ID, Client ID, Client secret, and generate a private key.
 7) Obtain the installation ID for this repo.
 8) Set env vars in Vercel using the mapping table above.
+
+### Installation ID Lookup
+1) Open the App settings page on GitHub.
+2) Select the installed App for the target account.
+3) Use the URL from the installation page:
+   - `https://github.com/settings/installations/<INSTALLATION_ID>`
+4) Copy the numeric ID and set it as `GITHUB_APP_INSTALLATION_ID`.
 
 ## Operational Flow
 1) Author note locally or via `/admin/`.
@@ -215,6 +244,12 @@ Private key:
 
 ## Deployment
 Deployment target is Vercel.
+
+### Vercel Rebuild (From Scratch)
+1) New Project → Import the GitHub repository.
+2) Framework preset: Astro (auto-detected).
+3) Set Environment Variables from the mapping table.
+4) Deploy.
 
 Notes:
 - `npm run build` runs `astro build`
