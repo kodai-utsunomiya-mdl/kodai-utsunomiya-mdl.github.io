@@ -1038,7 +1038,8 @@ header {
 
 .admin-button--danger {
     border-color: #d9534f;
-    color: #b52b27;
+    background: #fdecea;
+    color: #8b1e1a;
 }
 
 .admin-button--danger:hover {
