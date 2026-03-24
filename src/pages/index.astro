@@ -2,6 +2,18 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { getCollection } from "astro:content";
+
+const latestPost = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+
+const getSlug = (post) => {
+  if (!post) return "";
+  if (post.slug) return post.slug;
+  const filename = post.id.split("/").pop() ?? post.id;
+  return filename.replace(/\.mdx?$/, "");
+};
 ---
 <BaseLayout>
   <Header baseHref="" />
@@ -311,12 +323,27 @@ import Footer from "../components/Footer.astro";
         Notes.
       </p>
 
-      <div class="card">
-        <h3 class="card-title">Read the Blog</h3>
-        <a class="tool-link" href="/blog/">
-          Open Blog &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
-        </a>
-      </div>
+      {latestPost ? (
+        <div class="card">
+          <p class="timeline-date">Latest Post</p>
+          <h3 class="card-title">
+            <a href={`/blog/${getSlug(latestPost)}/`}>{latestPost.data.title}</a>
+          </h3>
+          {latestPost.data.description && (
+            <p class="abstract-text">{latestPost.data.description}</p>
+          )}
+          <a class="tool-link" href="/blog/">
+            Open Blog &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
+          </a>
+        </div>
+      ) : (
+        <div class="card">
+          <h3 class="card-title">Read the Blog</h3>
+          <a class="tool-link" href="/blog/">
+            Open Blog &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
+          </a>
+        </div>
+      )}
     </section>
     
   </main>
