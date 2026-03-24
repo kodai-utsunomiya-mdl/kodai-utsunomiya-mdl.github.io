@@ -300,18 +300,6 @@ header {
     font-family: var(--font-serif);
 }
 
-.section-title-row {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-.section-title-row .section-title {
-    margin-bottom: 0;
-}
-
 .section-subtitle {
     font-size: 0.65em;
     color: #888;
@@ -661,7 +649,8 @@ header {
 .tool-link--notes {
     display: inline-flex;
     align-items: center;
-    margin-top: 0;
+    margin-top: 6px;
+    margin-bottom: 18px;
 }
 
 .icon-inline {
