@@ -61,13 +61,19 @@ export async function GET({ request }: { request: Request }) {
   <body>
     <script>
       const message = 'authorization:${token}';
-      if (window.opener) {
-        window.opener.postMessage(message, window.location.origin);
+      const targetOrigin = window.location.origin;
+      const hasOpener = Boolean(window.opener);
+      if (hasOpener) {
+        window.opener.postMessage(message, targetOrigin);
       }
       try {
         window.localStorage.setItem('decap_auth_token', message);
       } catch (e) {}
-      ${debug ? "document.body.innerText = 'auth ok';" : "window.close();"}
+      ${
+        debug
+          ? "document.body.innerText = 'auth ok';"
+          : "if (hasOpener) { window.close(); } else { window.location.assign('/admin/'); }"
+      }
     </script>
   </body>
 </html>`;
