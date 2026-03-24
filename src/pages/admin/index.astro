@@ -40,10 +40,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <input id="post-draft" type="checkbox" />
             Draft
           </label>
-          <label class="admin-label">
-            Body
-            <textarea id="post-body" class="admin-textarea" rows="12"></textarea>
-          </label>
+          <div class="admin-editor-grid">
+            <label class="admin-label">
+              Body
+              <textarea id="post-body" class="admin-textarea" rows="16"></textarea>
+            </label>
+            <div class="admin-preview">
+              <p class="admin-preview__title">Preview</p>
+              <div id="post-preview" class="admin-preview__body"></div>
+            </div>
+          </div>
           <div class="admin-actions">
             <button class="admin-button" type="submit" id="save-btn">Save</button>
             <button class="admin-button admin-button--ghost" type="button" id="new-btn">New</button>
@@ -76,6 +82,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     const dateInput = document.getElementById('post-date');
     const draftInput = document.getElementById('post-draft');
     const bodyInput = document.getElementById('post-body');
+    const preview = document.getElementById('post-preview');
     const newBtn = document.getElementById('new-btn');
 
     let editingSlug = null;
@@ -90,6 +97,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       form.reset();
       slugInput.removeAttribute('disabled');
       formStatus.textContent = '';
+      if (preview) preview.innerHTML = '';
     };
 
     const loadPosts = async () => {
@@ -124,10 +132,21 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           dateInput.value = payload.pubDate ? payload.pubDate.slice(0, 10) : '';
           draftInput.checked = Boolean(payload.draft);
           bodyInput.value = payload.body || '';
+          renderPreview();
           formStatus.textContent = '';
         });
         postsList.appendChild(item);
       });
+    };
+
+    const renderPreview = () => {
+      if (!preview) return;
+      const content = bodyInput.value || '';
+      if (window.marked) {
+        preview.innerHTML = window.marked.parse(content);
+      } else {
+        preview.textContent = content;
+      }
     };
 
     const checkSession = async () => {
@@ -154,6 +173,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       await fetch('/api/cms/logout', { method: 'POST' });
       await checkSession();
     });
+
+    bodyInput?.addEventListener('input', renderPreview);
 
     form?.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -183,6 +204,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       await loadPosts();
       if (!isEditing) {
         resetForm();
+      } else {
+        renderPreview();
       }
     });
 
@@ -190,4 +213,5 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     checkSession();
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </BaseLayout>
