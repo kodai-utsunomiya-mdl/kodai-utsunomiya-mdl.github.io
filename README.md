@@ -284,6 +284,6 @@ Main areas:
 - Layout (`.container`, `.section`)
 - Cards, timeline, tags
 - Notes list and search
-- Blog content typography
+- Notes content typography
 - Admin UI
 - Dark mode overrides
