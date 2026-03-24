@@ -60,7 +60,13 @@ export async function GET({ request }: { request: Request }) {
 <html>
   <body>
     <script>
-      window.opener && window.opener.postMessage('authorization:${token}', '*');
+      const message = 'authorization:${token}';
+      if (window.opener) {
+        window.opener.postMessage(message, window.location.origin);
+      }
+      try {
+        window.localStorage.setItem('decap_auth_token', message);
+      } catch (e) {}
       ${debug ? "document.body.innerText = 'auth ok';" : "window.close();"}
     </script>
   </body>

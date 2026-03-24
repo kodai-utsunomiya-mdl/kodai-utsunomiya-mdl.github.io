@@ -7,6 +7,15 @@
     <title>Content Manager</title>
   </head>
   <body>
+    <script>
+      window.addEventListener('load', () => {
+        const token = window.localStorage.getItem('decap_auth_token');
+        if (token) {
+          window.postMessage(token, window.location.origin);
+          window.localStorage.removeItem('decap_auth_token');
+        }
+      });
+    </script>
     <script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
   </body>
 </html>
