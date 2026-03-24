@@ -741,7 +741,7 @@ header {
 }
 
 .blog-title {
-    margin: 0 0 12px 0;
+    margin: 0 0 16px 0;
     font-family: var(--font-serif);
     font-size: 2rem;
     color: var(--primary-color);
