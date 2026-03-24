@@ -37,6 +37,13 @@ const postsData = posts.map((post) => ({
           aria-label="Search notes"
         />
         <button class="notes-search__button" type="submit">Search</button>
+        <button
+          class="notes-search__clear is-hidden"
+          type="button"
+          id="notes-search-clear"
+        >
+          Clear
+        </button>
         <p class="notes-search__count" id="notes-search-count">
           All {posts.length} notes
         </p>
@@ -70,6 +77,7 @@ const postsData = posts.map((post) => ({
     const list = document.getElementById('notes-list');
     const count = document.getElementById('notes-search-count');
     const dataEl = document.getElementById('notes-data');
+    const clearButton = document.getElementById('notes-search-clear');
     let posts = [];
     if (dataEl) {
       try {
@@ -198,6 +206,20 @@ const postsData = posts.map((post) => ({
       count.textContent = `${currentIndex + 1} / ${formatCount(total)}`;
     };
 
+    const setClearVisible = (visible) => {
+      if (!clearButton) return;
+      clearButton.classList.toggle('is-hidden', !visible);
+    };
+
+    const resetSearch = () => {
+      if (input) input.value = '';
+      lastQuery = '';
+      currentIndex = 0;
+      currentMatches = render(posts) || [];
+      updateCount('');
+      setClearVisible(false);
+    };
+
     const runSearch = (query) => {
       const normalized = normalize(query);
       const items = filterPosts(query);
@@ -207,6 +229,7 @@ const postsData = posts.map((post) => ({
       if (currentMatches.length > 0) {
         currentMatches[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+      setClearVisible(true);
     };
 
     const advanceMatch = () => {
@@ -221,10 +244,7 @@ const postsData = posts.map((post) => ({
       const value = input?.value || '';
       const normalized = normalize(value);
       if (!normalized) {
-        lastQuery = '';
-        currentIndex = 0;
-        currentMatches = render(posts) || [];
-        updateCount('');
+        resetSearch();
         return;
       }
       if (normalized === lastQuery && currentMatches.length > 0) {
@@ -233,6 +253,23 @@ const postsData = posts.map((post) => ({
       }
       lastQuery = normalized;
       runSearch(value);
+    });
+
+    clearButton?.addEventListener('click', () => {
+      resetSearch();
+      input?.focus();
+    });
+
+    input?.addEventListener('input', () => {
+      const value = input.value.trim();
+      setClearVisible(value.length > 0);
+    });
+
+    input?.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        resetSearch();
+      }
     });
 
     if (count) count.textContent = '';
