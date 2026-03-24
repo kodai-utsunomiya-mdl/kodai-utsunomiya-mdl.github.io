@@ -117,7 +117,7 @@
                     <li><a href="#recognition">Recognition</a></li> 
                     <li><a href="#tools">Tools</a></li> 
                     <li>
-                        <button id="theme-toggle" aria-label="Toggle Dark Mode" style="background:none; border:none; cursor:pointer; color: var(--text-color); font-size: 1rem; padding: 5px;">
+                        <button id="theme-toggle" aria-label="Toggle Dark Mode">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
@@ -142,7 +142,7 @@
                 </p>
             </div>
 
-            <div class="hero-affiliation-group" style="margin-top: 5px;">
+            <div class="hero-affiliation-group hero-affiliation-group--tight">
                 <p class="hero-affiliation">
                     <a href="https://www.riken.jp/research/labs/aip/ai_soc/ai_sec_privacy/index.html" target="_blank" rel="noopener noreferrer">
                         <i class="fas fa-building"></i> &nbsp; 理化学研究所 革新知能統合研究センター (RIKEN AIP) 人工知能セキュリティ・プライバシーチーム 研修生
@@ -150,12 +150,12 @@
                 </p>
             </div>
 
-            <div class="social-links" style="margin-top: 30px;">
-                <a href="mailto:utsunomiya@mdl.cs.tsukuba.ac.jp" style="margin-right: 10px;">
+            <div class="social-links">
+                <a class="social-link" href="mailto:utsunomiya@mdl.cs.tsukuba.ac.jp">
                     <i class="fas fa-envelope"></i> &nbsp; Email
                 </a>
 
-                <a href="https://github.com/kodai-utsunomiya-mdl/" target="_blank" rel="noopener noreferrer me" style="margin-right: 10px;">
+                <a class="social-link" href="https://github.com/kodai-utsunomiya-mdl/" target="_blank" rel="noopener noreferrer me">
                     <i class="fab fa-github"></i> &nbsp; GitHub
                 </a>
 
@@ -164,12 +164,12 @@
                 </a>
             </div>
 
-            <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">
-                <i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i>
-                <span style="font-weight: 500;">Tsukuba</span>
-                <i class="fas fa-angle-left" style="margin: 0 8px; opacity: 0.5; font-size: 0.9em;"></i>
+            <p class="hero-location">
+                <i class="fas fa-map-marker-alt icon-spacer"></i>
+                <span class="text-strong">Tsukuba</span>
+                <i class="fas fa-angle-left icon-sep"></i>
                 Miyazaki
-                <i class="fas fa-angle-left" style="margin: 0 8px; opacity: 0.5; font-size: 0.9em;"></i>
+                <i class="fas fa-angle-left icon-sep"></i>
                 Nobeoka
             </p>
 
@@ -182,12 +182,12 @@
         <section id="about" class="section">
           <h2 class="section-title">
             Technical Interests
-            <span style="font-size: 0.65em; color: #888; font-weight: 400; margin-left: 8px;">
+            <span class="section-subtitle">
               (including topics for future study)
             </span>
           </h2>
 
-            <div class="tags" style="margin-top: 15px;">
+            <div class="tags tags--spaced">
                 <span>機械学習</span>
                 <span>深層学習</span>
                 <span>統計的学習理論</span>
@@ -209,52 +209,52 @@
             <h2 class="section-title">Research</h2>
              
             <div class="card">
-                <span style="background-color: #e3f2fd; color: #0d47a1; font-size: 0.75rem; padding: 4px 10px; border-radius: 12px; font-weight: 700; display: inline-block; margin-bottom: 8px;">
+                <span class="badge badge--current">
                     Current Research
                 </span>
                 
-                <h3 style="margin-top: 0;">Master's Theme</h3>
-                <p style="font-weight: 500; font-size: 1.05rem;">
+                <h3 class="card-title">Master's Theme</h3>
+                <p class="card-lead">
                     スプリアス相関下における深層ニューラルネットワークの特徴学習の解析
                 </p>
-                <p class="keywords" style="margin-top: 10px; margin-bottom: 10px;">
-                    <a href="https://github.com/kodai-utsunomiya-mdl/spurious-feature-analysis_v2" target="_blank" rel="noopener noreferrer" style="font-size: 0.9rem; font-style: normal;">
+                <p class="keywords">
+                    <a href="https://github.com/kodai-utsunomiya-mdl/spurious-feature-analysis_v2" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-github"></i> &nbsp; GitHub Repository
                     </a>
                 </p>
-                  <p style="font-size: 0.85rem; color: #666; line-height: 1.6;">
+                  <p class="abstract-text">
                       <strong>Abstract:</strong>&nbsp;
-                      <span style="color: #999;"> Work in progress...</span>
+                      <span class="abstract-muted"> Work in progress...</span>
                   </p>
-                <div style="margin-top: 20px; display: flex; justify-content: center; align-items: center; gap: 20px;">
-                    <img src="mt_1.png" style="max-width: 58%; height: auto;" class="zoomable">
-                    <img src="mt_2.jpeg" style="max-width: 40%; height: auto;" class="zoomable">
+                <div class="media-row">
+                    <img src="mt_1.png" class="zoomable media-img--wide">
+                    <img src="mt_2.jpeg" class="zoomable media-img--narrow">
                 </div>
             </div>
 
             <div class="card">
-                <span style="background-color: #f5f5f5; color: #616161; font-size: 0.75rem; padding: 4px 10px; border-radius: 12px; font-weight: 700; border: 1px solid #ddd; display: inline-block; margin-bottom: 8px;">
+                <span class="badge badge--bachelor">
                     Bachelor Thesis
                 </span>
         
-                <h3 style="margin-top: 0; line-height: 1.4;">
+                <h3 class="card-title card-title--wide">
                     中間層のニューロン数が層によって異なるオーダーを持つ深層ニューラルネットワークの学習ダイナミクスの解析
                 </h3>
                 
-                <p class="keywords" style="margin-top: 10px; margin-bottom: 10px;">
-                    <a href="https://github.com/kodai-utsunomiya-mdl/senior-thesis" target="_blank" rel="noopener noreferrer" style="font-size: 0.9rem; font-style: normal;">
+                <p class="keywords">
+                    <a href="https://github.com/kodai-utsunomiya-mdl/senior-thesis" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-github"></i> &nbsp; GitHub (Paper & Code)
                     </a>
                 </p>
      
-                <p style="font-size: 0.85rem; color: #666; line-height: 1.6;">
+                <p class="abstract-text">
                     <strong>Abstract:</strong>&nbsp; 層ごとに幅 (ニューロン数) のオーダーが異なる (ボトルネック構造などを持つ) 深層ニューラルネットワークにおいて，学習が安定するための条件を導出．
                     信号伝播のオーダー評価を行い，中間表現の更新量がネットワーク内の最小の幅に制約されるという規則を特定．これに基づき，初期化・学習率等を動的に調整する手法 <i>Dynamic Parametrization</i> を提案．
                 </p>
 
-                <div style="margin-top: 20px; display: flex; justify-content: center; align-items: center; gap: 20px;"> 
-                    <img src="bt_1.jpeg" style="max-width: 68%; height: auto;" class="zoomable">
-                    <img src="bt_2.jpeg" style="max-width: 28%; height: auto;" class="zoomable">
+                <div class="media-row"> 
+                    <img src="bt_1.jpeg" class="zoomable media-img--wide-2">
+                    <img src="bt_2.jpeg" class="zoomable media-img--narrow-2">
                 </div>
             </div>
         </section>
@@ -268,8 +268,8 @@
                     <div class="timeline-content">
                         <h3>Master's Student (M1)</h3>
                         <p>筑波大学大学院 機械学習・データマイニング研究室 (MDL)</p>
-                        <p style="font-size: 0.85rem; color: #666; margin-top: 4px; margin-bottom: 8px;">
-                            <span style="font-weight: 500;">2027.03</span> 修士 (工学) 修了予定
+                        <p class="timeline-note">
+                            <span class="timeline-year">2027.03</span> 修士 (工学) 修了予定
                         </p>
                         <p class="detail">
                             <a href="https://mdl.cs.tsukuba.ac.jp/ja/" target="_blank" rel="noopener noreferrer">
@@ -284,8 +284,8 @@
                     <div class="timeline-content">
                         <h3>Research Assistant (K Program)</h3>
                         <p>経済安全保障重要技術育成プログラム (K Program)</p>
-                        <p style="font-size: 0.85rem; color: #666; margin-top: 4px; margin-bottom: 8px;">
-                            <span style="font-weight: 500;"> LLMのセキュリティ評価・レッドチーミング技術の開発
+                        <p class="timeline-note">
+                            <span class="timeline-year"> LLMのセキュリティ評価・レッドチーミング技術の開発
                         </p>
                         <p class="detail">
                             <a href="https://www.jst.go.jp/k-program/" target="_blank" rel="noopener noreferrer">
@@ -301,8 +301,8 @@
                     <div class="timeline-content">
                         <h3>Student Trainee</h3>
                         <p>理化学研究所 革新知能統合研究センター (RIKEN AIP)</p>
-                        <p style="font-size: 0.85rem; color: #666; margin-top: 4px; margin-bottom: 8px;">
-                            <span style="font-weight: 500;"> 人工知能セキュリティ・プライバシーチーム
+                        <p class="timeline-note">
+                            <span class="timeline-year"> 人工知能セキュリティ・プライバシーチーム
                         </p>
                         <p class="detail">
                             <a href="https://www.riken.jp/research/labs/aip/ai_soc/ai_sec_privacy/index.html" target="_blank" rel="noopener noreferrer">
@@ -358,11 +358,11 @@
                     </div>
                 </div>
             </div>
-        <div style="margin-top: 50px;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px;">
-                <h3 style="font-size: 1.1rem; color: #555; margin: 0;">GitHub Contributions</h3>
-                <a href="https://github.com/kodai-utsunomiya-mdl" target="_blank" rel="noopener noreferrer me" style="font-size: 0.85rem;">
-                    <i class="fab fa-github"></i> &nbsp; View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em; margin-left: 3px;"></i>
+        <div class="skills-github">
+            <div class="skills-github__header">
+                <h3 class="skills-github__title">GitHub Contributions</h3>
+                <a class="skills-github__link" href="https://github.com/kodai-utsunomiya-mdl" target="_blank" rel="noopener noreferrer me">
+                    <i class="fab fa-github"></i> &nbsp; View on GitHub <i class="fas fa-arrow-right icon-inline"></i>
                 </a>
             </div>
              
@@ -430,39 +430,39 @@
         <!-- Tools & Utilities セクション -->
         <section id="tools" class="section">
             <h2 class="section-title">Tools & Utilities</h2>
-            <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">
+            <p class="tools-intro">
                 Personal tools and mini-projects I've created.
             </p>
             
             <!-- CSS Gridでカードを並べるコンテナ -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+            <div class="tools-grid">
                 
                 <!-- Tool 1: Text Counter -->
-                <div class="card" style="margin-bottom: 0;">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <i class="fas fa-calculator" style="font-size: 1.4rem; color: var(--accent-color); margin-right: 10px;"></i>
-                        <h3 style="margin: 0; font-size: 1.1rem;">Text Counter</h3>
+                <div class="card card--flush">
+                    <div class="tool-header">
+                        <i class="fas fa-calculator tool-icon"></i>
+                        <h3 class="tool-title">Text Counter</h3>
                     </div>
-                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px; line-height: 1.6;">
+                    <p class="tool-desc">
                         文字数カウント．入力データはブラウザ上で処理．
                     </p>
-                    <a href="https://kodai-utsunomiya-mdl.github.io/text-counter/" target="_blank" rel="noopener noreferrer" style="font-size: 0.9rem; font-weight: 500;">
-                        Open Tool &nbsp; <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 3px;"></i>
+                    <a class="tool-link" href="https://kodai-utsunomiya-mdl.github.io/text-counter/" target="_blank" rel="noopener noreferrer">
+                        Open Tool &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
                     </a>
                 </div>
 
                 <!-- ツールを追加する際 -->
                 <!--
-                <div class="card" style="margin-bottom: 0;">
-                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <i class="fas fa-code" style="font-size: 1.4rem; color: var(--accent-color); margin-right: 10px;"></i>
-                        <h3 style="margin: 0; font-size: 1.1rem;">Another Tool</h3>
+                <div class="card card--flush">
+                    <div class="tool-header">
+                        <i class="fas fa-code tool-icon"></i>
+                        <h3 class="tool-title">Another Tool</h3>
                     </div>
-                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px; line-height: 1.6;">
+                    <p class="tool-desc">
                         ここにツールの説明文
                     </p>
-                    <a href="#" target="_blank" rel="noopener noreferrer" style="font-size: 0.9rem; font-weight: 500;">
-                        Open Tool <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 3px;"></i>
+                    <a class="tool-link" href="#" target="_blank" rel="noopener noreferrer">
+                        Open Tool <i class="fas fa-external-link-alt icon-inline"></i>
                     </a>
                 </div>
                 -->
