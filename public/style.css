@@ -657,13 +657,16 @@ header {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 18px;
+    margin-bottom: 28px;
     flex-wrap: wrap;
 }
 
 .notes-search__input {
     max-width: 360px;
     height: 38px;
+    border-color: #cbd5f0;
+    background: #ffffff;
+    box-shadow: 0 6px 16px rgba(44, 62, 80, 0.08);
 }
 
 .notes-search__count {
@@ -673,16 +676,17 @@ header {
 
 .notes-search__button {
     border: 1px solid var(--border-color);
-    background: var(--white);
-    color: var(--text-color);
+    background: var(--primary-color);
+    color: var(--white);
     padding: 8px 14px;
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.9rem;
+    box-shadow: 0 6px 16px rgba(44, 62, 80, 0.15);
 }
 
 .notes-search__button:hover {
-    background: #f1f3f5;
+    background: #1f2a36;
 }
 
 .notes-match {

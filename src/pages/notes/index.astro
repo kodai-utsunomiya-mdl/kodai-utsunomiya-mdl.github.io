@@ -112,7 +112,7 @@ const postsData = posts.map((post) => ({
       if (count) {
         count.textContent = query
           ? `${formatCount(items.length)} / ${formatCount(posts.length)}`
-          : `All ${formatCount(posts.length)}`;
+          : '';
       }
       if (items.length === 0) {
         const empty = document.createElement('p');
@@ -176,6 +176,7 @@ const postsData = posts.map((post) => ({
       render(filterPosts(value), normalized);
     });
 
+    if (count) count.textContent = '';
     render(posts);
   </script>
 </BaseLayout>
