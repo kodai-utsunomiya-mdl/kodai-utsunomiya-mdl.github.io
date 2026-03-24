@@ -899,6 +899,8 @@ header {
     padding: 0;
     line-height: normal;
     display: block;
+    width: 100%;
+    max-width: 680px;
 }
 
 .admin-input--file::file-selector-button {
@@ -907,8 +909,8 @@ header {
     padding: 0 12px;
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    background: var(--white);
-    color: var(--text-color);
+    background: #f6f7f9;
+    color: var(--primary-color);
     font-size: 0.9rem;
     cursor: pointer;
 }
@@ -1010,14 +1012,18 @@ header {
     flex-wrap: wrap;
 }
 
+.admin-page #auth-card .admin-actions {
+    margin-top: 10px;
+}
+
 .admin-actions .admin-label {
     min-width: 240px;
 }
 
 .admin-button {
-    border: 1px solid var(--border-color);
-    background: var(--white);
-    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    background: var(--primary-color);
+    color: var(--white);
     padding: 8px 14px;
     border-radius: 6px;
     cursor: pointer;
@@ -1026,6 +1032,8 @@ header {
 
 .admin-button--ghost {
     background: transparent;
+    border-color: var(--border-color);
+    color: var(--text-color);
 }
 
 .admin-button--danger {
