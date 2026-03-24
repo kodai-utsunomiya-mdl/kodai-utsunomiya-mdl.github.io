@@ -46,18 +46,23 @@
       };
 
       const deliverToken = () => {
-        const token = window.localStorage.getItem('decap_auth_token');
-        if (!token) {
+        const rawToken = window.localStorage.getItem('decap_auth_token');
+        if (!rawToken) {
           logDebug('deliverToken: no token in localStorage');
           return;
         }
 
         const origin = window.location.origin;
+        const tokens = [rawToken];
+        if (rawToken.startsWith('authorization:') && !rawToken.startsWith('authorization:github:')) {
+          const value = rawToken.replace('authorization:', '');
+          tokens.push(`authorization:github:${value}`);
+        }
         let attempts = 0;
         const maxAttempts = 20;
-        logDebug(`deliverToken: start, token=${maskToken(token)}`);
+        logDebug(`deliverToken: start, token=${maskToken(rawToken)}`);
         const interval = setInterval(() => {
-          window.postMessage(token, origin);
+          tokens.forEach((token) => window.postMessage(token, origin));
           attempts += 1;
           logDebug(`deliverToken: postMessage attempt ${attempts}`);
           if (attempts >= maxAttempts) {
