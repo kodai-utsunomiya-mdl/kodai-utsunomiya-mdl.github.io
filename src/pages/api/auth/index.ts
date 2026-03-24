@@ -10,7 +10,11 @@ export async function GET({ request }: { request: Request }) {
   }
 
   if (!code) {
-    const redirectUri = `${url.origin}/api/auth`;
+    const redirectUriUrl = new URL(`${url.origin}/api/auth`);
+    if (debug) {
+      redirectUriUrl.searchParams.set("debug", "1");
+    }
+    const redirectUri = redirectUriUrl.toString();
     const authorizeUrl = new URL("https://github.com/login/oauth/authorize");
     authorizeUrl.searchParams.set("client_id", clientId);
     authorizeUrl.searchParams.set("redirect_uri", redirectUri);
