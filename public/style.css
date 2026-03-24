@@ -770,6 +770,8 @@ header {
     font-family: var(--font-sans);
     background: var(--white);
     color: var(--text-color);
+    height: 520px;
+    resize: vertical;
 }
 
 .admin-editor-grid {
@@ -783,7 +785,7 @@ header {
     border-radius: 6px;
     padding: 10px 12px;
     background: var(--white);
-    max-height: 520px;
+    height: 520px;
     overflow: auto;
 }
 
