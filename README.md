@@ -52,3 +52,16 @@ Notes:
   `![説明](/mt_1.png)`
 - Inline color can be applied with HTML:
   `<span class="text-color" style="--inline-text-color:#b45309;">強調</span>`
+
+### GUI Editor (Decap CMS)
+The site includes a GUI editor at `/admin/` using Decap CMS. It commits directly to GitHub.
+
+Setup:
+1) Create a GitHub OAuth App.
+2) Set the callback URL to `https://kodai-utsunomiya.vercel.app/admin/`.
+3) Add the client id/secret as Vercel environment variables:
+   - `GITHUB_CLIENT_ID`
+   - `GITHUB_CLIENT_SECRET`
+4) Deploy, then open `/admin/` and log in with GitHub.
+
+Config lives at `public/admin/config.yml` and the auth handler is `src/pages/api/auth/index.ts`.
