@@ -1,22 +1,20 @@
 ---
 title: "サンプル記事"
-description: "Notes運用のためのサンプル投稿．"
+description: "Notes サンプル投稿．"
 pubDate: 2026-03-24
 draft: false
 ---
-これはサンプルの記事．Markdownで本文を書き，必要に応じて数式や画像を追加できるが，読みやすさの確認を目的として少し長めに記述している．
+サンプル記事．Markdownで本文を書き，必要に応じて数式や画像を追加可能．
 
-次のように構成を分けると読みやすくなる．
-
-# 見出し例
+# 見出し
 - 箇条書き
 - **強調**
 
-# 数式例
-インライン: $E=mc^2$
+# 数式
+$\widetilde{\boldsymbol{h}}(\boldsymbol{x}) = \boldsymbol{Wx} + \boldsymbol{b}$
 
-# 画像例
+# 画像
 ![研究図のサンプル](/mt_1.png)
 
-# 色付け例
-重要な語句は <span class="text-color" style="--inline-text-color:#b45309;">このように色付け</span> できる．
+# 色付け
+語句は <span class="text-color" style="--inline-text-color:#b45309;">このように色付け</span> 可能．
