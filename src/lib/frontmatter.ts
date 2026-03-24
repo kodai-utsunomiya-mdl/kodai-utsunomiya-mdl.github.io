@@ -40,7 +40,7 @@ export const formatFrontmatter = (data: {
   const lines = [
     `title: ${escapeYaml(data.title)}`,
     ...(data.description ? [`description: ${escapeYaml(data.description)}`] : []),
-    `pubDate: ${escapeYaml(data.pubDate)}`,
+    `pubDate: ${data.pubDate}`,
     `draft: ${data.draft ? "true" : "false"}`,
   ];
   return `---\n${lines.join("\n")}\n---\n`;
