@@ -3,6 +3,7 @@ export async function GET({ request }: { request: Request }) {
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
   const debug = url.searchParams.get("debug");
+  const requestedScope = url.searchParams.get("scope") || "public_repo";
   const clientId = import.meta.env.GITHUB_CLIENT_ID;
   const clientSecret = import.meta.env.GITHUB_CLIENT_SECRET;
 
@@ -29,7 +30,7 @@ export async function GET({ request }: { request: Request }) {
     const authorizeUrl = new URL("https://github.com/login/oauth/authorize");
     authorizeUrl.searchParams.set("client_id", clientId);
     authorizeUrl.searchParams.set("redirect_uri", redirectUri);
-    authorizeUrl.searchParams.set("scope", "public_repo");
+    authorizeUrl.searchParams.set("scope", requestedScope);
     if (state) authorizeUrl.searchParams.set("state", state);
     return new Response(null, {
       status: 302,
