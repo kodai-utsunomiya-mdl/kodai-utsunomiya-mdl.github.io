@@ -69,7 +69,7 @@ Vercelに以下の環境変数を設定する．
 
 - `GITHUB_REPO`: `owner/name`
 - `GITHUB_APP_ID`: GitHub AppのApp ID
-- `GITHUB_APP_PRIVATE_KEY`: PEMの全文（BEGIN/END含む）
+- `GITHUB_APP_PRIVATE_KEY`: PEMの全文 (BEGIN/END含む)
 - `GITHUB_APP_INSTALLATION_ID`: インストールID
 - `GITHUB_APP_CLIENT_ID`: Client ID
 - `GITHUB_APP_CLIENT_SECRET`: Client secret
@@ -122,7 +122,7 @@ AstroのContent Collectionが厳密な型チェックを行うため，formatを
 - `pubDate` は `YYYY-MM-DD` 形式，必ず無引用
 - `draft` を `true` にすると一覧に出ない
 
-# 管理画面UI
+# 管理画面のUI
 左に編集フォーム，右にプレビューを置き，保存ボタンでGitHubに反映する．
 
 - 左: 編集フォーム (Title/Slug/Description/Date/Draft/Body)
@@ -132,7 +132,7 @@ AstroのContent Collectionが厳密な型チェックを行うため，formatを
 - MathJaxを読み込んで数式レンダリング
 - Previewと本番の差は `public/style.css` の `.admin-preview__body` で調整
 
-![Notes Admin UI](/admin_image.jpeg)
+![Notes Admin UI](/uploads/2026-03-24T18-57-57-623Z-admin_image.jpeg)
 
 # プレビューと本番の差分調整
 プレビュー側にも本番と同じCSSを適用．
@@ -153,8 +153,7 @@ AstroのContent Collectionが厳密な型チェックを行うため，formatを
 
 # 運用フロー
 1) `/admin/` でログイン
-2) Markdownを編集し保存
-2.5) 必要なら画像をアップロードしURLを挿入
+2) Markdownを編集し保存 (必要なら画像をアップロードしURLを挿入)
 3) GitHubにコミットされる
 4) Vercelが自動ビルド
 5) `/notes/` と個別ページに反映
