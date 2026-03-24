@@ -41,12 +41,13 @@ export async function GET({ request }: { request: Request }) {
   }
 
   const token = tokenData.access_token;
+  const debug = url.searchParams.get("debug");
   const body = `<!doctype html>
 <html>
   <body>
     <script>
       window.opener && window.opener.postMessage('authorization:${token}', '*');
-      window.close();
+      ${debug ? "document.body.innerText = 'auth ok';" : "window.close();"}
     </script>
   </body>
 </html>`;
