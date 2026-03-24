@@ -21,12 +21,12 @@ npm run preview
 
 ### Content
 - Main page: `src/pages/index.astro`
-- Blog posts: `src/content/blog/*.md`
+- Notes entries: `src/content/blog/*.md`
 - Layout: `src/layouts/BaseLayout.astro`
 - Assets: `public/`
 
-### Blog Authoring
-Blog posts live in `src/content/blog/` as Markdown files. The filename becomes the URL slug.
+### Notes Authoring
+Notes entries live in `src/content/blog/` as Markdown files. The filename becomes the URL slug.
 
 Steps:
 1) Create a new file in `src/content/blog/` (e.g. `my-post.md`).

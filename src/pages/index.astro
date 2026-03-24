@@ -318,14 +318,14 @@ const getSlug = (post) => {
     </section>
 
     <section id="tools" class="section">
-      <h2 class="section-title">Blog</h2>
+      <h2 class="section-title">Notes</h2>
       <p class="tools-intro">
         Notes.
       </p>
 
       {latestPost ? (
         <div class="card">
-          <p class="timeline-date">Latest Post</p>
+          <p class="timeline-date">Latest Note</p>
           <h3 class="card-title">
             <a href={`/blog/${getSlug(latestPost)}/`}>{latestPost.data.title}</a>
           </h3>
@@ -333,14 +333,14 @@ const getSlug = (post) => {
             <p class="abstract-text">{latestPost.data.description}</p>
           )}
           <a class="tool-link" href="/blog/">
-            Open Blog &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
+            Open Notes &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
           </a>
         </div>
       ) : (
         <div class="card">
-          <h3 class="card-title">Read the Blog</h3>
+          <h3 class="card-title">Read Notes</h3>
           <a class="tool-link" href="/blog/">
-            Open Blog &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
+            Open Notes &nbsp; <i class="fas fa-external-link-alt icon-inline"></i>
           </a>
         </div>
       )}
