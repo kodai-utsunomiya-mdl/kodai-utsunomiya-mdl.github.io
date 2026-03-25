@@ -158,7 +158,7 @@ const {
         const closeBtn = document.querySelector('.lightbox-close');
         if (!lightbox || !lightboxImg || !closeBtn) return;
 
-        document.querySelectorAll('.blog-content img').forEach(img => {
+        document.querySelectorAll('.blog-content img, img.zoomable').forEach(img => {
           img.classList.add('zoomable');
           img.addEventListener('click', function() {
             lightbox.style.display = "flex";
