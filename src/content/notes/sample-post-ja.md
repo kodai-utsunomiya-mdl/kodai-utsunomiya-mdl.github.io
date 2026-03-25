@@ -14,7 +14,7 @@ draft: false
 $f(\boldsymbol{x}; \boldsymbol{\theta}) = \frac{1}{m} \sum_{i=1}^m a_i \sigma \left(  \langle \boldsymbol{w}_i, \boldsymbol{x} \rangle \right)$
 
 # 画像
-![研究図のサンプル](/bt_1.png)
+![研究図のサンプル](/bt_1.jpeg)
 
 # 色付け
 語句は <span class="text-color" style="--inline-text-color:#b45309;">色付け</span> 可能．
