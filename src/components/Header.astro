@@ -2,10 +2,10 @@
 const baseHref = Astro.props.baseHref ?? "";
 ---
 <header>
-  <div class="container header-container">
-    <div class="logo"><a href="/">Kodai Utsunomiya</a></div>
+  <div class="l-container site-header__container">
+    <div class="site-header__logo"><a href="/">Kodai Utsunomiya</a></div>
     <nav>
-      <ul class="nav-list">
+      <ul class="site-header__nav-list">
         <li><a href={`${baseHref}#about`}>Interests</a></li>
         <li><a href={`${baseHref}#research`}>Research</a></li>
         <li><a href={`${baseHref}#experience`}>Experience</a></li>

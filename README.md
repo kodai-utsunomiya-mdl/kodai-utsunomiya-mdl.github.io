@@ -187,7 +187,7 @@ Styling:
 
 ## Notes Detail Page
 Notes detail route: `src/pages/notes/[slug].astro`.
-Styling rules live under `.blog-content` in `public/style.css`.
+Styling rules live under `.notes-content` in `public/style.css`.
 
 Key styles:
 - `h1/h2/h3` typography and separators
@@ -273,7 +273,7 @@ Admin auth issues:
 - Verify the callback URL matches exactly
 
 Preview vs live mismatch:
-- Verify styles are defined both for `.blog-content` and `.admin-preview__body`
+- Verify styles are defined both for `.notes-content` and `.admin__preview-body`
 - MathJax is only loaded on the site pages; Admin preview uses its own render path
 
 ## Style Sources

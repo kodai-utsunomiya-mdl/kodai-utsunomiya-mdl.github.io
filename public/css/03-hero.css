@@ -1,0 +1,100 @@
+#hero {
+    background-color: var(--white);
+    padding: 80px 0;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 60px;
+}
+
+.hero__name {
+    font-size: 2.5rem;
+    font-family: var(--font-serif);
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.hero__name-en {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-top: 5px;
+    color: #666;
+    font-family: var(--font-sans);
+}
+
+.hero__affiliation {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.hero__affiliation-sub a,
+.hero__affiliation a {
+    display: inline-block;
+}
+
+.hero__affiliation-group--tight {
+    margin-top: 5px;
+}
+
+.hero__social a {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    margin-right: 5px;
+}
+
+.hero__social a:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    text-decoration: none;
+}
+
+.hero__social {
+    margin-top: 30px;
+}
+
+.hero__social-link {
+    margin-right: 10px;
+}
+
+.hero__location {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.u-icon-spacer {
+    margin-right: 5px;
+}
+
+.u-icon-sep {
+    margin: 0 8px;
+    opacity: 0.5;
+    font-size: 0.9em;
+}
+
+.u-text-strong {
+    font-weight: 500;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    #hero {
+        padding: 60px 0;
+        text-align: left;
+    }
+
+    .hero__name {
+        font-size: 2rem;
+    }
+
+    .hero__social {
+        justify-content: flex-start;
+    }
+}

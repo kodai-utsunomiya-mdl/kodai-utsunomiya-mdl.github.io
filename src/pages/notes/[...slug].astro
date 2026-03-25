@@ -32,14 +32,14 @@ const { Content } = await render(post);
 <BaseLayout title={`${post.data.title} | Kodai Utsunomiya`} description={post.data.description ?? ""}>
   <Header baseHref="/" />
 
-  <main class="container blog-page">
-    <section class="section">
-      <div class="card blog-card">
-        <div class="blog-meta">
-          <h1 class="blog-title">{post.data.title}</h1>
-          <p class="timeline-date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
+  <main class="l-container notes-page">
+    <section class="l-section">
+      <div class="c-card notes-card">
+        <div class="notes-card__meta">
+          <h1 class="notes-card__title">{post.data.title}</h1>
+          <p class="timeline__date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
         </div>
-        <div class="blog-content">
+        <div class="notes-content">
           <Content />
         </div>
       </div>

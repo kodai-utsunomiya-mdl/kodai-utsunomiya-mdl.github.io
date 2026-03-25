@@ -1,0 +1,116 @@
+/* (A) Variable Overrides */
+html[data-theme="dark"] {
+    --primary-color: #ecf0f1;    /* Light Silver */
+    --text-color: #d1d5db;       /* Soft Gray */
+    --light-bg: #121212;         /* Deep Dark Gray */
+    --white: #1e1e1e;            /* Card Background */
+    --border-color: #333333;
+    --accent-color: #5dade2;     /* Bright Blue */
+}
+
+/* (B) Header Fixes */
+html[data-theme="dark"] header {
+    background-color: rgba(18, 18, 18, 0.85) !important;
+    border-bottom: 1px solid #333;
+    box-shadow: 0 1px 15px rgba(0,0,0,0.5);
+}
+html[data-theme="dark"] .site-header__logo a,
+html[data-theme="dark"] .site-header__nav-list a {
+    color: #cccccc !important;
+}
+html[data-theme="dark"] .site-header__nav-list a:hover {
+    color: var(--accent-color) !important;
+}
+
+/* (C) Text Visibility Fixes (Brighten Gray Text) */
+html[data-theme="dark"] .hero__name-en,
+html[data-theme="dark"] .hero__affiliation,
+html[data-theme="dark"] .timeline__date,
+html[data-theme="dark"] .timeline__note,
+html[data-theme="dark"] .timeline__content .timeline__detail,
+html[data-theme="dark"] .c-card__keywords,
+html[data-theme="dark"] .recognition__date,
+html[data-theme="dark"] .recognition__note,
+html[data-theme="dark"] footer,
+html[data-theme="dark"] footer p,
+html[data-theme="dark"] footer span,
+html[data-theme="dark"] .hero__social a,
+html[data-theme="dark"] .tools__intro,
+html[data-theme="dark"] .l-section__title span, 
+html[data-theme="dark"] .c-card span[style*="color"], 
+html[data-theme="dark"] .timeline__content span[style*="color"] {
+    color: #cccccc !important;
+}
+
+/* (D) Force Brightness for Inline-Styled Text */
+html[data-theme="dark"] .c-card p,
+html[data-theme="dark"] .timeline__content p {
+    color: #e0e0e0 !important;
+    opacity: 1 !important;
+}
+
+/* (E) Specific Fixes */
+/* Hero Location Text */
+html[data-theme="dark"] .hero__location {
+    color: #ffffff !important;
+    opacity: 0.9 !important;
+}
+
+/* Headings */
+html[data-theme="dark"] .hero__name,
+html[data-theme="dark"] .recognition strong,
+html[data-theme="dark"] .skills__category h3,
+html[data-theme="dark"] h3 {
+    color: #ffffff !important;
+}
+
+/* Hover States (Reset to accent) */
+html[data-theme="dark"] .hero__affiliation-sub a:hover,
+html[data-theme="dark"] .hero__social a:hover {
+    color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+}
+
+/* Tags (Darken bg) */
+html[data-theme="dark"] .c-tags span {
+    background-color: #2c2c2c;
+    border-color: #444;
+    color: #e0e0e0;
+}
+html[data-theme="dark"] .c-tags span:hover {
+    background-color: #3e3e3e;
+}
+
+/* Badges (Keep original dark colors) */
+html[data-theme="dark"] .c-badge--current { color: #0d47a1 !important; }
+html[data-theme="dark"] .c-badge--bachelor { color: #616161 !important; }
+
+/* Images (Dim brightness) */
+html[data-theme="dark"] img {
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+html[data-theme="dark"] img:hover {
+    opacity: 1;
+}
+
+/* Toggle Button */
+#theme-toggle {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+#theme-toggle:hover {
+    transform: scale(1.1);
+    color: var(--accent-color);
+}
+
+/* (F) GitHub Calendar Dark Mode */
+html[data-theme="dark"] .calendar {
+    border-color: #333 !important;
+}
+html[data-theme="dark"] .calendar text.ContributionCalendar-label {
+    fill: #ccc !important;
+}
+html[data-theme="dark"] .calendar .ContributionCalendar-day[data-level="0"] {
+    fill: #2d333b !important;
+    background-color: #2d333b !important;
+}

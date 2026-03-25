@@ -1,0 +1,21 @@
+.l-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.l-section {
+    margin-bottom: 60px;
+}
+
+.notes-page .l-section__title {
+    margin-top: 20px;
+}
+
+.notes-page .c-card:first-of-type {
+    margin-top: 10px;
+}
+
+.notes-page {
+    padding-top: 24px;
+}

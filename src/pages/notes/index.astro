@@ -25,13 +25,13 @@ const postsData = posts.map((post) => ({
 <BaseLayout title="Notes | Kodai Utsunomiya" description="Notes by Kodai Utsunomiya">
   <Header baseHref="/" />
 
-  <main class="container blog-page">
-    <section class="section">
-      <h2 class="section-title">Notes</h2>
+  <main class="l-container notes-page">
+    <section class="l-section">
+      <h2 class="l-section__title">Notes</h2>
       <form class="notes-search notes-search--sticky" id="notes-search-form">
         <input
           id="notes-search-input"
-          class="admin-input notes-search__input"
+          class="admin__input notes-search__input"
           type="search"
           placeholder="Search notes"
           aria-label="Search notes"
@@ -50,14 +50,14 @@ const postsData = posts.map((post) => ({
       </form>
       <div id="notes-list">
         {posts.map((post) => (
-          <div class="card">
-            <h3 class="card-title">
+          <div class="c-card">
+            <h3 class="c-card__title">
               <a href={`/notes/${getSlug(post)}/`}>{post.data.title}</a>
             </h3>
             {post.data.description && (
-              <p class="abstract-text">{post.data.description}</p>
+              <p class="c-text">{post.data.description}</p>
             )}
-            <p class="timeline-date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
+            <p class="timeline__date">{post.data.pubDate.toLocaleDateString("en-CA")}</p>
           </div>
         ))}
       </div>
@@ -124,7 +124,7 @@ const postsData = posts.map((post) => ({
       }
       if (items.length === 0) {
         const empty = document.createElement('p');
-        empty.className = 'abstract-text';
+        empty.className = 'c-text';
         empty.textContent = 'No matching notes.';
         list.appendChild(empty);
         return;
@@ -132,9 +132,9 @@ const postsData = posts.map((post) => ({
       const cards = [];
       items.forEach((post) => {
         const card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'c-card';
         const title = document.createElement('h3');
-        title.className = 'card-title';
+        title.className = 'c-card__title';
         const link = document.createElement('a');
         link.href = `/notes/${post.slug}/`;
         const titleMatch = query
@@ -153,7 +153,7 @@ const postsData = posts.map((post) => ({
         card.appendChild(title);
         if (post.description && (!query || descMatch)) {
           const desc = document.createElement('p');
-          desc.className = 'abstract-text';
+          desc.className = 'c-text';
           desc.innerHTML = descMatch
             ? highlightText(post.description, query)
             : escapeHtml(post.description);
@@ -162,13 +162,13 @@ const postsData = posts.map((post) => ({
           const snippet = getBodySnippet(post.body || '', query);
           if (snippet) {
             const desc = document.createElement('p');
-            desc.className = 'abstract-text';
+            desc.className = 'c-text';
             desc.innerHTML = highlightText(snippet, query);
             card.appendChild(desc);
           }
         }
         const date = document.createElement('p');
-        date.className = 'timeline-date';
+        date.className = 'timeline__date';
         date.textContent = post.pubDate;
         card.appendChild(date);
         list.appendChild(card);

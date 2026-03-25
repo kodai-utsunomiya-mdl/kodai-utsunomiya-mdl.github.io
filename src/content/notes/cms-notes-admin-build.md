@@ -130,7 +130,7 @@ AstroのContent Collectionが厳密な型チェックを行うため，formatを
 - 画像アップロード機能 (/uploads に保存)
 - PreviewはMarkdownをHTMLに変換して表示
 - MathJaxを読み込んで数式レンダリング
-- Previewと本番の差は `public/style.css` の `.admin-preview__body` で調整
+- Previewと本番の差は `public/style.css` の `.admin__preview-body` で調整
 
 ![Notes Admin UI](/uploads/2026-03-24T18-57-57-623Z-admin_image.jpeg)
 

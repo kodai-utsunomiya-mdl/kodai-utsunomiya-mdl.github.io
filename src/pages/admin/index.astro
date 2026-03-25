@@ -2,76 +2,76 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 <BaseLayout title="Notes Admin" description="Notes admin panel">
-  <main class="container admin-page">
-    <section class="section">
-      <h1 class="section-title">Notes Admin</h1>
+  <main class="l-container admin">
+    <section class="l-section">
+      <h1 class="l-section__title">Notes Admin</h1>
 
-      <div id="auth-card" class="card">
-        <p class="abstract-text" id="auth-status">Checking session...</p>
-        <div id="auth-actions" class="admin-actions is-hidden">
-          <a class="tool-link" href="/api/cms/login">Login with GitHub</a>
+      <div id="auth-card" class="c-card">
+        <p class="c-text" id="auth-status">Checking session...</p>
+        <div id="auth-actions" class="admin__actions is-hidden">
+          <a class="tools__link" href="/api/cms/login">Login with GitHub</a>
         </div>
-        <div id="auth-user" class="admin-actions is-hidden">
-          <span class="abstract-text" id="auth-user-name"></span>
-          <button class="admin-button" id="logout-btn" type="button">Logout</button>
+        <div id="auth-user" class="admin__actions is-hidden">
+          <span class="c-text" id="auth-user-name"></span>
+          <button class="admin__button" id="logout-btn" type="button">Logout</button>
         </div>
       </div>
 
-      <div id="editor-card" class="card is-hidden">
-        <h2 class="card-title">Edit Note</h2>
-        <form id="post-form" class="admin-form">
-          <label class="admin-label">
+      <div id="editor-card" class="c-card is-hidden">
+        <h2 class="c-card__title">Edit Note</h2>
+        <form id="post-form" class="admin__form">
+          <label class="admin__label">
             Title
-            <input id="post-title" class="admin-input" type="text" required />
+            <input id="post-title" class="admin__input" type="text" required />
           </label>
-          <label class="admin-label">
+          <label class="admin__label">
             Slug
-            <input id="post-slug" class="admin-input" type="text" required />
+            <input id="post-slug" class="admin__input" type="text" required />
           </label>
-          <label class="admin-label">
+          <label class="admin__label">
             Description
-            <input id="post-description" class="admin-input" type="text" />
+            <input id="post-description" class="admin__input" type="text" />
           </label>
-          <label class="admin-label">
+          <label class="admin__label">
             Publish Date
-            <input id="post-date" class="admin-input" type="date" required />
-            <span class="admin-hint">Format: YYYY-MM-DD</span>
+            <input id="post-date" class="admin__input" type="date" required />
+            <span class="admin__hint">Format: YYYY-MM-DD</span>
           </label>
-          <label class="admin-label admin-checkbox">
+          <label class="admin__label admin__checkbox">
             <input id="post-draft" type="checkbox" />
             Draft
           </label>
-          <div class="admin-editor-grid">
-            <label class="admin-label">
+          <div class="admin__editor">
+            <label class="admin__label">
               Body
-              <textarea id="post-body" class="admin-textarea" rows="16"></textarea>
+              <textarea id="post-body" class="admin__textarea" rows="16"></textarea>
             </label>
-            <div class="admin-preview-wrap">
-              <p class="admin-label-title">Preview</p>
-              <div id="post-preview" class="admin-preview admin-preview__body blog-content"></div>
+            <div class="admin__preview-wrap">
+              <p class="admin__label-title">Preview</p>
+              <div id="post-preview" class="admin__preview admin__preview-body notes-content"></div>
             </div>
           </div>
-          <div class="admin-actions">
-            <label class="admin-label">
+          <div class="admin__actions">
+            <label class="admin__label">
               Upload Image
-              <input id="upload-file" class="admin-input admin-input--file" type="file" accept="image/*" />
-              <span class="admin-hint">Uploads to /public/uploads and returns a URL.</span>
+              <input id="upload-file" class="admin__input admin__input--file" type="file" accept="image/*" />
+              <span class="admin__hint">Uploads to /public/uploads and returns a URL.</span>
             </label>
-            <button class="admin-button" type="button" id="upload-btn">Upload</button>
-            <span class="abstract-text" id="upload-status"></span>
+            <button class="admin__button" type="button" id="upload-btn">Upload</button>
+            <span class="c-text" id="upload-status"></span>
           </div>
-          <div class="admin-actions">
-            <button class="admin-button" type="submit" id="save-btn">Save</button>
-            <button class="admin-button admin-button--ghost" type="button" id="new-btn">New</button>
-            <button class="admin-button admin-button--danger is-hidden" type="button" id="delete-btn">Delete</button>
-            <span class="abstract-text" id="form-status"></span>
+          <div class="admin__actions">
+            <button class="admin__button" type="submit" id="save-btn">Save</button>
+            <button class="admin__button admin__button--ghost" type="button" id="new-btn">New</button>
+            <button class="admin__button admin__button--danger is-hidden" type="button" id="delete-btn">Delete</button>
+            <span class="c-text" id="form-status"></span>
           </div>
         </form>
       </div>
 
-      <div id="list-card" class="card is-hidden">
-        <h2 class="card-title">Notes</h2>
-        <div id="posts-list" class="admin-list"></div>
+      <div id="list-card" class="c-card is-hidden">
+        <h2 class="c-card__title">Notes</h2>
+        <div id="posts-list" class="admin__list"></div>
       </div>
     </section>
   </main>
@@ -131,15 +131,15 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       data.posts.forEach((post) => {
         const item = document.createElement('button');
         item.type = 'button';
-        item.className = 'admin-list-item';
+        item.className = 'admin__list-item';
         item.textContent = `${post.title} (${post.slug})`;
         item.addEventListener('click', async () => {
-          const detail = await fetch(`/api/cms/posts/${post.slug}`);
-          if (!detail.ok) {
+          const timeline__detail = await fetch(`/api/cms/posts/${post.slug}`);
+          if (!timeline__detail.ok) {
             formStatus.textContent = 'Failed to load post.';
             return;
           }
-          const payload = await detail.json();
+          const payload = await timeline__detail.json();
           editingSlug = post.slug;
           titleInput.value = payload.title || '';
           slugInput.value = payload.slug || '';

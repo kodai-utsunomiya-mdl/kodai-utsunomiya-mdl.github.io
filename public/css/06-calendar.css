@@ -1,0 +1,27 @@
+.calendar {
+    width: 100%;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: var(--white);
+    min-height: 180px;
+    font-family: var(--font-sans) !important;
+}
+.calendar .width-full {
+    fill: #666;
+    font-size: 10px;
+}
+.calendar text.ContributionCalendar-label {
+    fill: #666;
+    font-size: 10px;
+}
+.calendar-footer a {
+    color: var(--accent-color);
+}
+
+/* Calendar Colors (Blue Theme) */
+.calendar .ContributionCalendar-day[data-level="0"] { fill: #ebedf0 !important; background-color: #ebedf0 !important; }
+.calendar .ContributionCalendar-day[data-level="1"] { fill: #d6eaf8 !important; background-color: #d6eaf8 !important; }
+.calendar .ContributionCalendar-day[data-level="2"] { fill: #aed6f1 !important; background-color: #aed6f1 !important; }
+.calendar .ContributionCalendar-day[data-level="3"] { fill: #5dade2 !important; background-color: #5dade2 !important; }
+.calendar .ContributionCalendar-day[data-level="4"] { fill: #2e86c1 !important; background-color: #2e86c1 !important; }
