@@ -61,6 +61,85 @@ Scope: architecture, operations, configuration.
   - `public/js/notes.js`: Notes search behavior
 - `public/style.css`: global styling
 
+Directory tree (full structure):
+```text
+.
+├─ .astro/
+├─ .git/
+├─ .vscode/
+├─ node_modules/
+├─ public/
+│  ├─ css/
+│  │  ├─ 00-variables-reset.css
+│  │  ├─ 01-layout.css
+│  │  ├─ 02-header.css
+│  │  ├─ 03-hero.css
+│  │  ├─ 04-components.css
+│  │  ├─ 05-footer.css
+│  │  ├─ 06-calendar.css
+│  │  ├─ 07-dark.css
+│  │  └─ 08-lightbox.css
+│  ├─ js/
+│  │  ├─ admin.js
+│  │  ├─ gtag.js
+│  │  ├─ home.js
+│  │  ├─ mathjax-config.js
+│  │  ├─ notes.js
+│  │  └─ site.js
+│  ├─ uploads/
+│  │  └─ <timestamp>-<upload-name>.<ext>
+│  ├─ bt_1.jpeg
+│  ├─ bt_2.jpeg
+│  ├─ mt_1.png
+│  ├─ mt_2.jpeg
+│  ├─ favicon.ico
+│  ├─ favicon.jpg
+│  ├─ favicon.svg
+│  ├─ robots.txt
+│  ├─ sitemap.xml
+│  └─ style.css
+├─ src/
+│  ├─ components/
+│  │  ├─ Footer.astro
+│  │  └─ Header.astro
+│  ├─ content/
+│  │  └─ notes/
+│  │     ├─ <slug-1>.md
+│  │     ├─ <slug-2>.md
+│  │     └─ <slug-3>.md
+│  ├─ layouts/
+│  │  └─ BaseLayout.astro
+│  ├─ lib/
+│  │  ├─ cookies.ts
+│  │  ├─ frontmatter.ts
+│  │  ├─ githubApp.ts
+│  │  └─ session.ts
+│  ├─ pages/
+│  │  ├─ admin/
+│  │  │  └─ index.astro
+│  │  ├─ api/
+│  │  │  └─ cms/
+│  │  │     ├─ posts/
+│  │  │     │  ├─ [slug].ts
+│  │  │     │  └─ index.ts
+│  │  │     ├─ callback.ts
+│  │  │     ├─ login.ts
+│  │  │     ├─ logout.ts
+│  │  │     ├─ me.ts
+│  │  │     └─ uploads.ts
+│  │  ├─ notes/
+│  │  │  ├─ [...slug].astro
+│  │  │  └─ index.astro
+│  │  └─ index.astro
+│  └─ content.config.ts
+├─ .gitignore
+├─ astro.config.mjs
+├─ package-lock.json
+├─ package.json
+├─ README.md
+└─ tsconfig.json
+```
+
 ## System Architecture
 ```mermaid
 flowchart TD
