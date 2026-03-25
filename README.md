@@ -52,10 +52,13 @@ Scope: architecture, operations, configuration.
   - `src/pages/api/cms/posts/index.ts` (GET/POST)
   - `src/pages/api/cms/posts/[slug].ts` (GET/PUT/DELETE)
   - `src/lib/githubApp.ts`
+  - `src/lib/cookies.ts`
   - `src/lib/session.ts`
   - `src/lib/frontmatter.ts`
 - Static assets
   - `public/`: images, CSS, fonts, favicon
+  - `public/js/admin.js`: Notes Admin UI logic
+  - `public/js/notes.js`: Notes search behavior
 - `public/style.css`: global styling
 
 ## System Architecture
@@ -165,6 +168,7 @@ draft: false
 Authoring rules:
 - `draft: true` hides the entry from the list and from static generation.
 - `pubDate` must be a date (YYYY-MM-DD). Do not quote.
+- Frontmatter is parsed/generated with `yaml`.
 - Inline math: `$...$` (MathJax).
 - Images: store files in `public/` and reference by root path.
   - Example: `![Figure](/mt_1.png)`
