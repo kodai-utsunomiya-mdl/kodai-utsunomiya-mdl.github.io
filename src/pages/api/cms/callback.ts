@@ -1,24 +1,6 @@
+import type { APIRoute } from "astro";
+import { serializeCookie } from "../../../lib/cookies";
 import { createSessionToken, getSessionCookieName, getSessionTtlSeconds } from "../../../lib/session";
-
-const serializeCookie = (
-  name: string,
-  value: string,
-  options: {
-    httpOnly?: boolean;
-    secure?: boolean;
-    sameSite?: "lax" | "strict" | "none";
-    path?: string;
-    maxAge?: number;
-  }
-) => {
-  const parts = [`${name}=${value}`];
-  if (options.maxAge !== undefined) parts.push(`Max-Age=${options.maxAge}`);
-  if (options.httpOnly) parts.push("HttpOnly");
-  if (options.secure) parts.push("Secure");
-  if (options.sameSite) parts.push(`SameSite=${options.sameSite}`);
-  if (options.path) parts.push(`Path=${options.path}`);
-  return parts.join("; ");
-};
 
 const getAllowedUsers = () => {
   const raw = import.meta.env.CMS_ALLOWED_USERS || "";
@@ -28,7 +10,7 @@ const getAllowedUsers = () => {
     .filter(Boolean);
 };
 
-export async function GET({ request, cookies }: { request: Request; cookies: any }) {
+export const GET: APIRoute = async ({ request, cookies }) => {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
@@ -101,4 +83,4 @@ export async function GET({ request, cookies }: { request: Request; cookies: any
   headers.append("Set-Cookie", sessionCookie);
   headers.append("Set-Cookie", clearState);
   return new Response(null, { status: 302, headers });
-}
+};

@@ -1,6 +1,7 @@
+import type { APIRoute } from "astro";
 import { getSessionCookieName, verifySessionToken } from "../../../lib/session";
 
-export async function GET({ cookies }: { cookies: any }) {
+export const GET: APIRoute = async ({ cookies }) => {
   const token = cookies.get(getSessionCookieName())?.value;
   const session = verifySessionToken(token);
   if (!session) {
@@ -10,4 +11,4 @@ export async function GET({ cookies }: { cookies: any }) {
   return new Response(JSON.stringify({ login: session.login }), {
     headers: { "Content-Type": "application/json" },
   });
-}
+};

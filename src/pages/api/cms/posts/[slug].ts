@@ -1,3 +1,4 @@
+import type { APIContext, APIRoute } from "astro";
 import { getSessionCookieName, verifySessionToken } from "../../../../lib/session";
 import { formatFrontmatter, parseFrontmatter } from "../../../../lib/frontmatter";
 import { getRepoInfoEnv, getRepoPath, githubRequest } from "../../../../lib/githubApp";
@@ -10,7 +11,7 @@ const jsonResponse = (data: unknown, status = 200) =>
     headers: { "Content-Type": "application/json" },
   });
 
-const requireSession = (cookies: any) => {
+const requireSession = (cookies: APIContext["cookies"]) => {
   const token = cookies.get(getSessionCookieName())?.value;
   const session = verifySessionToken(token);
   if (!session) {
@@ -33,10 +34,10 @@ const fetchFileContent = async (path: string) => {
   return { content, sha: data.sha };
 };
 
-export async function GET({ params, cookies }: { params: any; cookies: any }) {
+export const GET: APIRoute = async ({ params, cookies }) => {
   const session = requireSession(cookies);
   if (session instanceof Response) return session;
-  const slug = params.slug;
+  const slug = typeof params.slug === "string" ? params.slug : "";
   if (!slug || !isValidSlug(slug)) {
     return jsonResponse({ error: "Invalid slug." }, 400);
   }
@@ -53,20 +54,12 @@ export async function GET({ params, cookies }: { params: any; cookies: any }) {
     draft: Boolean(data.draft),
     body,
   });
-}
+};
 
-export async function PUT({
-  params,
-  request,
-  cookies,
-}: {
-  params: any;
-  request: Request;
-  cookies: any;
-}) {
+export const PUT: APIRoute = async ({ params, request, cookies }) => {
   const session = requireSession(cookies);
   if (session instanceof Response) return session;
-  const slug = params.slug;
+  const slug = typeof params.slug === "string" ? params.slug : "";
   if (!slug || !isValidSlug(slug)) {
     return jsonResponse({ error: "Invalid slug." }, 400);
   }
@@ -108,13 +101,13 @@ export async function PUT({
   }
 
   return jsonResponse({ ok: true });
-}
+};
 
-export async function DELETE({ params, cookies }: { params: any; cookies: any }) {
+export const DELETE: APIRoute = async ({ params, cookies }) => {
   const session = requireSession(cookies);
   if (session instanceof Response) return session;
 
-  const slug = params.slug;
+  const slug = typeof params.slug === "string" ? params.slug : "";
   if (!slug || !isValidSlug(slug)) {
     return jsonResponse({ error: "Invalid slug." }, 400);
   }
@@ -136,4 +129,4 @@ export async function DELETE({ params, cookies }: { params: any; cookies: any })
   }
 
   return jsonResponse({ ok: true });
-}
+};

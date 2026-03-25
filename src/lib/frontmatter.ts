@@ -1,34 +1,27 @@
+import YAML from "yaml";
+
 const FRONTMATTER_REGEX = /^---\n([\s\S]*?)\n---\n?/;
 
 const normalizeLine = (value: string) => value.replace(/\r/g, "");
 
-const parseValue = (raw: string) => {
-  const trimmed = raw.trim();
-  if (trimmed === "true") return true;
-  if (trimmed === "false") return false;
-  if (/^".*"$/.test(trimmed) || /^'.*'$/.test(trimmed)) {
-    return trimmed.slice(1, -1);
-  }
-  return trimmed;
-};
+type FrontmatterData = Record<string, string | boolean | number | null | undefined>;
 
 export const parseFrontmatter = (content: string) => {
-  const match = normalizeLine(content).match(FRONTMATTER_REGEX);
+  const normalized = normalizeLine(content);
+  const match = normalized.match(FRONTMATTER_REGEX);
   if (!match) return { data: {}, body: content };
 
-  const lines = match[1].split("\n");
-  const data: Record<string, string | boolean> = {};
-  for (const line of lines) {
-    const [key, ...rest] = line.split(":");
-    if (!key || rest.length === 0) continue;
-    data[key.trim()] = parseValue(rest.join(":"));
+  let data: FrontmatterData = {};
+  try {
+    const parsed = YAML.parse(match[1]);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      data = parsed as FrontmatterData;
+    }
+  } catch {
+    data = {};
   }
-  const body = normalizeLine(content).slice(match[0].length);
+  const body = normalized.slice(match[0].length);
   return { data, body };
-};
-
-const escapeYaml = (value: string) => {
-  return `"${value.replace(/"/g, '\\"')}"`;
 };
 
 export const formatFrontmatter = (data: {
@@ -37,11 +30,12 @@ export const formatFrontmatter = (data: {
   pubDate: string;
   draft?: boolean;
 }) => {
-  const lines = [
-    `title: ${escapeYaml(data.title)}`,
-    ...(data.description ? [`description: ${escapeYaml(data.description)}`] : []),
-    `pubDate: ${data.pubDate}`,
-    `draft: ${data.draft ? "true" : "false"}`,
-  ];
-  return `---\n${lines.join("\n")}\n---\n`;
+  const payload = {
+    title: data.title,
+    ...(data.description ? { description: data.description } : {}),
+    pubDate: data.pubDate,
+    draft: Boolean(data.draft),
+  };
+  const yaml = YAML.stringify(payload).trimEnd();
+  return `---\n${yaml}\n---\n`;
 };

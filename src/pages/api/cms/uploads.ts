@@ -1,3 +1,4 @@
+import type { APIContext, APIRoute } from "astro";
 import { getSessionCookieName, verifySessionToken } from "../../../lib/session";
 import { getRepoInfoEnv, githubRequest } from "../../../lib/githubApp";
 
@@ -9,7 +10,7 @@ const jsonResponse = (data: unknown, status = 200) =>
     headers: { "Content-Type": "application/json" },
   });
 
-const requireSession = (cookies: any) => {
+const requireSession = (cookies: APIContext["cookies"]) => {
   const token = cookies.get(getSessionCookieName())?.value;
   const session = verifySessionToken(token);
   if (!session) {
@@ -27,7 +28,7 @@ const sanitizeName = (value: string) =>
     .replace(/\s+/g, "-")
     .replace(/[^a-z0-9._-]/g, "");
 
-export async function POST({ request, cookies }: { request: Request; cookies: any }) {
+export const POST: APIRoute = async ({ request, cookies }) => {
   const session = requireSession(cookies);
   if (session instanceof Response) return session;
 
@@ -61,4 +62,4 @@ export async function POST({ request, cookies }: { request: Request; cookies: an
   }
 
   return jsonResponse({ url: `/uploads/${filename}` });
-}
+};

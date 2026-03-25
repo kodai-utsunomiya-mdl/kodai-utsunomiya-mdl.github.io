@@ -1,3 +1,4 @@
+import type { APIContext, APIRoute } from "astro";
 import { getSessionCookieName, verifySessionToken } from "../../../../lib/session";
 import { formatFrontmatter, parseFrontmatter } from "../../../../lib/frontmatter";
 import { getRepoInfoEnv, getRepoPath, githubRequest } from "../../../../lib/githubApp";
@@ -10,7 +11,7 @@ const jsonResponse = (data: unknown, status = 200) =>
     headers: { "Content-Type": "application/json" },
   });
 
-const requireSession = (cookies: any) => {
+const requireSession = (cookies: APIContext["cookies"]) => {
   const token = cookies.get(getSessionCookieName())?.value;
   const session = verifySessionToken(token);
   if (!session) {
@@ -33,7 +34,7 @@ const fetchFileContent = async (path: string) => {
   return { content, sha: data.sha };
 };
 
-export async function GET({ cookies }: { cookies: any }) {
+export const GET: APIRoute = async ({ cookies }) => {
   const session = requireSession(cookies);
   if (session instanceof Response) return session;
 
@@ -59,9 +60,9 @@ export async function GET({ cookies }: { cookies: any }) {
   );
 
   return jsonResponse({ posts });
-}
+};
 
-export async function POST({ request, cookies }: { request: Request; cookies: any }) {
+export const POST: APIRoute = async ({ request, cookies }) => {
   const session = requireSession(cookies);
   if (session instanceof Response) return session;
   const body = await request.json();
@@ -103,4 +104,4 @@ export async function POST({ request, cookies }: { request: Request; cookies: an
   }
 
   return jsonResponse({ ok: true });
-}
+};
