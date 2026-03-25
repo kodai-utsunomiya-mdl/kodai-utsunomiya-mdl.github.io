@@ -141,22 +141,96 @@ Directory tree (full structure):
 ```
 
 ## System Architecture
+### Components
+- Client
+  - Public site pages (`/`, `/notes/*`)
+  - Notes Admin UI (`/admin/`)
+  - Static assets from `public/` (CSS/JS/images)
+- Astro server runtime (Vercel)
+  - Page rendering (Astro build output)
+  - API routes under `/api/cms/*`
+- GitHub App + GitHub API
+  - OAuth user login for Admin UI
+  - GitHub Contents API for notes CRUD
+- Content layer
+  - `src/content/notes/*.md` (authoring source of truth)
+  - `src/content.config.ts` (schema, validation)
+
+### Request Flow (Public Pages)
+1) Browser requests `/` or `/notes/*`.
+2) Vercel serves Astro output (static where possible, server where needed).
+3) Page reads content from `src/content/notes` at build time.
+4) Browser loads assets from `public/` and JS helpers (`public/js/*.js`).
+
+### Request Flow (Admin)
+1) Browser requests `/admin/`.
+2) Admin UI calls `GET /api/cms/login`.
+3) Server redirects to GitHub OAuth (GitHub App).
+4) GitHub redirects to `/api/cms/callback`.
+5) Callback validates user, sets signed session cookie.
+6) Admin UI uses session cookie to call `/api/cms/posts/*`.
+
+### Data Flow (Notes CRUD)
+1) Admin UI sends create/update/delete to `/api/cms/posts/*`.
+2) Server obtains GitHub App installation token.
+3) Server calls GitHub Contents API to write files in `src/content/notes/`.
+4) GitHub commit triggers Vercel build.
+5) New content appears on `/notes/` and `/notes/[slug]/`.
+
+### Deployment Flow
+1) Push to `main` triggers Vercel build.
+2) `astro build` generates output (server adapter on Vercel).
+3) Vercel serves static assets and server routes.
+
 ```mermaid
 flowchart TD
   User[User Browser] -->|HTTP| Vercel[Vercel Hosting]
-  Vercel -->|Static pages| Astro[Astro Build Output]
-  Astro --> NotesList[Notes List / Search]
-  Astro --> NotesDetail[Notes Detail Pages]
-  Astro --> AdminUI[Notes Admin UI]
 
-  AdminUI -->|Login| CMSLogin[/api/cms/login/]
-  CMSLogin --> GitHubOAuth[GitHub OAuth]
-  GitHubOAuth --> CMSCallback[/api/cms/callback/]
-  CMSCallback --> Session[Session Cookie]
-  AdminUI -->|CRUD| CMSPosts[/api/cms/posts/]
+  subgraph AstroRuntime["Astro Runtime (Vercel)"]
+    Pages[Astro Pages]
+    API[/api/cms/*/]
+  end
 
-  CMSPosts --> GitHubAPI[GitHub API]
-  GitHubAPI --> Repo[GitHub Repository]
+  subgraph PublicSite["Public Site"]
+    Home[/index/]
+    NotesList[/notes/]
+    NotesDetail[/notes/[slug]/]
+  end
+
+  subgraph Admin["Admin UI"]
+    AdminUI[/admin/]
+    CMSLogin[/api/cms/login/]
+    CMSCallback[/api/cms/callback/]
+    CMSPosts[/api/cms/posts/]
+  end
+
+  subgraph Content["Content Source"]
+    NotesMD[src/content/notes/*.md]
+    Schema[src/content.config.ts]
+  end
+
+  subgraph GitHub["GitHub Platform"]
+    GitHubOAuth[GitHub OAuth]
+    GitHubAPI[GitHub Contents API]
+    Repo[GitHub Repository]
+  end
+
+  User -->|Request pages| Pages
+  Pages --> Home
+  Pages --> NotesList
+  Pages --> NotesDetail
+  Pages --> NotesMD
+  Pages --> Schema
+
+  User -->|Open admin| AdminUI
+  AdminUI --> CMSLogin
+  CMSLogin --> GitHubOAuth
+  GitHubOAuth --> CMSCallback
+  CMSCallback -->|Set session cookie| AdminUI
+  AdminUI -->|CRUD| CMSPosts
+  CMSPosts -->|Installation token| GitHubAPI
+  GitHubAPI --> Repo
+  Repo -->|Build trigger| Vercel
 ```
 
 ## Recovery Checklist
