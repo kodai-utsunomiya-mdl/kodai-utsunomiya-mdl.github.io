@@ -1,5 +1,5 @@
 ---
-title: "GitHub AppとAstroでCMSを組む方法"
+title: "GitHub AppとAstroでCMSを組んだ (自身の勉強用)"
 description: "GitHub App + Vercel + Astro APIでCMSを自作する手順や設計判断について．"
 pubDate: 2026-03-25
 draft: false
