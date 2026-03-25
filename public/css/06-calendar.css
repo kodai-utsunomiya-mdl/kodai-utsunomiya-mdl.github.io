@@ -1,19 +1,19 @@
 .calendar {
     width: 100%;
     border: 1px solid var(--border-color) !important;
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: var(--space-sm);
+    padding: var(--space-xl);
     background-color: var(--white);
     min-height: 180px;
     font-family: var(--font-sans) !important;
 }
 .calendar .width-full {
-    fill: #666;
-    font-size: 10px;
+    fill: var(--text-muted);
+    font-size: var(--space-md);
 }
 .calendar text.ContributionCalendar-label {
-    fill: #666;
-    font-size: 10px;
+    fill: var(--text-muted);
+    font-size: var(--space-md);
 }
 .calendar-footer a {
     color: var(--accent-color);

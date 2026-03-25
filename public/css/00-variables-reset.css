@@ -6,10 +6,34 @@
     --light-bg: #f8f9fa;         /* Off White */
     --white: #ffffff;
     --border-color: #e0e0e0;
+    --text-muted: #666;
+    --text-subtle: #888;
+    --text-faint: #999;
     
     /* Typography */
     --font-sans: "Lato", "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
     --font-serif: "Noto Serif JP", serif;
+
+    /* Type scale */
+    --text-xs: 0.85rem;
+    --text-sm: 0.9rem;
+    --text-md: 0.95rem;
+    --text-lg: 1.1rem;
+    --text-xl: 1.2rem;
+    --text-2xl: 1.3rem;
+    --text-3xl: 1.4rem;
+    --text-4xl: 1.5rem;
+    --text-5xl: 1.6rem;
+
+    /* Spacing scale */
+    --space-2xs: 4px;
+    --space-xs: 5px;
+    --space-sm: 8px;
+    --space-md: 10px;
+    --space-lg: 15px;
+    --space-xl: 20px;
+    --space-2xl: 25px;
+    --space-3xl: 30px;
 }
 
 * {
