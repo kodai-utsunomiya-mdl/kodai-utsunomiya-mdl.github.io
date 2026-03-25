@@ -192,16 +192,16 @@ flowchart TD
   end
 
   subgraph PublicSite["Public Site"]
-    Home[/index/]
-    NotesList[/notes/]
-    NotesDetail[/notes/[slug]/]
+    Home["/index/"]
+    NotesList["/notes/"]
+    NotesDetail["/notes/[slug]/"]
   end
 
   subgraph Admin["Admin UI"]
-    AdminUI[/admin/]
-    CMSLogin[/api/cms/login/]
-    CMSCallback[/api/cms/callback/]
-    CMSPosts[/api/cms/posts/]
+    AdminUI["/admin/"]
+    CMSLogin["/api/cms/login/"]
+    CMSCallback["/api/cms/callback/"]
+    CMSPosts["/api/cms/posts/"]
   end
 
   subgraph Content["Content Source"]
