@@ -11,3 +11,7 @@ Edit TeX documents in your browser on Windows or macOS, and compile them with Te
 - https://github.com/kodai-utsunomiya-mdl/Local-TeX-Web-Editor
 
 - https://apps.microsoft.com/detail/9P6QF32N19HG
+
+![Notes Admin UI](/uploads/2026-11-19T11-43-58-491Z-editor-tex-dark.png)
+
+![Notes Admin UI](/uploads/2026-11-19T11-45-38-271Z-editor-markdown-light.png)
