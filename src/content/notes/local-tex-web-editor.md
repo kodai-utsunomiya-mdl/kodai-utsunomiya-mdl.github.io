@@ -3,8 +3,6 @@ title: Local TeX Web Editor の作成
 pubDate: 2026-11-19
 draft: false
 ---
-# Local TeX Web Editor
-
 Edit TeX documents in your browser on Windows or macOS, and compile them with TeX Live on your computer. The editor and PDF preview appear in the same window. Launching the app opens a localhost page in your default browser. Markdown editing and preview are also supported.
 
 - https://kodai-utsunomiya-mdl.github.io/Local-TeX-Web-Editor/
@@ -18,7 +16,7 @@ Edit TeX documents in your browser on Windows or macOS, and compile them with Te
 
 ![Notes Admin UI](/uploads/2026-11-19T11-45-38-271Z-editor-markdown-light.png)
 
-## Why this editor exists
+# Why this editor exists
 
 Local TeX Web Editor brings a browser editing workflow to the TeX Live installation on your computer.
 
@@ -29,7 +27,7 @@ VS Code provides a broad set of development features. For editing TeX documents,
 Continuous PDF scrolling, SyncTeX, and Markdown preview support writing and reviewing documents while using the project files and TeX installation already on the computer.
 
 
-## Libraries
+# Libraries
 
 - [CodeMirror](https://codemirror.net/): editor (MIT)
 - [PDF.js](https://mozilla.github.io/pdf.js/): PDF display (Apache-2.0)
