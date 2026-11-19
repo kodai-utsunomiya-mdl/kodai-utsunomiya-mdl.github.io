@@ -1,6 +1,6 @@
 ---
 title: Local TeX Web Editor
-description: TeX のエディタを作成
+description: 軽量な TeX のエディタを作成し，Microsoft Store にも公開．
 pubDate: 2026-11-19
 draft: false
 ---
