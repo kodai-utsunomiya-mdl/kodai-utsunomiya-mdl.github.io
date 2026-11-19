@@ -1,5 +1,6 @@
 ---
-title: Local TeX Web Editor の作成
+title: Local TeX Web Editor
+description: TeX のエディタを作成
 pubDate: 2026-11-19
 draft: false
 ---
